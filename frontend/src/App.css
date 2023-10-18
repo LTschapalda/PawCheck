@@ -1,0 +1,99 @@
+/* variables */
+:root{
+    --mainGreen: #87AD19;
+    --darkerGreen: #698713;
+    --catBrown: #9D6C3D;
+    --catBeige: #E3D0B2;
+    --catPink: #D8A89D;
+}
+
+/* reset */
+body,p,a,ul,li,h1{
+    margin: 1px;
+    padding: 0;
+    text-decoration: none;
+}
+
+li{
+    list-style-type: none;
+}
+
+/* base styles */
+
+body {
+    background: linear-gradient(180deg, #FFF 0%, #F5F5F5 27.08%);
+    font-family: Hind, sans-serif;
+}
+
+h1,h2,h3,h4{
+    color: var(--darkerGreen);
+    font-family: Montserrat, sans-serif;
+    font-size: 2.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+}
+p,a,li{
+    color: var(--mainGreen);
+    font-size: 1.3em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+#pawcheck {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+}
+
+/* mobile styles */
+.topic {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    margin: auto;
+}
+
+.topic p {
+    padding-right: 10px;
+}
+
+/* small tablet styles */
+@media screen and (min-width: 620px){
+
+}
+
+/* large tablet & laptop styles */
+@media screen and (min-width: 960px){
+
+    body{
+        font-size: 18px;
+    }
+
+}
+
+/* desktop styles */
+@media screen and (min-width: 1200px){
+
+    body{
+        font-size: 20px;
+    }
+
+}
+
+/* fonts */
+@font-face {
+    font-family: 'Montserrat';
+    src: url("assets/Montserrat-VariableFont_wght.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'Hind';
+    src: url("assets/Hind-Regular.ttf") format("truetype");
+}
