@@ -22,12 +22,12 @@ li{
 
 body {
     background: linear-gradient(180deg, #FFF 0%, #F5F5F5 27.08%);
-    font-family: Hind;
+    font-family: Hind, sans-serif;
 }
 
 h1,h2,h3,h4{
     color: var(--darkerGreen);
-    font-family: 'Montserrat';
+    font-family: Montserrat, sans-serif;
     font-size: 2.5em;
     display: flex;
     flex-direction: column;
