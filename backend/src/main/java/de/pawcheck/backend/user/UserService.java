@@ -1,34 +1,31 @@
 package de.pawcheck.backend.user;
 
+import de.pawcheck.backend.IdService;
 import de.pawcheck.backend.cat.CatService;
-import de.pawcheck.backend.cat.entities.Cat;
-import de.pawcheck.backend.user.entities.User;
+import de.pawcheck.backend.cat.Cat;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class UserService {
     //ATTRIBUTES
     private final UserRepo userRepo;
     private final CatService catService;
+    private final IdService idService;
 
     //DEPENDENCY INJECTION
-    public UserService(UserRepo userRepo, CatService catService) {
+    public UserService(UserRepo userRepo, CatService catService, IdService idService) {
         this.userRepo = userRepo;
         this.catService = catService;
+        this.idService = idService;
     }
 
     //METHODEN
-    public static String generateRandomId() {
-        UUID uuid = UUID.randomUUID();
-        return uuid.toString();
-    }
 
     public User createUser(boolean isOwner) {
-        String userId = generateRandomId();
+        String userId = idService.generateRandomId();
         Cat newCat = catService.addCat();
 
         List<String> catsOwned = new ArrayList<>();

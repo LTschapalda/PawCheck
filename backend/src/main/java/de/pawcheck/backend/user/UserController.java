@@ -1,6 +1,5 @@
 package de.pawcheck.backend.user;
 
-import de.pawcheck.backend.user.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

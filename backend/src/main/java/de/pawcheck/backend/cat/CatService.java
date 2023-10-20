@@ -1,28 +1,24 @@
 package de.pawcheck.backend.cat;
 
-import de.pawcheck.backend.cat.entities.Cat;
+import de.pawcheck.backend.IdService;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 public class CatService {
     //ATTRIBUTES
     private final CatRepo catRepo;
+    private final IdService idService;
 
     //DEPENDENCY INJECTION
-    public CatService(CatRepo catRepo) {
+    public CatService(CatRepo catRepo, IdService idService) {
         this.catRepo = catRepo;
+        this.idService = idService;
     }
 
     //METHODEN
-    public static String generateRandomId() {
-        UUID uuid = UUID.randomUUID();
-        return uuid.toString();
-    }
 
     public Cat addCat() {
-        String catId = generateRandomId();
+        String catId = idService.generateRandomId();
         Cat newCat = new Cat(catId);
         return catRepo.save(newCat);
     }

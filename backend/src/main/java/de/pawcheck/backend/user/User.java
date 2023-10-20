@@ -1,4 +1,4 @@
-package de.pawcheck.backend.user.entities;
+package de.pawcheck.backend.user;
 
 import java.util.List;
 

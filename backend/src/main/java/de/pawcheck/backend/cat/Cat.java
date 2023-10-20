@@ -1,4 +1,4 @@
-package de.pawcheck.backend.cat.entities;
+package de.pawcheck.backend.cat;
 
 public record Cat(
         String id
