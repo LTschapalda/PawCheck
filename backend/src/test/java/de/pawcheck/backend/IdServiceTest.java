@@ -1,6 +1,4 @@
 package de.pawcheck.backend;
-
-import de.pawcheck.backend.user.UserService;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;

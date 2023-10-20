@@ -20,7 +20,7 @@ public class UserController {
 
     //SERVER REQUESTS
     @PostMapping("/newuser")
-    public User createUser(@RequestBody boolean isOwner) {
-        return userService.createUser(isOwner);
+    public User createUser(@RequestBody UserCreationRequest request) {
+        return userService.createUser(request.isOwner());
     }
 }
