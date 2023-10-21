@@ -1,4 +1,4 @@
-package de.pawcheck.backend.user;
+package de.pawcheck.backend.cat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class UserController {
+public class CatController {
     //ATTRIBUTE
-    private final UserService userService;
+    private final CatService catService;
 
     //DEPENDENCY INJECTION
     @Autowired
-    public UserController (UserService userService) {
-        this.userService = userService;
+    public CatController (CatService catService) {
+        this.catService = catService;
     }
 
     //SERVER REQUESTS
-    @PostMapping("/newuser")
-    public User createUser(@RequestBody UserCreationRequest request) {
-        return userService.createUser(request.isOwner());
+    @PostMapping("/cat")
+    public Cat createCatWithName(@RequestBody String name) {
+        return catService.addCat(name);
     }
 }

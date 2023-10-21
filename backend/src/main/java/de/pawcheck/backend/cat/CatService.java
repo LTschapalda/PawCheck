@@ -17,9 +17,9 @@ public class CatService {
 
     //METHODEN
 
-    public Cat addCat() {
+    public Cat addCat(String name) {
         String catId = idService.generateRandomId();
-        Cat newCat = new Cat(catId);
+        Cat newCat = new Cat(catId, name);
         return catRepo.save(newCat);
     }
 

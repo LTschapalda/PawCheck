@@ -15,11 +15,11 @@ class CatServiceTest {
     @Test
     void returnNewCat_whenAddCat() {
         //GIVEN
-        Cat newCat = new Cat("1234");
+        Cat newCat = new Cat("1234", "Mo");
         when(catRepo.save(newCat)).thenReturn(newCat);
         when(idService.generateRandomId()).thenReturn("1234");
         //WHEN
-        Cat expected = catService.addCat();
+        Cat expected = catService.addCat("Mo");
         //VERIFY
         verify(catRepo, times(1)).save(newCat);
         //THEN

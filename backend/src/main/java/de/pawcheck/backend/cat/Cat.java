@@ -1,6 +1,7 @@
 package de.pawcheck.backend.cat;
 
 public record Cat(
-        String id
+        String id,
+        String name
 ) {
 }
