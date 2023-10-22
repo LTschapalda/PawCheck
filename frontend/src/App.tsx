@@ -8,7 +8,7 @@ function App() {
 
   return (
     <Routes>
-        <Route path={"/"} element={<LandingPage/>}/>
+        <Route path={"/"}         element={<LandingPage/>}/>
         <Route path={"/cat/name"} element={<NameInput/>}/>
         <Route path={"/cat/role"} element={<RoleInput/>}/>
     </Routes>
