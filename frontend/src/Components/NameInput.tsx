@@ -11,9 +11,10 @@ export default function NameInput() {
     }
 
     const handleSubmit = () => {
-        axios.post('api/cat', `"${name}"`, {headers: {'Content-Type': 'text/plain',},})
+        axios.post('/api/cat', { name: name })
             .then(response => {
-                console.log(response.data);
+                console.log('Erfolgreich erstellt:' + response.data);
+                setName('');
             })
             .catch(error => {
                 console.error(error);
