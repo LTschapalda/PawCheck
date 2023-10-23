@@ -1,8 +1,11 @@
 package de.pawcheck.backend.cat;
 
 import de.pawcheck.backend.IdService;
+import de.pawcheck.backend.user.User;
+import de.pawcheck.backend.user.UserRepo;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +15,8 @@ class CatServiceTest {
 
     CatRepo catRepo = mock(CatRepo.class);
     IdService idService = mock(IdService.class);
-    CatService catService = new CatService(catRepo,idService);
+    UserRepo userRepo = mock(UserRepo.class);
+    CatService catService = new CatService(catRepo,idService,userRepo);
 
 
     @Test
@@ -28,6 +32,21 @@ class CatServiceTest {
         //THEN
         assertNotNull(expected);
         assertEquals(expected,newCat);
+    }
+
+    @Test
+    void  addCatIdToUserList_whenAddCat() {
+        //GIVEN
+        Cat newCat = new Cat("1234", "Mo");
+        User user = new User("123", List.of());
+        when(catRepo.save(newCat)).thenReturn(newCat);
+        when(idService.generateRandomId()).thenReturn("1234");
+        when(userRepo.findById("123")).thenReturn(Optional.of(user));
+        //WHEN
+        // List<String> expected = user.catsOwned().add(newCat.id());
+        //VERIFY
+        verify(userRepo, times(1)).findById(user.id());
+        //THEN
     }
 
     @Test
