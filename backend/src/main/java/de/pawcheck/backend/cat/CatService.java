@@ -2,10 +2,6 @@ package de.pawcheck.backend.cat;
 
 import de.pawcheck.backend.IdService;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
-import java.util.Optional;
-
 @Service
 public class CatService {
     //ATTRIBUTES
@@ -27,13 +23,12 @@ public class CatService {
     }
 
     public Cat getCatById(String id) throws CatNotFoundException {
-        Optional<Cat> catOptional = catRepo.findById(id);
-
-        // Überprüfen, ob das Objekt vorhanden ist
-        if (catOptional.isPresent()) {
-            return catOptional.get(); // Das tatsächliche Objekt aus dem Optional abrufen
-        } else {
-           throw new CatNotFoundException("Cat not found with ID: " + id);
+        try {
+            return catRepo.findById(id)
+                    .orElseThrow(() -> new CatNotFoundException("Cat not found with ID: " + id));
+        } catch (CatNotFoundException e) {
+            System.err.println("Fehler beim Abrufen der Katze: " + e.getMessage());
+            return new Cat("000", "Cat not found");
         }
     }
 }

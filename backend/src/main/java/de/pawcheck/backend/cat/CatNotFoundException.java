@@ -1,6 +1,7 @@
 package de.pawcheck.backend.cat;
 
-public class CatNotFoundException extends Exception {
-    public CatNotFoundException(String s) {
+public class CatNotFoundException extends RuntimeException {
+    public CatNotFoundException(String message) {
+        super(message);
     }
 }
