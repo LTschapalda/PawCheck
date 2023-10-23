@@ -1,0 +1,19 @@
+.xx {
+    height: 300px;
+}
+
+.catName {
+    display: flex;
+    margin: auto;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 300px;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 1px 13px 0px rgba(0, 0, 0, 0.20)
+}
+
+#placeholder {
+    width: 58px;
+}
