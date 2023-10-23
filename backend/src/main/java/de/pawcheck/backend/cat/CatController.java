@@ -20,4 +20,5 @@ public class CatController {
     public Cat createCatWithName(@RequestBody RequestName requestName) {
         return catService.addCat(requestName.name);
     }
+
 }

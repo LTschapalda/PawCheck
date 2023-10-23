@@ -55,6 +55,8 @@ p,a,li{
     width: 200px;
 }
 
+
+
 /* mobile styles */
 .topic {
     position: absolute;
@@ -63,6 +65,16 @@ p,a,li{
     transform: translate(-50%, -50%);
     width: 300px;
     margin: auto;
+}
+
+.peakingCat {
+    position: fixed;
+    top: 61%;
+    left: -55px;
+}
+
+#peaking {
+    width: 180px;
 }
 
 .topic p {
@@ -94,7 +106,6 @@ p,a,li{
     transform: translate(-50%, -50%);
     width: 300px;
     margin: auto;
-
 }
 
 .mainButton {

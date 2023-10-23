@@ -38,6 +38,9 @@ export default function NameInput() {
                     </foreignObject>
                 </svg>
             </div>
+            <div className="peakingCat">
+                <img id="peaking" src="/src/assets/NameCat.svg" alt="peaking cat"/>
+            </div>
             <div className="weiter">
                 <button className="secondaryButton"
                         onClick={handleSubmit}>weiter</button>
