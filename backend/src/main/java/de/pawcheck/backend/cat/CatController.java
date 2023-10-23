@@ -21,4 +21,9 @@ public class CatController {
         return catService.addCat(requestName.name);
     }
 
+    @GetMapping("/movies/{id}")
+    public Cat getCatById(@PathVariable String id) throws CatNotFoundException {
+        return catService.getCatById(id);
+    }
+
 }
