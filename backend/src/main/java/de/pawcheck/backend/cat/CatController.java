@@ -1,18 +1,23 @@
 package de.pawcheck.backend.cat;
 
+import de.pawcheck.backend.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class CatController {
     //ATTRIBUTE
     private final CatService catService;
+    private final UserService userService;
 
     //DEPENDENCY INJECTION
     @Autowired
-    public CatController (CatService catService) {
+    public CatController (CatService catService, UserService userService) {
         this.catService = catService;
+        this.userService = userService;
     }
 
     //SERVER REQUESTS
@@ -24,6 +29,11 @@ public class CatController {
     @GetMapping("/cat/{id}")
     public Cat getCatById(@PathVariable String id) throws CatNotFoundException {
         return catService.getCatById(id);
+    }
+
+    @GetMapping("/cats/{id}")
+    public List<Cat> getCatsAssociatedToUser(@PathVariable String id) {
+        return userService.getCatsAssociatedToUser(id);
     }
 
 }

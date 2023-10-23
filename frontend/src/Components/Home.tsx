@@ -1,18 +1,17 @@
 import './Home.css'
-import {useEffect} from "react";
+import axios from "axios";
+
 export default function Home() {
 
-    useEffect(() => {
+    function getCatsFromUser() {
+        //TODO: Get request vom backend, der Liste von im User gespeicherten Katzen holt.
+    }
 
-    }, []);
 
     return(
         <>
             <div className="xx"></div>
-            <div className="catName">
-                <img id="placeholder" src="/src/assets/ImagePlaceholder.png" alt="catface"/>
-                <p>Mo</p>
-            </div>
+
         </>
     )
 }
