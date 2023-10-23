@@ -1,12 +1,18 @@
 package de.pawcheck.backend.cat;
 
 import de.pawcheck.backend.IdService;
+import de.pawcheck.backend.user.User;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
 public class CatService {
     //ATTRIBUTES
     private final CatRepo catRepo;
     private final IdService idService;
+
+    User user = new User(List.of());
 
     //DEPENDENCY INJECTION
     public CatService(CatRepo catRepo, IdService idService) {
