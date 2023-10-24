@@ -30,8 +30,10 @@ class CatIntegrationTest {
         String name = "Mo";
         //WHEN
         mockMvc.perform(MockMvcRequestBuilders.post("/api/cat")
-                .contentType(MediaType.TEXT_PLAIN)
-                .content(name))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+        {"name" : "Mo"}
+        """))
         //THEN
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isNotEmpty())
