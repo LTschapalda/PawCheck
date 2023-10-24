@@ -38,6 +38,7 @@ h1,h2,h3,h4{
     justify-content: center;
     flex-shrink: 0;
 }
+
 p,a,li{
     color: var(--mainGreen);
     font-size: 1.3em;
@@ -141,28 +142,18 @@ p,a,li{
     transition: transform 0.3s ease;
 }
 
-/* small tablet styles */
-@media screen and (min-width: 620px){
-
+.navbar {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: -25px;
+    margin-left: 8%;
 }
 
-/* large tablet & laptop styles */
-@media screen and (min-width: 960px){
-
-    body{
-        font-size: 18px;
-    }
-
+#menuPaw {
+    width: 67px;
+    height: 150px;
 }
 
-/* desktop styles */
-@media screen and (min-width: 1200px){
-
-    body{
-        font-size: 20px;
-    }
-
-}
 
 /* fonts */
 @font-face {
