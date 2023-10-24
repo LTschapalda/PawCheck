@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 export default function LandingPage() {
     return (
         <>
@@ -6,6 +8,11 @@ export default function LandingPage() {
                 <p>Let's check, ob deine Katze es auch ist!</p>
             </div>
             <img id="pawcheck" src="src/assets/PawCheck.svg" alt="PawCheck"/>
+            <div className="letsgo">
+                <Link to="/cat/name">
+                    <button className="mainButton">check in</button>
+                </Link>
+            </div>
         </>
     )
 }
