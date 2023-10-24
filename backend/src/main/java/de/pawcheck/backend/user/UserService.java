@@ -14,8 +14,6 @@ public class UserService {
     private final CatService catService;
 
     //KONSTRUKTOR
-
-
     public UserService(UserRepo userRepo, CatService catService) {
         this.userRepo = userRepo;
         this.catService = catService;
@@ -27,8 +25,8 @@ public class UserService {
         List<String> idsCatsOwned = user.catsOwned();
 
         return idsCatsOwned.stream()
-                .map(catService::getCatById) // Ruft die findById-Methode für jede ID auf
-                .filter(cat -> cat != null) // Filtert null-Werte, falls findById keine Übereinstimmung findet
+                .map(catService::getCatById)
+                .filter(cat -> cat != null)
                 .collect(Collectors.toList());
     }
 

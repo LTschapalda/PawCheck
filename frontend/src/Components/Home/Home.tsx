@@ -34,7 +34,7 @@ export default function Home() {
             <div className="addCat">
                 <Link to="/cat/name">
                 <svg id="plus" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M13.8966 2V25M25 13.3708H2" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M13.8966 2V25M25 13.3708H2" stroke="white" strokeWidth="3" strokeLinecap="round"/>
                 </svg>
                 </Link>
             </div>

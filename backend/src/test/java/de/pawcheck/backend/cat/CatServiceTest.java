@@ -43,7 +43,7 @@ class CatServiceTest {
         when(idService.generateRandomId()).thenReturn("1234");
         when(userRepo.findById("123")).thenReturn(Optional.of(user));
         //WHEN
-        // List<String> expected = user.catsOwned().add(newCat.id());
+        //List<String> expected = user.catsOwned().add(newCat.id());
         //VERIFY
         verify(userRepo, times(1)).findById(user.id());
         //THEN

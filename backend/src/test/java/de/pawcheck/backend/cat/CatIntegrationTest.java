@@ -1,5 +1,7 @@
 package de.pawcheck.backend.cat;
 
+import de.pawcheck.backend.user.User;
+import de.pawcheck.backend.user.UserRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -9,6 +11,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -22,6 +26,9 @@ class CatIntegrationTest {
 
     @Autowired
     CatRepo catRepo;
+
+    @Autowired
+    UserRepo userRepo;
 
     @Test
     @DirtiesContext
@@ -77,6 +84,22 @@ class CatIntegrationTest {
                         {
                          id : "000",
                          name : "Cat not found"}
+                        """));
+    }
+
+    @Test
+    @DirtiesContext
+    void getCatsAssociatedToUser_andExpectListOfCats() throws Exception {
+        //GIVEN
+        catRepo.save(new Cat("1234", "Mo"));
+        userRepo.save(new User("123", List.of("1234")));
+
+        //WHEN
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/cats/123"))
+                //THEN
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("""
+                        [{"id":"1234","name":"Mo"}]
                         """));
     }
 
