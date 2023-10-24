@@ -1,6 +1,7 @@
 import  './NameInput.css'
 import {ChangeEvent, useState} from "react";
 import axios from "axios";
+import NameCat from "../assets/NameCat.svg";
 
 export default function NameInput() {
     const [name, setName] = useState<string>('')
@@ -39,7 +40,7 @@ export default function NameInput() {
                 </svg>
             </div>
             <div className="peakingCat">
-                <img id="peaking" src="/src/assets/NameCat.svg" alt="peaking cat"/>
+                <img id="peaking" src={NameCat} alt="peaking cat"/>
             </div>
             <div className="weiter">
                 <button className="secondaryButton"
