@@ -1,5 +1,5 @@
 .xx {
-    height: 300px;
+    height: 50vh;
 }
 
 .catName {
@@ -16,4 +16,18 @@
 
 #placeholder {
     width: 58px;
+}
+
+.addCat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 68px;
+    height: 68px;
+    background-color: #9FCC1D;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

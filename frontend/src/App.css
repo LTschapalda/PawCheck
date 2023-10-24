@@ -143,15 +143,14 @@ p,a,li{
 }
 
 .navbar {
-    display: flex;
-    justify-content: flex-start;
-    margin-top: -25px;
+    position: fixed;
     margin-left: 8%;
 }
 
 #menuPaw {
     width: 67px;
     height: 150px;
+    margin-top: -25px;
 }
 
 
