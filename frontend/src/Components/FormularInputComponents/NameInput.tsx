@@ -1,7 +1,7 @@
 import  './NameInput.css'
 import {ChangeEvent, useState} from "react";
 import axios from "axios";
-import NameCat from "../assets/NameCat.svg";
+import NameCat from "../../assets/NameCat.svg";
 
 export default function NameInput() {
     const [name, setName] = useState<string>('')
