@@ -5,6 +5,10 @@ import de.pawcheck.backend.user.User;
 import de.pawcheck.backend.user.UserRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class CatService {
     //ATTRIBUTES
@@ -29,10 +33,18 @@ public class CatService {
         String catId = idService.generateRandomId();
         Cat newCat = new Cat(catId, name);
 
-        User user = userRepo.findById("123").orElse(null);
-        assert user != null;
-        user.catsOwned().add(newCat.id());
-        userRepo.save(user);
+        Optional<User> optionalUser = userRepo.findById("123");
+
+        if (optionalUser.isPresent()) {
+            User user =optionalUser.get();
+            List<String> updatedCatIds = new ArrayList<>(user.catsOwned());
+            updatedCatIds.add(newCat.id());
+
+            User upatedUser = new User(user.id(),updatedCatIds);
+            userRepo.save(upatedUser);
+        } else {
+            System.out.println("The User is null");
+        }
 
         return catRepo.save(newCat);
     }

@@ -23,31 +23,41 @@ class CatServiceTest {
     void returnNewCat_whenAddCat() {
         //GIVEN
         Cat newCat = new Cat("1234", "Mo");
-        when(catRepo.save(newCat)).thenReturn(newCat);
+        User user = new User("123", List.of());
+        User updatedUser = new User("123", List.of("1234"));
         when(idService.generateRandomId()).thenReturn("1234");
+        when(userRepo.findById("123")).thenReturn(Optional.of(user));
+        when(userRepo.save(user)).thenReturn(updatedUser);
+        when(catRepo.save(newCat)).thenReturn(newCat);
+
         //WHEN
         Cat expected = catService.addCat("Mo");
         //VERIFY
         verify(catRepo, times(1)).save(newCat);
         //THEN
-        assertNotNull(expected);
         assertEquals(expected,newCat);
     }
 
     @Test
-    void  addCatIdToUserList_whenAddCat() {
+    void returnNull_whenAddCat_AndUserNotFound() {
         //GIVEN
         Cat newCat = new Cat("1234", "Mo");
         User user = new User("123", List.of());
-        when(catRepo.save(newCat)).thenReturn(newCat);
+        User updatedUser = new User("123", List.of("1234"));
         when(idService.generateRandomId()).thenReturn("1234");
-        when(userRepo.findById("123")).thenReturn(Optional.of(user));
+        when(userRepo.findById("123")).thenReturn(Optional.empty());
+        when(userRepo.save(user)).thenReturn(updatedUser);
+        when(catRepo.save(newCat)).thenReturn(newCat);
+
         //WHEN
-        //List<String> expected = user.catsOwned().add(newCat.id());
+        Cat expected = catService.addCat("Mo");
         //VERIFY
-        verify(userRepo, times(1)).findById(user.id());
+        verify(catRepo, times(1)).save(newCat);
         //THEN
+        assertTrue(user.catsOwned().isEmpty());
     }
+
+
 
     @Test
     void returnCatById_whenGetCatById() {

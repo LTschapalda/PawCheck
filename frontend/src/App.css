@@ -21,6 +21,7 @@ li{
 /* base styles */
 
 body {
+    position: fixed;
     background: linear-gradient(180deg, #FFF 0%, #F5F5F5 27.08%);
     font-family: Hind, sans-serif;
     margin: 0;

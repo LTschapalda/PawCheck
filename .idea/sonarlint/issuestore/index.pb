@@ -350,8 +350,6 @@ m
 =backend/src/main/java/de/pawcheck/backend/cat/CatService.java,0/d/0d8b3d75524afab44775a7db2aa44490262da26d
 u
 Ebackend/src/test/java/de/pawcheck/backend/BackendApplicationTest.java,2/a/2af15ae249b4188d9f7dcafc4dc826ad6e62a13b
-w
-Gbackend/src/test/java/de/pawcheck/backend/user/UserIntegrationTest.java,5/0/5079f4ba383412e780e2ca66fecf426ea1a3f665
 f
 6backend/src/main/java/de/pawcheck/backend/cat/Cat.java,b/d/bd97106c2e18c04288a58bb10e657b9715c8c522
 p
@@ -362,5 +360,9 @@ n
 >backend/src/main/java/de/pawcheck/backend/cat/RequestName.java,f/6/f6a6c1ff14c5d938931211e086343842bf55f102
 W
 'frontend/src/Components/LandingPage.tsx,1/5/157cfb58aa7ec617023ef03f89f9f117b67e5377
-U
-%frontend/src/Components/NameInput.tsx,1/c/1cc5ef98d8be77cf4b0af55527c93d8b63965743
+w
+Gbackend/src/main/java/de/pawcheck/backend/cat/CatNotFoundException.java,9/8/98c30a84e6be4ab231a81ae611d85460a0c07800
+h
+8backend/src/main/java/de/pawcheck/backend/user/User.java,a/8/a87fc2e50fbc67291e876209367e2182842ace9b
+u
+Ebackend/src/test/java/de/pawcheck/backend/cat/CatIntegrationTest.java,2/1/2103baa706de8d02f5451eb4942d2d213d4be425
