@@ -5,6 +5,8 @@ import de.pawcheck.backend.cat.CatService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,14 +22,18 @@ public class UserService {
     }
 
     public List<Cat> getCatsAssociatedToUser(String id) {
-        User user = userRepo.findById(id).orElse(null);
-        assert user != null;
-        List<String> idsCatsOwned = user.catsOwned();
+        Optional<User> optionalUser = userRepo.findById(id);
 
-        return idsCatsOwned.stream()
-                .map(catService::getCatById)
-                .filter(cat -> cat != null)
-                .collect(Collectors.toList());
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            List<String> idsCatsOwned = user.catsOwned();
+            return idsCatsOwned.stream()
+                    .map(catService::getCatById)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+        } else {
+            return List.of();
+        }
     }
 
 }

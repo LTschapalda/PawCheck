@@ -37,4 +37,22 @@ class UserServiceTest {
         verify(userRepo, times(1)).findById(user.id());
         assertEquals(List.of(newCat), expected);
     }
+
+    @Test
+    void GetEmptyListWhen_getCatsAssociatedToUser_UserIsNotPresent() {
+        //GIVEN
+        Cat newCat = new Cat("1234", "Mo");
+        User user = new User("123", List.of("1234"));
+
+        // Mocks und Annahmen
+        when(userRepo.findById(user.id())).thenReturn(Optional.empty());
+        when(catRepo.findById(newCat.id())).thenReturn(Optional.of(newCat));
+
+        // WHEN
+        List<Cat> expected = userService.getCatsAssociatedToUser(user.id());
+
+        // THEN
+        verify(userRepo, times(1)).findById(user.id());
+        assertEquals(expected, List.of());
+    }
 }
