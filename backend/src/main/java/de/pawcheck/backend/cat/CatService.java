@@ -3,7 +3,11 @@ package de.pawcheck.backend.cat;
 import de.pawcheck.backend.IdService;
 import de.pawcheck.backend.user.User;
 import de.pawcheck.backend.user.UserRepo;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +21,16 @@ public class CatService {
 
     private final UserRepo userRepo;
 
+    private final MongoTemplate mongoTemplate;
+
 
     //DEPENDENCY INJECTION
 
-    public CatService(CatRepo catRepo, IdService idService, UserRepo userRepo) {
+    public CatService(CatRepo catRepo, IdService idService, UserRepo userRepo, MongoTemplate mongoTemplate) {
         this.catRepo = catRepo;
         this.idService = idService;
         this.userRepo = userRepo;
+        this.mongoTemplate = mongoTemplate;
     }
 
 
@@ -57,5 +64,13 @@ public class CatService {
             System.err.println("Fehler beim Abrufen der Katze: " + e.getMessage());
             return new Cat("000", "Cat not found");
         }
+    }
+
+    public void deleteCatEverywhereById(String catId) {
+        Query query = new Query(Criteria.where("catsOwned").in(catId));
+        Update update = new Update().pull("catsOwned", catId);
+        mongoTemplate.updateMulti(query, update, User.class);
+
+        catRepo.deleteById(catId);
     }
 }
