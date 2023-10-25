@@ -27,7 +27,9 @@ body {
     padding: 0;
     height: 100vh;
     width: 100vw;
+    overflow-y: auto;
 }
+
 
 h1,h2,h3,h4{
     color: var(--darkerGreen);
@@ -38,6 +40,7 @@ h1,h2,h3,h4{
     justify-content: center;
     flex-shrink: 0;
 }
+
 p,a,li{
     color: var(--mainGreen);
     font-size: 1.3em;
@@ -54,8 +57,6 @@ p,a,li{
     transform: translateX(-50%);
     width: 200px;
 }
-
-
 
 /* mobile styles */
 .topic {
@@ -143,28 +144,18 @@ p,a,li{
     transition: transform 0.3s ease;
 }
 
-/* small tablet styles */
-@media screen and (min-width: 620px){
-
+.navbar {
+    position: fixed;
+    margin-left: 8%;
+    z-index: 1000;
 }
 
-/* large tablet & laptop styles */
-@media screen and (min-width: 960px){
-
-    body{
-        font-size: 18px;
-    }
-
+#menuPaw {
+    width: 67px;
+    height: 150px;
+    margin-top: -25px;
 }
 
-/* desktop styles */
-@media screen and (min-width: 1200px){
-
-    body{
-        font-size: 20px;
-    }
-
-}
 
 /* fonts */
 @font-face {
