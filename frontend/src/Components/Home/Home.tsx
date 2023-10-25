@@ -30,7 +30,7 @@ export default function Home() {
             {catsOwned.map(
                 (cat:Cat) => <CatHeader key={cat.id} cat={cat}/>
             )}
-
+            <div className="bottomSpace"/>
             <div className="addCat">
                 <Link to="/cat/name">
                 <svg id="plus" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">

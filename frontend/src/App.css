@@ -21,14 +21,15 @@ li{
 /* base styles */
 
 body {
-    position: fixed;
     background: linear-gradient(180deg, #FFF 0%, #F5F5F5 27.08%);
     font-family: Hind, sans-serif;
     margin: 0;
     padding: 0;
     height: 100vh;
     width: 100vw;
+    overflow-y: auto;
 }
+
 
 h1,h2,h3,h4{
     color: var(--darkerGreen);
@@ -146,6 +147,7 @@ p,a,li{
 .navbar {
     position: fixed;
     margin-left: 8%;
+    z-index: 1000;
 }
 
 #menuPaw {

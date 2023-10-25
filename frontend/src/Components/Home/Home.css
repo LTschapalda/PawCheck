@@ -5,13 +5,18 @@
 .catName {
     display: flex;
     flex-wrap: wrap;
+    position: relative;
     gap: 1rem;
     width: 300px;
     padding: 1rem;
     margin: auto auto 0.8rem;
     background-color: white;
     border-radius: 15px;
-    box-shadow: 0 1px 13px 0 rgba(0, 0, 0, 0.20)
+    box-shadow: 0 1px 13px 0 rgba(0, 0, 0, 0.20);
+   }
+
+.bottomSpace {
+    height: 140px;
 }
 
 #placeholder {
