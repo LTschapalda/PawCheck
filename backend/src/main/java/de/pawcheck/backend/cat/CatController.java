@@ -37,7 +37,8 @@ public class CatController {
     }
 
     @DeleteMapping("/cat/{id}")
-    public void deleteCatEverywhere (@PathVariable String id) {
+
+    public void deleteCatEverywhereById (@PathVariable String id) {
         catService.deleteCatEverywhereById(id);
     }
 

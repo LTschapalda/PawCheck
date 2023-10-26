@@ -3,7 +3,13 @@ package de.pawcheck.backend.cat;
 import de.pawcheck.backend.IdService;
 import de.pawcheck.backend.user.User;
 import de.pawcheck.backend.user.UserRepo;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.*;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.mongodb.core.query.Query;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -13,10 +19,26 @@ import static org.mockito.Mockito.*;
 
 class CatServiceTest {
 
-    CatRepo catRepo = mock(CatRepo.class);
-    IdService idService = mock(IdService.class);
-    UserRepo userRepo = mock(UserRepo.class);
-    CatService catService = new CatService(catRepo,idService,userRepo);
+    @Mock
+    private CatRepo catRepo;
+    @Mock
+    private UserRepo userRepo;
+    @Mock
+    private IdService idService;
+    @Mock
+    private MongoTemplate mongoTemplate;
+    @Captor
+    private ArgumentCaptor<Query> queryCaptor;
+    @Captor
+    private ArgumentCaptor<Update> updateCaptor;
+
+    @InjectMocks
+    private CatService catService ;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
 
 
     @Test
@@ -33,7 +55,10 @@ class CatServiceTest {
         //WHEN
         Cat expected = catService.addCat("Mo");
         //VERIFY
-        verify(catRepo, times(1)).save(newCat);
+        verify(idService).generateRandomId();
+        verify(userRepo).findById("123");
+        verify(userRepo).save(updatedUser);
+        verify(catRepo).save(newCat);
         //THEN
         assertEquals(expected,newCat);
     }
@@ -81,4 +106,16 @@ class CatServiceTest {
         //THEN
         assertEquals(wrongId,expected);
     }
+
+    @Test
+    void deleteCatEverywhereById () {
+        //GIVEN
+        String catId = "1234";
+        //WHEN
+        catService.deleteCatEverywhereById(catId);
+        //THEN
+        verify(mongoTemplate).updateMulti(queryCaptor.capture(), updateCaptor.capture(), eq(User.class));
+        verify(catRepo).deleteById(catId);
+    }
+
 }
