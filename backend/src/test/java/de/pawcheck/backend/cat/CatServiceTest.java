@@ -75,7 +75,7 @@ class CatServiceTest {
         when(catRepo.save(newCat)).thenReturn(newCat);
 
         //WHEN
-        Cat expected = catService.addCat("Mo");
+        catService.addCat("Mo");
         //VERIFY
         verify(catRepo, times(1)).save(newCat);
         //THEN
