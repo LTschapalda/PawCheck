@@ -45,7 +45,17 @@ h1,h2{
     flex-shrink: 0;
 }
 
-h3,h4{
+h3{
+    color: var(--darkerGreen);
+    font-family: Montserrat, sans-serif;
+    font-size: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+h4{
     color: var(--darkerGreen);
     font-family: Montserrat, sans-serif;
     font-size: 1.5em;
@@ -164,7 +174,7 @@ p,a,li{
     left: 0;
     width: 100%;
     margin-left: 8%;
-    z-index: 1000;
+    z-index: 990;
 }
 
 #menuPaw {
