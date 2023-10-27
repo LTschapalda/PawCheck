@@ -58,13 +58,13 @@ export default function CatDetailPage( props: CatDetailProps) {
             {deleteConfirmation && (
                 <div className="deleteConfirmationPopup">
                     <div className="overlay">
-                    <div className="deleteConfirmationPopup-content">
-                        <h3>Willst du diese Katze wirklich endgültig löschen?</h3>
-                        <button className="mainButton"
-                                onClick={toggleDeleteConfirmation}>Abort!</button>
-                        <button className="secondaryButton"
-                                onClick={deleteCatEverywhere}>Ja, ich bin sicher</button>
-                    </div>
+                        <div className="deleteConfirmationPopup-content">
+                            <h3>Willst du diese Katze wirklich endgültig löschen?</h3>
+                            <button className="mainButton"
+                                    onClick={toggleDeleteConfirmation}>Abort!</button>
+                            <button className="secondaryButton"
+                                    onClick={deleteCatEverywhere}>Ja, ich bin sicher</button>
+                        </div>
                     </div>
                 </div>
             )}
