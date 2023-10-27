@@ -28,16 +28,18 @@ export default function Home(props : HomeProps) {
 
     return(
         <>
-            <div className="xx">
-                <div className="topic">
-                <h1>Hallo Nutzer</h1>
-                    <p>Hier findest du eine Übersicht über deine Katzen</p>
+            <div className="container">
+                <div className="xx">
+                    <h1>Hallo Nutzer</h1>
+                        <p>Hier findest du eine Übersicht über deine Katzen</p>
                 </div>
+                <div className="listOfCats">
+                    {catsOwned.map(
+                        (cat:Cat) => <CatHeader key={cat.id} cat={cat}/>
+                    )}
+                </div>
+                <div className="bottomSpace"/>
             </div>
-                {catsOwned.map(
-                    (cat:Cat) => <CatHeader key={cat.id} cat={cat}/>
-                )}
-            <div className="bottomSpace"/>
             <div className="addCat">
                 <Link to="/cat/name">
                 <svg id="plus" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">

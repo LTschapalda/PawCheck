@@ -19,6 +19,7 @@ export default function CatDetailPage( props: CatDetailProps) {
         setDeleteConfirmation(!deleteConfirmation);
     }
 
+    //POP-UP CSS
     if(deleteConfirmation) {
         document.body.classList.add('active-deleteConfirmation')
     } else {
