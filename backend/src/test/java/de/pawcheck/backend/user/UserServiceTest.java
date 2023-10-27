@@ -5,6 +5,7 @@ import de.pawcheck.backend.cat.Cat;
 import de.pawcheck.backend.cat.CatRepo;
 import de.pawcheck.backend.cat.CatService;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,8 +18,9 @@ class UserServiceTest {
     CatRepo catRepo = mock(CatRepo.class);
     IdService idService = new IdService();
     UserRepo userRepo = mock(UserRepo.class);
-    CatService catService = new CatService(catRepo,idService,userRepo);
-    UserService userService = new UserService(userRepo,catService);
+    MongoTemplate mongoTemplate = mock(MongoTemplate.class);
+    CatService catService = new CatService(catRepo, idService, userRepo, mongoTemplate);
+    UserService userService = new UserService(userRepo, catService);
 
     @Test
     void GetAListOFCatsWhen_getCatsAssociatedToUser() {

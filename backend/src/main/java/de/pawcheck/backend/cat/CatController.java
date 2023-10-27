@@ -36,4 +36,10 @@ public class CatController {
         return userService.getCatsAssociatedToUser(id);
     }
 
+    @DeleteMapping("/cat/{id}")
+
+    public void deleteCatEverywhereById (@PathVariable String id) {
+        catService.deleteCatEverywhereById(id);
+    }
+
 }

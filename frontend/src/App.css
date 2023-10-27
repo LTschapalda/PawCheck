@@ -23,6 +23,10 @@ li{
 body {
     background: linear-gradient(180deg, #FFF 0%, #F5F5F5 27.08%);
     font-family: Hind, sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    position: fixed;
+    justify-content: center;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -31,10 +35,30 @@ body {
 }
 
 
-h1,h2,h3,h4{
+h1,h2{
     color: var(--darkerGreen);
     font-family: Montserrat, sans-serif;
     font-size: 2.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+h3{
+    color: var(--darkerGreen);
+    font-family: Montserrat, sans-serif;
+    font-size: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+h4{
+    color: var(--darkerGreen);
+    font-family: Montserrat, sans-serif;
+    font-size: 1.5em;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -146,8 +170,11 @@ p,a,li{
 
 .navbar {
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     margin-left: 8%;
-    z-index: 1000;
+    z-index: 990;
 }
 
 #menuPaw {

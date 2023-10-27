@@ -1,5 +1,10 @@
 .xx {
-    height: 50vh;
+    height: 42%;
+    position: relative;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
 }
 
 .catName {
@@ -19,7 +24,7 @@
     height: 140px;
 }
 
-#placeholder {
+#catFace {
     width: 58px;
 }
 
@@ -35,4 +40,95 @@
     bottom: 15px;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.deleteCat {
+    display: flex;
+    bottom: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    height: 70px;
+    width: 100vw;
+    background-color: white;
+}
+
+.deleteCat:hover {
+    background-color: red;
+    color: white;
+}
+
+#catFaceBigger {
+    width: 220px;
+}
+
+.catImage {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 45vh;
+    margin-bottom: 20px;
+}
+.catDetails {
+    display: flex;
+    justify-content: flex-start;
+    width: 340px;
+    padding: 5px;
+}
+
+.container {
+    width: 350px;
+    height: 100vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+   }
+
+.container::-webkit-scrollbar {
+    width: 0; /* Breite der Scroll-Leiste */
+}
+
+.container::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Hintergrundfarbe des Scroll-Leisten-Griffs */
+}
+
+body.active-deleteConfirmation {
+    overflow-y: hidden;
+}
+
+.deleteConfirmationPopup, .overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.overlay {
+    background: rgba(49,49,49,0.8);
+    z-index: 999;
+}
+
+.deleteConfirmationPopup-content {
+    z-index: 1000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #f1f1f1;
+    padding: 14px 28px;
+    border-radius: 3px;
+    max-width: 600px;
+    min-width: 300px;
+}
+
+.delete {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 7px;
 }

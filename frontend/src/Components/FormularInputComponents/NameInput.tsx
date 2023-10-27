@@ -2,6 +2,7 @@ import  './NameInput.css'
 import {ChangeEvent, useState} from "react";
 import axios from "axios";
 import NameCat from "../../assets/NameCat.svg";
+import {Link} from "react-router-dom";
 
 export default function NameInput() {
     const [name, setName] = useState<string>('')
@@ -39,12 +40,14 @@ export default function NameInput() {
                     </foreignObject>
                 </svg>
             </div>
-            <div className="peakingCat">
-                <img id="peaking" src={NameCat} alt="peaking cat"/>
-            </div>
+                <div className="peakingCat">
+                    <img id="peaking" src={NameCat} alt="peaking cat"/>
+                </div>
             <div className="weiter">
+                <Link to="/home">
                 <button className="secondaryButton"
                         onClick={handleSubmit}>weiter</button>
+                </Link>
             </div>
         </>
     );
