@@ -51,19 +51,20 @@ export default function CatDetailPage( props: CatDetailProps) {
                     <div className="catDetails">Katze nicht gefunden</div>
                 )}
             </div>
-            <div id="deleteCat" className="deleteCat"
+            <button id="deleteCat" className="deleteCat"
                  onClick={toggleDeleteConfirmation}>Löschen
-            </div>
+            </button>
 
             {deleteConfirmation && (
                 <div className="deleteConfirmationPopup">
-                    <div onClick={toggleDeleteConfirmation} className="overlay"></div>
+                    <div className="overlay">
                     <div className="deleteConfirmationPopup-content">
                         <h3>Willst du diese Katze wirklich endgültig löschen?</h3>
                         <button className="mainButton"
                                 onClick={toggleDeleteConfirmation}>Abort!</button>
                         <button className="secondaryButton"
                                 onClick={deleteCatEverywhere}>Ja, ich bin sicher</button>
+                    </div>
                     </div>
                 </div>
             )}
