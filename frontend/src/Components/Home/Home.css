@@ -39,6 +39,8 @@
 
 .deleteCat {
     display: flex;
+    bottom: 0;
+    left: 0;
     justify-content: center;
     align-items: center;
     position: fixed;
@@ -46,6 +48,11 @@
     height: 70px;
     width: 100vw;
     background-color: white;
+}
+
+.deleteCat:hover {
+    background-color: red;
+    color: white;
 }
 
 #catFaceBigger {
@@ -61,6 +68,12 @@
 }
 .catDetails {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    width: 340px;
+    padding: 5px;
+}
+
+.container {
     width: 350px;
+    height: 100vh;
 }

@@ -8,10 +8,12 @@ type CatDetailProps = {
 }
 export default function CatDetailPage( props: CatDetailProps) {
 
+    //VARIABLES
     const { id } = useParams();
     const navigate = useNavigate()
     const selectedCat = props.catsOwned.find((cat: Cat) => cat.id == id)
 
+    //FUNCTIONS
     function deleteCatEverywhere () {
         axios.delete("/api/cat/" + id)
             .then(() => {
@@ -19,20 +21,25 @@ export default function CatDetailPage( props: CatDetailProps) {
             })
     }
 
+    //RETURN
     return(
         <>
-            <div className="catImage">
-                <img id="catFaceBigger"
-                     src={CatFace}
-                     alt="catface"/>
+            <div className="container" >
+                <div className="catImage">
+                    <img id="catFaceBigger"
+                         src={CatFace}
+                         alt="catface"/>
+                </div>
+                {selectedCat ? (
+                    <div className="catDetails">
+                        <h3>{selectedCat.name}</h3>
+                    </div>
+                ) : (
+                    <div className="catDetails">Katze nicht gefunden</div>
+                )}
             </div>
-            {selectedCat ? (
-                <div className="catDetails">{selectedCat.name}</div>
-            ) : (
-                <div className="catDetails">Katze nicht gefunden</div>
-            )}
-            <div className="deleteCat"
-                 onClick={deleteCatEverywhere}>löschen</div>
+            <div id="deleteCat" className="deleteCat"
+                 onClick={deleteCatEverywhere}>Löschen</div>
         </>
     )
 }
