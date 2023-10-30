@@ -88,7 +88,7 @@ class CatServiceTest {
     void returnCatById_whenGetCatById() {
         //GIVEN
         Cat newCat = new Cat("1234", "Mo");
-        when(catRepo.findById(newCat.id())).thenReturn(Optional.of(newCat));
+        when(catRepo.findById(newCat.getId())).thenReturn(Optional.of(newCat));
         //WHEN
         Cat expected = catService.getCatById("1234");
         //THEN
@@ -99,7 +99,7 @@ class CatServiceTest {
     void returnErrorCat_whenGetCatByIdUnsuccessful() {
         //GIVEN
         Cat newCat = new Cat("1234", "Mo");
-        when(catRepo.findById(newCat.id())).thenReturn(Optional.of(newCat));
+        when(catRepo.findById(newCat.getId())).thenReturn(Optional.of(newCat));
         //WHEN
         Cat wrongId = catService.getCatById("234");
         Cat expected = new Cat("000", "Cat not found");

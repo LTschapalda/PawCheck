@@ -37,9 +37,13 @@ public class CatController {
     }
 
     @DeleteMapping("/cat/{id}")
-
     public void deleteCatEverywhereById (@PathVariable String id) {
         catService.deleteCatEverywhereById(id);
+    }
+
+    @PutMapping("/cat/{id}")
+    public Cat updateCat(@PathVariable String id, @RequestBody Cat cat) {
+        return catService.updateCatById(id, cat);
     }
 
 }
