@@ -1,4 +1,4 @@
 export type Food = {
-    timeOfDay : string,
-    amount? : string,
+    morning? : string,
+    evening? : string,
 }
