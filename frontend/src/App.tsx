@@ -12,17 +12,18 @@ import FoodInput from "./Components/FormularInputComponents/FoodInput.tsx";
 
 function App() {
     const [catsOwned, setCatsOwned] = useState<Cat[]>([])
+    const [cat, setCat] = useState<Cat>({id: "", name: ""})
 
     return (
         <>
             <MenuPaw/>
             <Routes>
                 <Route index                  element={<LandingPage/>}/>
-                <Route path={"/cat/name"}     element={<NameInput />}/>
+                <Route path={"/cat/name"}     element={<NameInput setCat={setCat} />}/>
                 <Route path={"/home"}         element={<Home setCatsOwned={setCatsOwned}/>}/>
                 <Route path={"/cat/details/:id"} element={<CatDetailPage catsOwned={catsOwned}/>} />
                 <Route path={"/sweet"}        element={<SweetCheckup/>}/>
-                <Route path={"/cat/food"} element={<FoodInput catsOwned={catsOwned}/>}/>
+                <Route path={"/cat/food"} element={<FoodInput cat={cat} setCat={setCat}/>}/>
             </Routes>
         </>
     )

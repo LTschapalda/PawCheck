@@ -1,10 +1,14 @@
 import  './NameInput.css'
-import {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import axios from "axios";
 import NameCat from "../../assets/NameCat.svg";
 import {Link} from "react-router-dom";
+import {Cat} from "../assets/Cat.ts";
 
-export default function NameInput() {
+type NameInputProps = {
+    setCat : React.Dispatch<React.SetStateAction<Cat>>;
+}
+export default function NameInput(props : NameInputProps) {
     const [name, setName] = useState<string>('')
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
@@ -16,13 +20,15 @@ export default function NameInput() {
         if (name !== '') {
             axios.post('/api/cat', { name: name })
                 .then(response => {
-                    console.log('Erfolgreich erstellt:' + response.data);
+                    if (response.data) {
+                    props.setCat(response.data);
+                    }
                     setName('');
                 })
                 .catch(error => {
                     console.error(error);
                 });
-        };
+        }
     };
 
     return(

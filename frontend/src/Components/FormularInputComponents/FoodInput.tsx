@@ -1,26 +1,21 @@
-import {ChangeEvent, useState} from "react";
-import {Link, useParams} from "react-router-dom";
+import React, {ChangeEvent, useState} from "react";
+import {Link} from "react-router-dom";
 import {Cat} from "../assets/Cat.ts";
 import axios from "axios";
 import FoodIcon from "../../assets/Kategorie_Icons_food.png";
 import './Input.css'
 
 type FoodInputProps = {
-    catsOwned : Cat[]
+    cat : Cat
+    setCat : React.Dispatch<React.SetStateAction<Cat>>;
 }
 
 export default function FoodInput(props: FoodInputProps) {
-    const { id } = useParams();
-    const currentCat : Cat | undefined = props.catsOwned.find(cat => cat.id === id)
-    const [cat, setCat] = useState<Cat>()
-    if (currentCat) {
-    setCat(currentCat)
-    }
+
+
+    console.log(props.cat)
     function onDryFoodMorningAmount(event: ChangeEvent<HTMLInputElement>) {
-        if (!cat) {
-            return;
-        }
-        setCat({...cat, dry: {timeOfDay: "MORNING", amount: event.target.value}});
+        props.setCat({...props.cat, dry: {timeOfDay: "MORNING", amount: event.target.value}});
     }
 
     const [dryFood, setDryFood] = useState(false)
@@ -39,11 +34,12 @@ export default function FoodInput(props: FoodInputProps) {
 
 
     const handleSubmit = () => {
-        axios.put("/api/cat/" + id, cat)
+        axios.put("/api/cat/" + props.cat.id, props.cat)
             .then((response: { data: string; }) => {
                 console.log('Erfolgreich upgedatet:' + response.data);
             })
             .catch((error) => {
+                console.log(props.cat)
                 console.error(error);
             });
     };
@@ -57,7 +53,7 @@ export default function FoodInput(props: FoodInputProps) {
                 </div>
 
                 <div className="topicText">
-                    <h1>Bekommt Mo Trocken oder Nassfutter? </h1>
+                    <h1>Bekommt {props.cat.name} Trocken oder Nassfutter? </h1>
                 </div>
 
                 <div className="selection">
@@ -73,7 +69,7 @@ export default function FoodInput(props: FoodInputProps) {
                                         <input
                                                type="text"
                                                placeholder="Wie viel?"
-                                               value={cat?.dry?.amount}
+                                               value={props.cat?.dry?.amount || ''}
                                                onChange={onDryFoodMorningAmount}/>
                                     </div>
                                 )}
