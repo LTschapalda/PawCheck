@@ -13,14 +13,16 @@ export default function NameInput() {
     }
 
     const handleSubmit = () => {
-        axios.post('/api/cat', { name: name })
-            .then(response => {
-                console.log('Erfolgreich erstellt:' + response.data);
-                setName('');
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        if (name !== '') {
+            axios.post('/api/cat', { name: name })
+                .then(response => {
+                    console.log('Erfolgreich erstellt:' + response.data);
+                    setName('');
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        };
     };
 
     return(
@@ -44,7 +46,7 @@ export default function NameInput() {
                     <img id="peaking" src={NameCat} alt="peaking cat"/>
                 </div>
             <div className="weiter">
-                <Link to="/home">
+                <Link to="/cat/food">
                 <button className="secondaryButton"
                         onClick={handleSubmit}>weiter</button>
                 </Link>

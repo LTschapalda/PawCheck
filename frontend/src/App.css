@@ -18,6 +18,14 @@ li{
     list-style-type: none;
 }
 
+input, textarea{
+    text-align: center;
+    border-radius: 17px;
+    border: 1px solid var(--mainGreen);
+    font-family: Hind, sans-serif;
+    font-size: 1em;
+}
+
 /* base styles */
 
 body {
@@ -134,6 +142,9 @@ p,a,li{
 }
 
 .mainButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 0;
     background-color: #87AD19;
     border-radius: 17px;
@@ -149,11 +160,20 @@ p,a,li{
     transition: transform 0.3s ease;
 }
 
-.mainButton:hover {
+.mainButton:active {
     transform: scale(0.9);
 }
 
+
+.mainButtonLighter{
+    background-color: rgba(135, 173, 25, 0.7);
+}
+
+
 .secondaryButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 0;
     background-color: transparent;
     border-radius: 17px;
@@ -165,6 +185,7 @@ p,a,li{
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    margin-bottom: 7px;
     transition: transform 0.3s ease;
 }
 
