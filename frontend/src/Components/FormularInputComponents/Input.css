@@ -23,8 +23,24 @@
     margin-top: 8%;
 }
 
-
-.secondaryButton input {
-    width: 99%;
-    height: 99%;
+.secondaryButton label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 66px;
+    width: 160px;
+    color: white;
+    background-color: rgba(135, 173, 25, 0.7);
+    border-radius: 17px 0 0 17px;
 }
+.secondaryButton input {
+    width: 98%;
+    height: 97%;
+    border-radius: 0 17px 17px 0;
+}
+
+.secondaryButton.border {
+    border: 1px solid rgba(135, 173, 25, 0.7);
+    border-radius: 17px ;
+}
+

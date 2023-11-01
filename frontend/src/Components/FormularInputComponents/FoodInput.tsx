@@ -6,70 +6,77 @@ import FoodIcon from "../../assets/Kategorie_Icons_food.png";
 import './Input.css'
 
 type FoodInputProps = {
-    cat : Cat
-    setCat : React.Dispatch<React.SetStateAction<Cat>>;
+    cat: Cat
+    setCat: React.Dispatch<React.SetStateAction<Cat>>;
 }
 
 export default function FoodInput(props: FoodInputProps) {
-
-
-    console.log(props.cat)
-    function onDryFoodMorningAmount(event: ChangeEvent<HTMLInputElement>) {
-        props.setCat({...props.cat, dry: { morning : event.target.value}});
+    //FOLD DOWN SELECTION OPERATORS
+    const [dryFood, setDryFood] = useState(false)
+    const toggleDryFood = () => {
+        setDryFood(!dryFood);
     }
+    const [dryMorning, setDryMorning] = useState(false)
+    const toggleDryMorning = () => {
+        setDryMorning(!dryMorning);
+    }
+    function onDryFoodMorningAmount(event: ChangeEvent<HTMLInputElement>) {
+        props.setCat({...props.cat, dry: {morning: event.target.value}});
+    }
+
+    const [dryEvening, setDryEvening] = useState(false)
+    const toggleDryEvening = () => {
+        setDryEvening(!dryEvening)
+    }
+
     function onDryFoodEveningAmount(event: ChangeEvent<HTMLInputElement>) {
         props.setCat({...props.cat, dry: {evening: event.target.value}});
-    }
-
-    function onWetFoodMorningAmount (event: ChangeEvent<HTMLInputElement>) {
-        props.setCat({...props.cat, wet: {morning: event.target.value}});
-    }
-
-    function onWetFoodEveningAmount (event: ChangeEvent<HTMLInputElement>) {
-        props.setCat({...props.cat, wet: {evening: event.target.value}});
     }
 
     const [wetFood, setWetFood] = useState(false)
     const toggleWetFood = () => {
         setWetFood(!wetFood);
     }
-
-    const [dryFood, setDryFood] = useState(false)
-    const toggleDryFood = () => {
-        setDryFood(!dryFood);
-    }
-
     const [wetMorning, setWetMorning] = useState(false)
     const toggleWetMorning = () => {
         setWetMorning(!wetMorning)
     }
 
-    const [dryMorning, setDryMorning] = useState(false)
-    const toggleDryMorning = () => {
-        setDryMorning(!dryMorning);
+    function onWetFoodMorningAmount(event: ChangeEvent<HTMLInputElement>) {
+        props.setCat({...props.cat, wet: {morning: event.target.value}});
     }
 
     const [wetEvening, setWetEvening] = useState(false)
     const toggleWetEvening = () => {
         setWetEvening(!wetEvening);
     }
-    const [dryEvening, setDryEvening] = useState(false)
-    const toggleDryEvening = () => {
-        setDryEvening(!dryEvening)
+
+    function onWetFoodEveningAmount(event: ChangeEvent<HTMLInputElement>) {
+        props.setCat({...props.cat, wet: {evening: event.target.value}});
     }
 
+    //SUBMIT TO BACKEND
+    const [doYouReallyWantToContinue, setDoYouReallyWantToContinue] = useState(false)
+    const toggleDoYouReallyWantToContinue = () => {
+        setDoYouReallyWantToContinue(!doYouReallyWantToContinue);
+    }
+    function allInputsAreEmpty (){
+        return props.cat.dry?.morning == null
+            && props.cat.dry?.evening == null
+            && props.cat.wet?.morning == null
+            && props.cat.wet?.evening == null;
+    }
 
     const handleSubmit = () => {
-        axios.put("/api/cat/" + props.cat.id, props.cat)
-            .then((response: { data: string; }) => {
-                console.log('Erfolgreich upgedatet:' + response.data);
-            })
-            .catch((error) => {
-                console.log(props.cat)
-                console.error(error);
-            });
-    };
-    
+                axios.put("/api/cat/" + props.cat.id, props.cat)
+                    .then((response: { data: string; }) => {
+                        console.log('Erfolgreich upgedatet:' + response.data);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            }
+
     return (
         <>
             <div className="container">
@@ -84,33 +91,37 @@ export default function FoodInput(props: FoodInputProps) {
 
                 <div className="catDetails">
                     <div>
-                    <button className="mainButton" onClick={toggleDryFood}>Trockenfutter</button>
+                        <button className="mainButton" onClick={toggleDryFood}>Trockenfutter</button>
                         {dryFood && (
                             <div>
-                                <button className="mainButton mainButtonLighter"
-                                        onClick={toggleDryMorning}>Morgens</button>
-
-                                {dryMorning && (
-                                    <div className="secondaryButton">
+                                {!dryMorning ?
+                                    <button className="mainButton mainButtonLighter"
+                                            onClick={toggleDryMorning}>Morgens
+                                    </button>
+                                    :
+                                    <div className="secondaryButton border">
+                                        <label onClick={toggleDryMorning}>Morgens</label>
                                         <input
-                                               type="text"
-                                               placeholder="Wie viel?"
-                                               value={props.cat?.dry?.morning || ''}
-                                               onChange={onDryFoodMorningAmount}/>
+                                            type="text"
+                                            placeholder="Wie viel?"
+                                            value={props.cat?.dry?.morning || ''}
+                                            onChange={onDryFoodMorningAmount}/>
                                     </div>
-                                )}
-                                <button className="mainButton mainButtonLighter"
-                                        onClick={toggleDryEvening}>Abends</button>
-
-                                {dryEvening && (
-                                    <div className="secondaryButton">
+                                }
+                                {!dryEvening ?
+                                    <button className="mainButton mainButtonLighter"
+                                            onClick={toggleDryEvening}>Abends
+                                    </button>
+                                    :
+                                    <div className="secondaryButton border">
+                                        <label onClick={toggleDryEvening}>Abends</label>
                                         <input
                                             type="text"
                                             placeholder="Wie viel?"
                                             value={props.cat?.dry?.evening || ''}
                                             onChange={onDryFoodEveningAmount}/>
                                     </div>
-                                )}
+                                }
                             </div>
                         )}
                     </div>
@@ -118,37 +129,59 @@ export default function FoodInput(props: FoodInputProps) {
                         <button className="mainButton" onClick={toggleWetFood}>Nassfutter</button>
                         {wetFood && (
                             <div>
-                                <button className="mainButton mainButtonLighter"
-                                        onClick={toggleWetMorning}>Morgens</button>
-
-                                {wetMorning && (
-                                    <div className="secondaryButton">
+                                {!wetMorning ?
+                                    <button className="mainButton mainButtonLighter"
+                                            onClick={toggleWetMorning}>Morgens
+                                    </button>
+                                    :
+                                    <div className="secondaryButton border">
+                                        <label onClick={toggleWetMorning}>Morgens</label>
                                         <input
                                             type="text"
                                             placeholder="Wie viel?"
                                             value={props.cat?.wet?.morning || ''}
                                             onChange={onWetFoodMorningAmount}/>
                                     </div>
-                                )}
-                                <button className="mainButton mainButtonLighter"
-                                        onClick={toggleWetEvening}>Abends</button>
-
-                                {wetEvening && (
-                                    <div className="secondaryButton">
+                                }
+                                {!wetEvening ?
+                                    <button className="mainButton mainButtonLighter"
+                                            onClick={toggleWetEvening}>Abends
+                                    </button>
+                                    :
+                                    <div className="secondaryButton border">
+                                        <label onClick={toggleWetEvening}>Abends</label>
                                         <input
                                             type="text"
                                             placeholder="Wie viel?"
                                             value={props.cat?.wet?.evening || ''}
                                             onChange={onWetFoodEveningAmount}/>
                                     </div>
-                                )}
+                                }
                             </div>
                         )}
                     </div>
-                    <Link to="/home">
-                        <button className="secondaryButton"
-                                onClick={handleSubmit}>weiter</button>
-                    </Link>
+                    {allInputsAreEmpty() ? <>
+                        <button className="secondaryButton" onClick={toggleDoYouReallyWantToContinue}>weiter</button>
+                        {doYouReallyWantToContinue && (
+                            <div className="deleteConfirmationPopup">
+                                <div className="overlay">
+                                    <div className="deleteConfirmationPopup-content">
+                                        <h3>Deine Katze isst nichts?</h3>
+                                        <button className="mainButton"
+                                                onClick={toggleDoYouReallyWantToContinue}>Ups, doch!</button>
+                                        <button className="secondaryButton"
+                                                onClick={handleSubmit}>Ne, sie ist auf Diet</button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}</>
+                        :
+                        <Link to="/home">
+                            <button className="secondaryButton"
+                                    onClick={handleSubmit}>weiter
+                            </button>
+                        </Link>
+                    }
                 </div>
             </div>
         </>
