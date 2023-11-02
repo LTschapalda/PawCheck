@@ -6,13 +6,14 @@ import {useEffect} from "react";
 
 type HomeProps = {
     catsOwned : Cat[];
-    setCatsOwned : React.Dispatch<React.SetStateAction<Cat[]>>;
     getCatsFromUser: () => void;
 }
 
 export default function Home(props : HomeProps) {
 
-    useEffect(props.getCatsFromUser, []);
+    useEffect(() => {
+        props.getCatsFromUser();
+    }, []);
 
     return(
         <>
