@@ -1,30 +1,19 @@
 import './Home.css'
-import axios from "axios";
-import React, {useEffect, useState} from "react";
 import {Cat} from "../assets/Cat.ts";
 import CatHeader from './CatHeader.tsx';
 import {Link} from "react-router-dom";
+import {useEffect} from "react";
 
 type HomeProps = {
-    setCatsOwned : React.Dispatch<React.SetStateAction<Cat[]>>;
+    catsOwned : Cat[];
+    getCatsFromUser: () => void;
 }
 
 export default function Home(props : HomeProps) {
 
-    const [catsOwned, setCatsOwnedLocal] = useState<Cat[]>([])
-    const id : string = "123"
-
-    useEffect(getCatsFromUser, []);
-    function getCatsFromUser() {
-
-        axios.get("/api/cats/" + id)
-            .then(response => {
-                const cats = response.data;
-                setCatsOwnedLocal(cats);
-                props.setCatsOwned(cats);})
-            .catch(reason => console.error(reason))
-    }
-
+    useEffect(() => {
+        props.getCatsFromUser();
+    }, []);
 
     return(
         <>
@@ -34,7 +23,7 @@ export default function Home(props : HomeProps) {
                         <p>Hier findest du eine Übersicht über deine Katzen</p>
                 </div>
                 <div className="listOfCats">
-                    {catsOwned.map(
+                    {props.catsOwned.map(
                         (cat:Cat) => <CatHeader key={cat.id} cat={cat}/>
                     )}
                 </div>

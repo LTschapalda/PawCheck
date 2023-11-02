@@ -1,24 +1,18 @@
 package de.pawcheck.backend.cat;
 
 import de.pawcheck.backend.user.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class CatController {
     //ATTRIBUTE
     private final CatService catService;
     private final UserService userService;
-
-    //DEPENDENCY INJECTION
-    @Autowired
-    public CatController (CatService catService, UserService userService) {
-        this.catService = catService;
-        this.userService = userService;
-    }
 
     //SERVER REQUESTS
     @PostMapping("/cat")
@@ -37,9 +31,13 @@ public class CatController {
     }
 
     @DeleteMapping("/cat/{id}")
-
     public void deleteCatEverywhereById (@PathVariable String id) {
         catService.deleteCatEverywhereById(id);
+    }
+
+    @PutMapping("/cat/{id}")
+    public Cat updateCat(@PathVariable String id, @RequestBody Cat cat) {
+        return catService.updateCatById(id, cat);
     }
 
 }

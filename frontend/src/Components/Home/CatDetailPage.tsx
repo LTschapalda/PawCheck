@@ -1,11 +1,13 @@
 import CatFace from "../../assets/ImagePlaceholder.png";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {Cat} from "../assets/Cat.ts";
 import axios from "axios";
 import {useState} from "react";
+import './Home.css'
 
 type CatDetailProps = {
     catsOwned : Cat[]
+    toggleEditMode : () => void;
 }
 export default function CatDetailPage( props: CatDetailProps) {
 
@@ -50,6 +52,41 @@ export default function CatDetailPage( props: CatDetailProps) {
                 ) : (
                     <div className="catDetails">Katze nicht gefunden</div>
                 )}
+                {selectedCat?.dry || selectedCat?.wet ? (
+                    <Link to={`/cat/food/${selectedCat.id}`}>
+                        <div className="catName" onClick={() => props.toggleEditMode() }
+                             onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === 'Space') {
+                                props.toggleEditMode();
+                            }
+                        }}
+                             tabIndex={0}>
+                            {selectedCat?.dry && (
+                                <div>
+                                    <h4>Trockenfutter</h4>
+                                    {selectedCat.dry.morning && (
+                                        <p>Morgens : {selectedCat.dry.morning}</p>
+                                    )}
+                                    {selectedCat.dry.evening && (
+                                    <p>Abends : {selectedCat.dry.evening}</p>
+                                    )}
+                                </div>
+                            )}
+                            {selectedCat?.wet && (
+                                <div>
+                                    <h4>Nassfutter</h4>
+                                    {selectedCat.wet.morning && (
+                                        <p>Morgens : {selectedCat.wet.morning}</p>
+                                    )}
+                                    {selectedCat.wet.evening && (
+                                        <p>Abends : {selectedCat.wet.evening}</p>
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    </Link>
+                ):(<div/>)}
+                <div className="bottomSpace"/>
             </div>
             <button id="deleteCat" className="deleteCat"
                  onClick={toggleDeleteConfirmation}>Löschen

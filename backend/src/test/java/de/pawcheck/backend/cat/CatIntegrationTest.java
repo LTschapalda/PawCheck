@@ -2,6 +2,7 @@ package de.pawcheck.backend.cat;
 
 import de.pawcheck.backend.user.User;
 import de.pawcheck.backend.user.UserRepo;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -33,6 +34,11 @@ class CatIntegrationTest {
 
     @Autowired
     MongoTemplate mongoTemplate;
+
+    @BeforeEach
+    void setUp() {
+        mongoTemplate.getDb().drop();
+    }
 
     @Test
     @DirtiesContext
@@ -117,6 +123,42 @@ class CatIntegrationTest {
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/cat/123"))
                 //THEN
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    @DirtiesContext
+    void updateCatById() throws Exception {
+        //GIVEN
+        catRepo.save(new Cat("1234", "Mo"));
+        //WHEN
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/cat/1234")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                        {"id": "1234",
+                         "name": "Mo",
+                         "wet": {
+                             "morning": "40g"
+                           },
+                           "dry": {
+                             "morning": "50g"
+                           }
+                         }
+                        """))
+                //THEN
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("""
+                        {"id": "1234",
+                         "name": "Mo",
+                         "wet": {
+                             "morning": "40g",
+                             "evening": null
+                         },
+                         "dry": {
+                             "morning": "50g",
+                             "evening": null
+                         }
+                         }
+                        """));
     }
 
 

@@ -45,7 +45,7 @@ public class CatService {
         if (optionalUser.isPresent()) {
             User user =optionalUser.get();
             List<String> updatedCatIds = new ArrayList<>(user.catsOwned());
-            updatedCatIds.add(newCat.id());
+            updatedCatIds.add(newCat.getId());
 
             User upatedUser = new User(user.id(),updatedCatIds);
             userRepo.save(upatedUser);
@@ -73,4 +73,20 @@ public class CatService {
 
         catRepo.deleteById(catId);
     }
+
+    public Cat updateCatById(String id, Cat cat) {
+        Optional<Cat> existingCatOptional = catRepo.findById(id);
+
+        if (existingCatOptional.isPresent()) {
+            Cat existingCat = existingCatOptional.get();
+            existingCat.setName(cat.getName());
+            existingCat.setWet(cat.getWet());
+            existingCat.setDry(cat.getDry());
+
+            return catRepo.save(existingCat);
+        } else {
+            return null;
+        }
+    }
+
 }
