@@ -24,7 +24,7 @@ export default function NameInput(props : NameInputProps) {
                     const newCat = response.data;
                     console.log(newCat);
                     setName('');
-                    navigate(`/sweeet/:id${newCat.id}`);
+                    navigate(`/sweeet/${newCat.id}`);
                 })
                 .catch(error => {
                     console.error(error);

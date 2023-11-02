@@ -7,6 +7,7 @@ import './Home.css'
 
 type CatDetailProps = {
     catsOwned : Cat[]
+    toggleEditMode : () => void;
 }
 export default function CatDetailPage( props: CatDetailProps) {
 
@@ -14,10 +15,6 @@ export default function CatDetailPage( props: CatDetailProps) {
     const { id } = useParams();
     const navigate = useNavigate()
     const selectedCat = props.catsOwned.find((cat: Cat) => cat.id == id)
-    const [editMode, setEditMode] = useState(false)
-    const toggleEditMode = () => {
-        setEditMode(!editMode);
-    }
 
     const [deleteConfirmation, setDeleteConfirmation] = useState(false)
     const toggleDeleteConfirmation = () => {
@@ -42,7 +39,7 @@ export default function CatDetailPage( props: CatDetailProps) {
     //RETURN
     return(
         <>
-            <div className="container detail" >
+            <div className="container" >
                 <div className="catImage">
                     <img id="catFaceBigger"
                          src={CatFace}
@@ -57,7 +54,7 @@ export default function CatDetailPage( props: CatDetailProps) {
                 )}
                 {selectedCat?.dry || selectedCat?.wet ? (
                     <Link to={`/cat/food/${selectedCat.id}`}>
-                        <div className="catName" onClick={toggleEditMode}>
+                        <div className="catName" onClick={() => props.toggleEditMode()}>
                             {selectedCat?.dry && (
                                 <div>
                                     <h4>Trockenfutter</h4>
@@ -83,6 +80,7 @@ export default function CatDetailPage( props: CatDetailProps) {
                         </div>
                     </Link>
                 ):(<div/>)}
+                <div className="bottomSpace"/>
             </div>
             <button id="deleteCat" className="deleteCat"
                  onClick={toggleDeleteConfirmation}>Löschen
