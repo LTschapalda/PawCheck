@@ -56,7 +56,7 @@ export default function CatDetailPage( props: CatDetailProps) {
                     <div className="catDetails">Katze nicht gefunden</div>
                 )}
                 {selectedCat?.dry || selectedCat?.wet ? (
-                    <Link to={"/cat/food"}>
+                    <Link to={`/cat/food/${selectedCat.id}`}>
                         <div className="catName" onClick={toggleEditMode}>
                             {selectedCat?.dry && (
                                 <div>

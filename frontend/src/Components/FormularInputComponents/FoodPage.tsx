@@ -1,16 +1,21 @@
-import React, {ChangeEvent, useState} from "react";
-import {Link} from "react-router-dom";
 import {Cat} from "../assets/Cat.ts";
+import {Link, useParams} from "react-router-dom";
+import {ChangeEvent, useState} from "react";
 import axios from "axios";
 import FoodIcon from "../../assets/Kategorie_Icons_food.png";
-import './Input.css'
+import './input.css'
 
-type FoodInputProps = {
-    cat: Cat
-    setCat: React.Dispatch<React.SetStateAction<Cat>>;
+type FoodPageProps = {
+    catsOwned: Cat[]
 }
+export default function FoodPage(props: FoodPageProps) {
+    //VARIABLES
+    const { id } = useParams();
+    const [cat, setCat] = useState(props.catsOwned.find((cat: Cat) => cat.id === id));
 
-export default function FoodInput(props: FoodInputProps) {
+    console.log(props.catsOwned);
+    console.log(cat)
+
     //FOLD DOWN SELECTION OPERATORS
     const [dryFood, setDryFood] = useState(false)
     const toggleDryFood = () => {
@@ -21,7 +26,9 @@ export default function FoodInput(props: FoodInputProps) {
         setDryMorning(!dryMorning);
     }
     function onDryFoodMorningAmount(event: ChangeEvent<HTMLInputElement>) {
-        props.setCat({...props.cat, dry: {morning: event.target.value}});
+        if(cat) {
+        setCat({...cat, dry: {morning: event.target.value}});
+        }
     }
 
     const [dryEvening, setDryEvening] = useState(false)
@@ -30,7 +37,9 @@ export default function FoodInput(props: FoodInputProps) {
     }
 
     function onDryFoodEveningAmount(event: ChangeEvent<HTMLInputElement>) {
-        props.setCat({...props.cat, dry: {evening: event.target.value}});
+        if(cat) {
+        setCat({...cat, dry: {evening: event.target.value}});
+        }
     }
 
     const [wetFood, setWetFood] = useState(false)
@@ -43,7 +52,9 @@ export default function FoodInput(props: FoodInputProps) {
     }
 
     function onWetFoodMorningAmount(event: ChangeEvent<HTMLInputElement>) {
-        props.setCat({...props.cat, wet: {morning: event.target.value}});
+        if(cat) {
+            setCat({...cat, wet: {morning: event.target.value}});
+        }
     }
 
     const [wetEvening, setWetEvening] = useState(false)
@@ -52,7 +63,9 @@ export default function FoodInput(props: FoodInputProps) {
     }
 
     function onWetFoodEveningAmount(event: ChangeEvent<HTMLInputElement>) {
-        props.setCat({...props.cat, wet: {evening: event.target.value}});
+        if(cat) {
+        setCat({...cat, wet: {evening: event.target.value}});
+        }
     }
 
     //SUBMIT TO BACKEND
@@ -61,21 +74,21 @@ export default function FoodInput(props: FoodInputProps) {
         setDoYouReallyWantToContinue(!doYouReallyWantToContinue);
     }
     function allInputsAreEmpty (){
-        return props.cat.dry?.morning == null
-            && props.cat.dry?.evening == null
-            && props.cat.wet?.morning == null
-            && props.cat.wet?.evening == null;
+        return cat?.dry?.morning == null
+            && cat?.dry?.evening == null
+            && cat?.wet?.morning == null
+            && cat?.wet?.evening == null;
     }
 
     const handleSubmit = () => {
-                axios.put("/api/cat/" + props.cat.id, props.cat)
-                    .then((response: { data: string; }) => {
-                        console.log('Erfolgreich upgedatet:' + response.data);
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    });
-            }
+        axios.put("/api/cat/" + id, cat)
+            .then((response: { data: string; }) => {
+                console.log('Erfolgreich upgedatet:' + response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
 
     return (
         <>
@@ -86,7 +99,7 @@ export default function FoodInput(props: FoodInputProps) {
                 </div>
 
                 <div className="topicText">
-                    <h1>Bekommt {props.cat.name} Trocken oder Nassfutter? </h1>
+                    <h1>Bekommt {cat?.name} Trocken oder Nassfutter? </h1>
                 </div>
 
                 <div className="catDetails">
@@ -104,7 +117,7 @@ export default function FoodInput(props: FoodInputProps) {
                                         <input
                                             type="text"
                                             placeholder="Wie viel?"
-                                            value={props.cat?.dry?.morning || ''}
+                                            value={cat?.dry?.morning || ''}
                                             onChange={onDryFoodMorningAmount}/>
                                     </div>
                                 }
@@ -118,7 +131,7 @@ export default function FoodInput(props: FoodInputProps) {
                                         <input
                                             type="text"
                                             placeholder="Wie viel?"
-                                            value={props.cat?.dry?.evening || ''}
+                                            value={cat?.dry?.evening || ''}
                                             onChange={onDryFoodEveningAmount}/>
                                     </div>
                                 }
@@ -139,7 +152,7 @@ export default function FoodInput(props: FoodInputProps) {
                                         <input
                                             type="text"
                                             placeholder="Wie viel?"
-                                            value={props.cat?.wet?.morning || ''}
+                                            value={cat?.wet?.morning || ''}
                                             onChange={onWetFoodMorningAmount}/>
                                     </div>
                                 }
@@ -153,7 +166,7 @@ export default function FoodInput(props: FoodInputProps) {
                                         <input
                                             type="text"
                                             placeholder="Wie viel?"
-                                            value={props.cat?.wet?.evening || ''}
+                                            value={cat?.wet?.evening || ''}
                                             onChange={onWetFoodEveningAmount}/>
                                     </div>
                                 }
@@ -161,20 +174,20 @@ export default function FoodInput(props: FoodInputProps) {
                         )}
                     </div>
                     {allInputsAreEmpty() ? <>
-                        <button className="secondaryButton" onClick={toggleDoYouReallyWantToContinue}>weiter</button>
-                        {doYouReallyWantToContinue && (
-                            <div className="deleteConfirmationPopup">
-                                <div className="overlay">
-                                    <div className="deleteConfirmationPopup-content">
-                                        <h3>Deine Katze isst nichts?</h3>
-                                        <button className="mainButton"
-                                                onClick={toggleDoYouReallyWantToContinue}>Ups, doch!</button>
-                                        <button className="secondaryButton"
-                                                onClick={handleSubmit}>Ne, sie ist auf Diet</button>
+                            <button className="secondaryButton" onClick={toggleDoYouReallyWantToContinue}>weiter</button>
+                            {doYouReallyWantToContinue && (
+                                <div className="deleteConfirmationPopup">
+                                    <div className="overlay">
+                                        <div className="deleteConfirmationPopup-content">
+                                            <h3>Deine Katze isst nichts?</h3>
+                                            <button className="mainButton"
+                                                    onClick={toggleDoYouReallyWantToContinue}>Ups, doch!</button>
+                                            <button className="secondaryButton"
+                                                    onClick={handleSubmit}>Ne, sie ist auf Diet</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        )}</>
+                            )}</>
                         :
                         <Link to="/home">
                             <button className="secondaryButton"

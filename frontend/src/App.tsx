@@ -5,25 +5,39 @@ import NameInput from "./Components/FormularInputComponents/NameInput.tsx";
 import Home from "./Components/Home/Home.tsx";
 import MenuPaw from "./MenuPaw.tsx";
 import CatDetailPage from "./Components/Home/CatDetailPage.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Cat} from "./Components/assets/Cat.ts";
 import SweetCheckup from "./Components/FormularInputComponents/SweetCheckup.tsx";
-import FoodInput from "./Components/FormularInputComponents/FoodInput.tsx";
+import FoodPage from "./Components/FormularInputComponents/FoodPage.tsx";
+import axios from "axios";
+
 
 function App() {
     const [catsOwned, setCatsOwned] = useState<Cat[]>([])
-    const [cat, setCat] = useState<Cat>({id: "", name: ""})
+    const id : string = "123"
+
+    useEffect(getCatsFromUser, []);
+    function getCatsFromUser() {
+
+        axios.get("/api/cats/" + id)
+            .then(response => {
+                const cats = response.data;
+                setCatsOwned(cats);
+            })
+            .catch(reason => console.error(reason))
+    }
 
     return (
         <>
             <MenuPaw/>
             <Routes>
-                <Route index                  element={<LandingPage/>}/>
-                <Route path={"/cat/name"}     element={<NameInput setCat={setCat} />}/>
-                <Route path={"/home"}         element={<Home setCatsOwned={setCatsOwned}/>}/>
+                <Route index                     element={<LandingPage/>}/>
+                <Route path={"/cat/name"}        element={<NameInput getCatsFromUser={getCatsFromUser}/>}/>
+                <Route path={"/sweeet/:id"}      element={<SweetCheckup/>}/>
+                <Route path={"/cat/food/:id"}    element={<FoodPage catsOwned={catsOwned}/>} />
+                <Route path={"/home"}            element={<Home catsOwned={catsOwned} setCatsOwned={setCatsOwned} getCatsFromUser={getCatsFromUser}/>}/>
                 <Route path={"/cat/details/:id"} element={<CatDetailPage catsOwned={catsOwned}/>} />
-                <Route path={"/sweet"}        element={<SweetCheckup/>}/>
-                <Route path={"/cat/food"} element={<FoodInput cat={cat} setCat={setCat}/>}/>
+                <Route path={"/sweet"}           element={<SweetCheckup/>}/>
             </Routes>
         </>
     )

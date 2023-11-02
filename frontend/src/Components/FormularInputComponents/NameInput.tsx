@@ -1,15 +1,15 @@
 import  './NameInput.css'
-import React, {ChangeEvent, useState} from "react";
+import {ChangeEvent, useState} from "react";
 import axios from "axios";
 import NameCat from "../../assets/NameCat.svg";
-import {Link} from "react-router-dom";
-import {Cat} from "../assets/Cat.ts";
+import { useNavigate } from 'react-router-dom';
 
 type NameInputProps = {
-    setCat : React.Dispatch<React.SetStateAction<Cat>>;
+    getCatsFromUser: () => void;
 }
 export default function NameInput(props : NameInputProps) {
     const [name, setName] = useState<string>('')
+    const navigate = useNavigate();
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
         const name: string = event.target.value;
@@ -20,10 +20,11 @@ export default function NameInput(props : NameInputProps) {
         if (name !== '') {
             axios.post('/api/cat', { name: name })
                 .then(response => {
-                    if (response.data) {
-                    props.setCat(response.data);
-                    }
+                    props.getCatsFromUser();
+                    const newCat = response.data;
+                    console.log(newCat);
                     setName('');
+                    navigate(`/sweeet/:id${newCat.id}`);
                 })
                 .catch(error => {
                     console.error(error);
@@ -52,10 +53,8 @@ export default function NameInput(props : NameInputProps) {
                     <img id="peaking" src={NameCat} alt="peaking cat"/>
                 </div>
             <div className="weiter">
-                <Link to="/cat/food">
                 <button className="secondaryButton"
                         onClick={handleSubmit}>weiter</button>
-                </Link>
             </div>
         </>
     );

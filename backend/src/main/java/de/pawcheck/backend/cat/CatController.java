@@ -1,6 +1,7 @@
 package de.pawcheck.backend.cat;
 
 import de.pawcheck.backend.user.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,17 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class CatController {
     //ATTRIBUTE
     private final CatService catService;
     private final UserService userService;
-
-    //DEPENDENCY INJECTION
-    @Autowired
-    public CatController (CatService catService, UserService userService) {
-        this.catService = catService;
-        this.userService = userService;
-    }
 
     //SERVER REQUESTS
     @PostMapping("/cat")
