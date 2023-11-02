@@ -54,7 +54,13 @@ export default function CatDetailPage( props: CatDetailProps) {
                 )}
                 {selectedCat?.dry || selectedCat?.wet ? (
                     <Link to={`/cat/food/${selectedCat.id}`}>
-                        <div className="catName" onClick={() => props.toggleEditMode()}>
+                        <div className="catName" onClick={() => props.toggleEditMode() }
+                             onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === 'Space') {
+                                props.toggleEditMode();
+                            }
+                        }}
+                             tabIndex={0}>
                             {selectedCat?.dry && (
                                 <div>
                                     <h4>Trockenfutter</h4>
