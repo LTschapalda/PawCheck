@@ -3,7 +3,7 @@ import {Link, useParams} from "react-router-dom";
 import {ChangeEvent, useState} from "react";
 import axios from "axios";
 import FoodIcon from "../../assets/Kategorie_Icons_food.png";
-import './input.css'
+import './Input.css'
 
 type FoodPageProps = {
     catsOwned: Cat[];
