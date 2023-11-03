@@ -40,7 +40,7 @@ function App() {
                 <Route path={"/cat/name"}        element={<NameInput getCatsFromUser={getCatsFromUser}/>}/>
                 <Route path={"/sweeet/:id"}      element={<SweetCheckup/>}/>
                 <Route path={"/cat/food/:id"}    element={<FoodPage catsOwned={catsOwned} editMode={editMode} toggleEditMode={toggleEditMode}/>} />
-                <Route path={"/home"}            element={<Home catsOwned={catsOwned} setCatsOwned={setCatsOwned} getCatsFromUser={getCatsFromUser}/>}/>
+                <Route path={"/home"}            element={<Home catsOwned={catsOwned} getCatsFromUser={getCatsFromUser}/>}/>
                 <Route path={"/cat/details/:id"} element={<CatDetailPage catsOwned={catsOwned} toggleEditMode={toggleEditMode}/>} />
                 <Route path={"/sweet"}           element={<SweetCheckup/>}/>
             </Routes>
