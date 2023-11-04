@@ -5,4 +5,5 @@ export type Cat ={
     name : string,
     dry? : Food,
     wet? : Food,
+    treats? : string,
 }

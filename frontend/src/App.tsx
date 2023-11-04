@@ -10,6 +10,7 @@ import {Cat} from "./Components/assets/Cat.ts";
 import SweetCheckup from "./Components/FormularInputComponents/SweetCheckup.tsx";
 import FoodPage from "./Components/FormularInputComponents/FoodPage.tsx";
 import axios from "axios";
+import TreatPage from "./Components/FormularInputComponents/TreatPage.tsx";
 
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
                 <Route path={"/cat/food/:id"}    element={<FoodPage catsOwned={catsOwned} editMode={editMode} toggleEditMode={toggleEditMode}/>} />
                 <Route path={"/home"}            element={<Home catsOwned={catsOwned} getCatsFromUser={getCatsFromUser}/>}/>
                 <Route path={"/cat/details/:id"} element={<CatDetailPage catsOwned={catsOwned} toggleEditMode={toggleEditMode}/>} />
-                <Route path={"/sweet"}           element={<SweetCheckup/>}/>
+                <Route path={"/cat/treats/:id"}  element={<TreatPage catsOwned={catsOwned} toggleEditMode={toggleEditMode} editMode={editMode}/>}/>
             </Routes>
         </>
     )

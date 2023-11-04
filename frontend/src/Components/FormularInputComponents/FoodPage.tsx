@@ -1,9 +1,9 @@
 import {Cat} from "../assets/Cat.ts";
 import {Link, useParams} from "react-router-dom";
 import {ChangeEvent, useState} from "react";
-import axios from "axios";
 import FoodIcon from "../../assets/Kategorie_Icons_food.png";
 import './Input.css'
+import {handleSubmit} from "../assets/submitFunction.tsx";
 
 type FoodPageProps = {
     catsOwned: Cat[];
@@ -14,7 +14,6 @@ export default function FoodPage(props: FoodPageProps) {
     //VARIABLES
     const {id} = useParams();
     const [cat, setCat] = useState(props.catsOwned.find((cat: Cat) => cat.id === id));
-
 
     //FOLD DOWN SELECTION OPERATORS
     const [dryFood, setDryFood] = useState(false)
@@ -135,16 +134,16 @@ export default function FoodPage(props: FoodPageProps) {
         );
     }
 
-    const handleSubmit = () => {
-        axios.put("/api/cat/" + id, cat)
-            .then((response: {
-                data: string;
-            }) => {
-                console.log('Erfolgreich upgedatet:' + response.data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+    function handleSubmitLocaly() {
+        if (!id) {
+            console.error('ID is undefined');
+            return null;
+        }
+        if(!cat) {
+            console.error('cat is undefined');
+            return null;
+        }
+        handleSubmit(id,cat);
     }
 
     return (
@@ -256,7 +255,7 @@ export default function FoodPage(props: FoodPageProps) {
                 {props.editMode ?
                     <Link to={'/home'}>
                         <button className="secondaryButton" onClick={() => {
-                            handleSubmit();
+                            handleSubmitLocaly();
                             props.toggleEditMode()
                         }}>Speichern
                         </button>
@@ -275,7 +274,7 @@ export default function FoodPage(props: FoodPageProps) {
                                                 </button>
                                                 <Link to={"/home"}>
                                                     <button className="secondaryButton"
-                                                            onClick={handleSubmit}>Ne, sie ist auf Diet
+                                                            onClick={handleSubmitLocaly}>Ne, sie ist auf Diet
                                                     </button>
                                                 </Link>
                                             </div>
@@ -285,7 +284,7 @@ export default function FoodPage(props: FoodPageProps) {
                             :
                             <Link to="/home">
                                 <button className="secondaryButton"
-                                        onClick={handleSubmit}>weiter
+                                        onClick={handleSubmitLocaly}>weiter
                                 </button>
                             </Link>
                         }
