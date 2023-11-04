@@ -1,10 +1,7 @@
 package de.pawcheck.backend.user;
 
 import de.pawcheck.backend.IdService;
-import de.pawcheck.backend.cat.Cat;
-import de.pawcheck.backend.cat.CatRepo;
-import de.pawcheck.backend.cat.CatService;
-import de.pawcheck.backend.cat.Food;
+import de.pawcheck.backend.cat.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
@@ -63,8 +60,8 @@ class UserServiceTest {
     void getUpdatedCat_WhenUpdateCatById() {
         //GIVEN
         String catId = "1234";
-        Cat existingCat = new Cat("1234", "Mo", new Food("40g", "30g"), new Food("50g", "40g"));
-        Cat updatedCat = new Cat("1234", "NewName", new Food("20g", "10g"), new Food("30g", "20g"));
+        Cat existingCat = new Cat("1234", "Mo", new Food("40g", "30g"), new Food("50g", "40g"),"","no","in der Küche",new Toilet("im Bad", "", null), new Toy("Federboa", "auf dem Schrank"));
+        Cat updatedCat = new Cat("1234", "NewName", new Food("20g", "10g"), new Food("30g", "20g"),"","no","in der Küche",new Toilet("im Bad", "", null), new Toy("Federboa", "auf dem Schrank"));
 
         when(catRepo.findById(catId)).thenReturn(Optional.of(existingCat));
         when(catRepo.save(any())).thenReturn(updatedCat);
@@ -81,7 +78,7 @@ class UserServiceTest {
     void updateCatById_nonExistingCat_shouldReturnNull() {
         //GIVEN
         String catId = "nonExistentId";
-        Cat updatedCat = new Cat("nonExistentId", "NewName", new Food("20g", "10g"), new Food("30g", "20g"));
+        Cat updatedCat = new Cat("nonExistentId", "NewName", new Food("20g", "10g"), new Food("30g", "20g"),"","no","in der Küche",new Toilet("im Bad", "", null), new Toy("Federboa", "auf dem Schrank"));
 
         when(catRepo.findById(catId)).thenReturn(Optional.empty());
 

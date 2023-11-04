@@ -12,6 +12,11 @@ public class Cat {
     private String name;
     private Food wet;
     private Food dry;
+    private String treats;
+    private String catlery;
+    private String water;
+    private Toilet toilet;
+    private Toy toy;
 
     //KONSTRUKTOR
     public Cat(String id, String name) {
@@ -19,5 +24,10 @@ public class Cat {
         this.name = name;
         this.wet = null;
         this.dry = null;
+        this.treats = null;
+        this.catlery = null;
+        this.water = null;
+        this.toilet = null;
+        this.toy = null;
     }
 }
