@@ -40,10 +40,10 @@ function App() {
                 <Route index                     element={<LandingPage/>}/>
                 <Route path={"/cat/name"}        element={<NameInput getCatsFromUser={getCatsFromUser}/>}/>
                 <Route path={"/sweeet/:id"}      element={<SweetCheckup/>}/>
-                <Route path={"/cat/food/:id"}    element={<FoodPage catsOwned={catsOwned} editMode={editMode} toggleEditMode={toggleEditMode}/>} />
+                <Route path={"/cat/food/:id"}    element={<FoodPage catsOwned={catsOwned} editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser}/>} />
+                <Route path={"/cat/treats/:id"}  element={<TreatPage catsOwned={catsOwned} toggleEditMode={toggleEditMode} editMode={editMode} getCatsFromUser={getCatsFromUser}/>}/>
                 <Route path={"/home"}            element={<Home catsOwned={catsOwned} getCatsFromUser={getCatsFromUser}/>}/>
                 <Route path={"/cat/details/:id"} element={<CatDetailPage catsOwned={catsOwned} toggleEditMode={toggleEditMode}/>} />
-                <Route path={"/cat/treats/:id"}  element={<TreatPage catsOwned={catsOwned} toggleEditMode={toggleEditMode} editMode={editMode}/>}/>
             </Routes>
         </>
     )

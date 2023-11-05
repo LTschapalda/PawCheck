@@ -44,3 +44,14 @@
     border-radius: 17px ;
 }
 
+.dropdown {
+    margin-top: 18%;
+}
+
+.dropdown input {
+    width: 98%;
+    height: 97%;
+    border: 1px solid rgba(135, 173, 25, 0.7);
+    border-radius: 17px ;
+}
+

@@ -1,19 +1,31 @@
 import {Cat} from "../assets/Cat.ts";
 import {Link, useParams} from "react-router-dom";
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 import FoodIcon from "../../assets/Kategorie_Icons_food.png";
 import './Input.css'
-import {handleSubmit} from "../assets/submitFunction.tsx";
+import {getCatById, handleSubmit} from "../assets/FormFunctions.tsx";
 
 type FoodPageProps = {
     catsOwned: Cat[];
     editMode: boolean;
     toggleEditMode: () => void;
+    getCatsFromUser : () => void;
 }
 export default function FoodPage(props: FoodPageProps) {
     //VARIABLES
     const {id} = useParams();
-    const [cat, setCat] = useState(props.catsOwned.find((cat: Cat) => cat.id === id));
+    const [cat, setCat] = useState<Cat | undefined>(undefined);
+    useEffect(() => {
+        const fetchCat = async () => {
+            const catData = await getCatById(id);
+            if (catData) {
+                setCat(catData);
+            } else {
+                console.error('Failed to fetch cat');
+            }
+        };
+        fetchCat();
+    }, [id]);
 
     //FOLD DOWN SELECTION OPERATORS
     const [dryFood, setDryFood] = useState(false)
@@ -134,7 +146,7 @@ export default function FoodPage(props: FoodPageProps) {
         );
     }
 
-    function handleSubmitLocaly() {
+    function handleSubmitLocally() {
         if (!id) {
             console.error('ID is undefined');
             return null;
@@ -143,7 +155,7 @@ export default function FoodPage(props: FoodPageProps) {
             console.error('cat is undefined');
             return null;
         }
-        handleSubmit(id,cat);
+        handleSubmit(id,cat, props.getCatsFromUser);
     }
 
     return (
@@ -255,7 +267,7 @@ export default function FoodPage(props: FoodPageProps) {
                 {props.editMode ?
                     <Link to={'/home'}>
                         <button className="secondaryButton" onClick={() => {
-                            handleSubmitLocaly();
+                            handleSubmitLocally();
                             props.toggleEditMode()
                         }}>Speichern
                         </button>
@@ -272,9 +284,9 @@ export default function FoodPage(props: FoodPageProps) {
                                                 <button className="mainButton"
                                                         onClick={toggleDoYouReallyWantToContinue}>Ups, doch!
                                                 </button>
-                                                <Link to={"/home"}>
+                                                <Link to={"/cat/treats/:id"}>
                                                     <button className="secondaryButton"
-                                                            onClick={handleSubmitLocaly}>Ne, sie ist auf Diet
+                                                            onClick={handleSubmitLocally}>Ne, sie ist auf Diet
                                                     </button>
                                                 </Link>
                                             </div>
@@ -282,9 +294,9 @@ export default function FoodPage(props: FoodPageProps) {
                                     </div>
                                 )}</>
                             :
-                            <Link to="/home">
+                            <Link to={"/cat/treats/" + id}>
                                 <button className="secondaryButton"
-                                        onClick={handleSubmitLocaly}>weiter
+                                        onClick={handleSubmitLocally}>weiter
                                 </button>
                             </Link>
                         }

@@ -44,7 +44,7 @@ class CatServiceTest {
     @Test
     void returnNewCat_whenAddCat() {
         //GIVEN
-        Cat newCat = new Cat("1234", "Mo");
+        Cat newCat = new Cat("1234", "Mo",null,null,null,null,null,null,null);
         User user = new User("123", List.of());
         User updatedUser = new User("123", List.of("1234"));
         when(idService.generateRandomId()).thenReturn("1234");
@@ -66,7 +66,7 @@ class CatServiceTest {
     @Test
     void returnNull_whenAddCat_AndUserNotFound() {
         //GIVEN
-        Cat newCat = new Cat("1234", "Mo");
+        Cat newCat = new Cat("1234", "Mo",null,null,null,null,null,null,null);
         User user = new User("123", List.of());
         User updatedUser = new User("123", List.of("1234"));
         when(idService.generateRandomId()).thenReturn("1234");
@@ -87,7 +87,7 @@ class CatServiceTest {
     @Test
     void returnCatById_whenGetCatById() {
         //GIVEN
-        Cat newCat = new Cat("1234", "Mo");
+        Cat newCat = new Cat("1234", "Mo",null,null,null,null,null,null,null);
         when(catRepo.findById(newCat.getId())).thenReturn(Optional.of(newCat));
         //WHEN
         Cat expected = catService.getCatById("1234");
@@ -98,11 +98,11 @@ class CatServiceTest {
     @Test
     void returnErrorCat_whenGetCatByIdUnsuccessful() {
         //GIVEN
-        Cat newCat = new Cat("1234", "Mo");
+        Cat newCat = new Cat("1234", "Mo",null,null,null,null,null,null,null);
         when(catRepo.findById(newCat.getId())).thenReturn(Optional.of(newCat));
         //WHEN
         Cat wrongId = catService.getCatById("234");
-        Cat expected = new Cat("000", "Cat not found");
+        Cat expected = new Cat("000", "Cat not found",null,null,null,null,null,null,null);
         //THEN
         assertEquals(wrongId,expected);
     }

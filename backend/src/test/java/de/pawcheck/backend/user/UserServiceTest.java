@@ -23,7 +23,7 @@ class UserServiceTest {
     @Test
     void getAListOFCatsWhen_getCatsAssociatedToUser() {
         //GIVEN
-        Cat newCat = new Cat("1234", "Mo");
+        Cat newCat = new Cat("1234", "Mo",null,null,null,null,null,null,null);
         User user = new User("123", List.of("1234"));
 
         // Mocks und Annahmen
@@ -41,7 +41,7 @@ class UserServiceTest {
     @Test
     void getEmptyListWhen_getCatsAssociatedToUser_UserIsNotPresent() {
         //GIVEN
-        Cat newCat = new Cat("1234", "Mo");
+        Cat newCat = new Cat("1234", "Mo",null,null,null,null,null,null,null);
         User user = new User("123", List.of("1234"));
 
         // Mocks und Annahmen

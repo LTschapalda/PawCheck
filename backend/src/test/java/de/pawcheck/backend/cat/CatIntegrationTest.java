@@ -61,7 +61,7 @@ class CatIntegrationTest {
     @DirtiesContext
     void getCatById_andExpectCatObject() throws Exception {
         //GIVEN
-        catRepo.save(new Cat("1234", "Mo"));
+        catRepo.save(new Cat("1234", "Mo",null,null,null,null,null,null,null));
         //WHEN
         mockMvc.perform(MockMvcRequestBuilders.get("/api/cat/1234")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -81,7 +81,7 @@ class CatIntegrationTest {
     @DirtiesContext
     void getCatById_andExpectNotFoundCatObject() throws Exception {
         //GIVEN
-        catRepo.save(new Cat("1234", "Mo"));
+        catRepo.save(new Cat("1234", "Mo",null,null,null,null,null,null,null));
         //WHEN
         mockMvc.perform(MockMvcRequestBuilders.get("/api/cat/234")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -101,7 +101,7 @@ class CatIntegrationTest {
     @DirtiesContext
     void getCatsAssociatedToUser_andExpectListOfCats() throws Exception {
         //GIVEN
-        catRepo.save(new Cat("1234", "Mo"));
+        catRepo.save(new Cat("1234", "Mo",null,null,null,null,null,null,null));
         userRepo.save(new User("123", List.of("1234")));
 
         //WHEN
@@ -117,7 +117,7 @@ class CatIntegrationTest {
     @DirtiesContext
     void deleteCatEverywhereById () throws Exception {
         //GIVEN
-        catRepo.save(new Cat("1234", "Mo"));
+        catRepo.save(new Cat("1234", "Mo",null,null,null,null,null,null,null));
         userRepo.save(new User("123", List.of("1234")));
         //WHEN
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/cat/123"))
@@ -129,7 +129,7 @@ class CatIntegrationTest {
     @DirtiesContext
     void updateCatById() throws Exception {
         //GIVEN
-        catRepo.save(new Cat("1234", "Mo"));
+        catRepo.save(new Cat("1234", "Mo",null,null,null,null,null,null,null));
         //WHEN
         mockMvc.perform(MockMvcRequestBuilders.put("/api/cat/1234")
                 .contentType(MediaType.APPLICATION_JSON)

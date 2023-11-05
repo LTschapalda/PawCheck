@@ -1,18 +1,31 @@
 import {Link, useParams} from "react-router-dom";
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 import {Cat} from "../assets/Cat.ts";
 import FoodIcon from "../../assets/Kategorie_Icons_food.png";
-import {handleSubmit} from "../assets/submitFunction.tsx";
+import {getCatById, handleSubmit} from "../assets/FormFunctions.tsx";
+import './Input.css'
 
 type TreatPageProps = {
     catsOwned: Cat[];
     editMode: boolean;
     toggleEditMode: () => void;
+    getCatsFromUser : () => void;
 }
 export default function TreatPage(props : TreatPageProps) {
     //VARIABLES
     const {id} = useParams();
-    const [cat, setCat] = useState(props.catsOwned.find((cat: Cat) => cat.id === id));
+    const [cat, setCat] = useState<Cat | undefined>(undefined);
+    useEffect(() => {
+        const fetchCat = async () => {
+            const catData = await getCatById(id);
+            if (catData) {
+                setCat(catData);
+            } else {
+                console.error('Failed to fetch cat');
+            }
+        };
+        fetchCat();
+    }, [id]);
 
     //FOLD DOWN SELECTION OPERATOR
     const [treats, setTreats] = useState(false)
@@ -21,26 +34,30 @@ export default function TreatPage(props : TreatPageProps) {
     }
 
     const onTreatsInput = (event: ChangeEvent<HTMLInputElement>) => {
-        setCat((prevCat: Cat | undefined) => {
-            if (!prevCat) {
+        setCat((cat: Cat | undefined) => {
+            if (!cat) {
                 return {
                     treats: event.target.value,
                     id: '',
                     name: '',
                 };
             } else {
-                return { ...prevCat, treats: event.target.value };
+                console.log(cat)
+                return { ...cat, treats: event.target.value };
             }
         });
     };
 
-    if (!id) {
-        console.error('ID is undefined');
-        return null;
-    }
-    if(!cat) {
-        console.error('cat is undefined');
-        return null;
+    function handleSubmitLocally() {
+        if (!id) {
+            console.error('ID is undefined');
+            return null;
+        }
+        if(!cat) {
+            console.error('cat is undefined');
+            return null;
+        }
+        handleSubmit(id,cat, props.getCatsFromUser);
     }
 
     return (
@@ -54,22 +71,25 @@ export default function TreatPage(props : TreatPageProps) {
                 <h1>Wie siehts mit Leckerchen aus? </h1>
             </div>
 
-            <div className="input dropdown">
+            <div className="dropdown catDetails">
                 <button className="mainButton"
                         onClick={toggleTreats}>Jup
                 </button>
                 {treats && (
-                    <input type="text"
-                           placeholder="Wie viel?"
-                           value={cat?.treats || ''}
-                           onChange={onTreatsInput}/>
+                    <div className="secondaryButton">
+                        <input type="text"
+                               placeholder="Wie viel?"
+                               value={cat?.treats || ''}
+                               onChange={onTreatsInput}/>
+                    </div>
                 )}
             </div>
             <Link to="/home">
-                <button className="secondaryButton"
-                        onClick={() => {handleSubmit(id,cat)}}>weiter
+                <button className="secondaryButton weiter"
+                        onClick={handleSubmitLocally}>weiter
                 </button>
             </Link>
+
 
         </div>
     )
