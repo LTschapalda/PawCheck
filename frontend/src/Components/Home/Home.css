@@ -52,6 +52,10 @@
     height: 70px;
     width: 100vw;
     background-color: white;
+    border-top: 2px solid #9FCC1D;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
 }
 
 .deleteCat:hover {

@@ -33,9 +33,11 @@ function App() {
             .catch(reason => console.error(reason))
     }
 
+
+
     return (
         <>
-            <MenuPaw/>
+            <MenuPaw editMode={editMode} toggleEditMode={toggleEditMode}/>
             <Routes>
                 <Route index                     element={<LandingPage/>}/>
                 <Route path={"/cat/name"}        element={<NameInput getCatsFromUser={getCatsFromUser}/>}/>
