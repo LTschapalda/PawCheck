@@ -15,6 +15,7 @@ export default function CatDetailPage( props: CatDetailProps) {
     const { id } = useParams();
     const navigate = useNavigate()
     const selectedCat = props.catsOwned.find((cat: Cat) => cat.id == id)
+    console.log(selectedCat)
 
     const [deleteConfirmation, setDeleteConfirmation] = useState(false)
     const toggleDeleteConfirmation = () => {
@@ -36,6 +37,12 @@ export default function CatDetailPage( props: CatDetailProps) {
             })
     }
 
+    function onKeyDown (e:React.KeyboardEvent<HTMLDivElement>){
+            if (e.key === 'Enter' || e.key === 'Space') {
+                props.toggleEditMode();
+            }
+        }
+
     //RETURN
     return(
         <>
@@ -52,14 +59,11 @@ export default function CatDetailPage( props: CatDetailProps) {
                 ) : (
                     <div className="catDetails">Katze nicht gefunden</div>
                 )}
+
                 {selectedCat?.dry || selectedCat?.wet ? (
                     <Link to={`/cat/food/${selectedCat.id}`}>
                         <div className="catName" onClick={() => props.toggleEditMode() }
-                             onKeyDown={(e) => {
-                            if (e.key === 'Enter' || e.key === 'Space') {
-                                props.toggleEditMode();
-                            }
-                        }}
+                             onKeyDown={onKeyDown}
                              tabIndex={0}>
                             {selectedCat?.dry && (
                                 <div>
@@ -86,8 +90,20 @@ export default function CatDetailPage( props: CatDetailProps) {
                         </div>
                     </Link>
                 ):(<div/>)}
+                {selectedCat?.treats && (
+                    <Link to={`/cat/treats/${selectedCat.id}`}>
+                        <div className="catName" onClick={() => props.toggleEditMode() }
+                             onKeyDown={onKeyDown} tabIndex={0}>
+                            <div>
+                                <h4>Leckerlies</h4>
+                                <p>{selectedCat?.treats}</p>
+                            </div>
+                        </div>
+                    </Link>
+                )}
                 <div className="bottomSpace"/>
             </div>
+
             <button id="deleteCat" className="deleteCat"
                  onClick={toggleDeleteConfirmation}>Löschen
             </button>
