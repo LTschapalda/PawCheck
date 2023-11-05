@@ -44,7 +44,6 @@ class CatIntegrationTest {
     @DirtiesContext
     void createCatWithName() throws Exception{
         //GIVEN
-        String name = "Mo";
         //WHEN
         mockMvc.perform(MockMvcRequestBuilders.post("/api/cat")
                 .contentType(MediaType.APPLICATION_JSON)

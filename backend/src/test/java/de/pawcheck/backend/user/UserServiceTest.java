@@ -88,6 +88,6 @@ class UserServiceTest {
         //THEN
         verify(catRepo, times(1)).findById(catId);
         verify(catRepo, never()).save(any());
-        assertEquals(null, result);
+        assertNull(result);
     }
 }
