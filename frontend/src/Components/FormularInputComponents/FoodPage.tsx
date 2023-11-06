@@ -1,9 +1,10 @@
 import {Cat} from "../assets/Cat.ts";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {ChangeEvent, useEffect, useState} from "react";
 import FoodIcon from "../../assets/Kategorie_Icons_food.png";
 import './Input.css'
-import {getCatById, handleSubmit} from "../assets/FormFunctions.tsx";
+import {handleSubmit} from "../assets/FormFunctions.tsx";
+import axios from "axios";
 
 type FoodPageProps = {
     catsOwned: Cat[];
@@ -15,17 +16,24 @@ export default function FoodPage(props: FoodPageProps) {
     //VARIABLES
     const {id} = useParams();
     const [cat, setCat] = useState<Cat | undefined>(undefined);
+    const navigate = useNavigate();
+
+    const getCatById = () => {
+        if (!id) {
+            return undefined;
+        }
+        axios.get("/api/cat/" + id)
+            .then((response: {
+                data: Cat;
+            }) => {setCat(response.data);})
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
     useEffect(() => {
-        const fetchCat = async () => {
-            const catData = await getCatById(id);
-            if (catData) {
-                setCat(catData);
-            } else {
-                console.error('Failed to fetch cat');
-            }
-        };
-        fetchCat();
-    }, [id]);
+        getCatById()
+    }, []);
 
     //FOLD DOWN SELECTION OPERATORS
     const [dryFood, setDryFood] = useState(false)
@@ -146,7 +154,7 @@ export default function FoodPage(props: FoodPageProps) {
         );
     }
 
-    function handleSubmitLocally() {
+   function handleSubmitLocally() {
         if (!id) {
             console.error('ID is undefined');
             return null;
@@ -155,7 +163,8 @@ export default function FoodPage(props: FoodPageProps) {
             console.error('cat is undefined');
             return null;
         }
-        handleSubmit(id,cat, props.getCatsFromUser);
+        handleSubmit(id,cat, props.getCatsFromUser,()=> {navigate(`/cat/treats/${id}`);});
+
     }
 
     return (
@@ -294,11 +303,9 @@ export default function FoodPage(props: FoodPageProps) {
                                     </div>
                                 )}</>
                             :
-                            <Link to={"/cat/treats/" + id}>
-                                <button className="secondaryButton"
-                                        onClick={handleSubmitLocally}>weiter
-                                </button>
-                            </Link>
+                            <button className="secondaryButton"
+                                    onClick={handleSubmitLocally}>weiter
+                            </button>
                         }
                     </div>
                 }

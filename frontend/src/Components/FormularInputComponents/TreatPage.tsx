@@ -1,9 +1,10 @@
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {ChangeEvent, useEffect, useState} from "react";
 import {Cat} from "../assets/Cat.ts";
 import FoodIcon from "../../assets/Kategorie_Icons_food.png";
-import {getCatById, handleSubmit} from "../assets/FormFunctions.tsx";
+import {handleSubmit} from "../assets/FormFunctions.tsx";
 import './Input.css'
+import axios from "axios";
 
 type TreatPageProps = {
     catsOwned: Cat[];
@@ -15,17 +16,25 @@ export default function TreatPage(props : TreatPageProps) {
     //VARIABLES
     const {id} = useParams();
     const [cat, setCat] = useState<Cat | undefined>(undefined);
+    const navigate = useNavigate();
+
+    const getCatById = () => {
+        if (!id) {
+            return undefined;
+        }
+        axios.get("/api/cat/" + id)
+            .then((response: {
+                data: Cat;
+            }) => {setCat(response.data);
+            console.log(response.data)})
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
     useEffect(() => {
-        const fetchCat = async () => {
-            const catData = await getCatById(id);
-            if (catData) {
-                setCat(catData);
-            } else {
-                console.error('Failed to fetch cat');
-            }
-        };
-        fetchCat();
-    }, [id]);
+        getCatById()
+    }, []);
 
     //FOLD DOWN SELECTION OPERATOR
     const [treats, setTreats] = useState(false)
@@ -57,7 +66,7 @@ export default function TreatPage(props : TreatPageProps) {
             console.error('cat is undefined');
             return null;
         }
-        handleSubmit(id,cat, props.getCatsFromUser);
+        handleSubmit(id,cat, props.getCatsFromUser,()=> {navigate(`/cat/treats/${id}`);});
     }
 
     return (

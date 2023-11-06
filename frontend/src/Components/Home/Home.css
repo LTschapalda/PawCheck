@@ -37,7 +37,7 @@
     background-color: #9FCC1D;
     border-radius: 50%;
     position: fixed;
-    bottom: 15px;
+    bottom: 10px;
     left: 50%;
     transform: translate(-50%, -50%);
 }

@@ -16,6 +16,10 @@ export default function CatDetailPage( props: CatDetailProps) {
     const navigate = useNavigate()
     const selectedCat = props.catsOwned.find((cat: Cat) => cat.id == id)
     console.log(selectedCat)
+    const [addCategories, setAddCategories] = useState(false)
+    const toggleAddCategories = () => {
+        setAddCategories(!addCategories);
+    }
 
     const [deleteConfirmation, setDeleteConfirmation] = useState(false)
     const toggleDeleteConfirmation = () => {
@@ -107,6 +111,14 @@ export default function CatDetailPage( props: CatDetailProps) {
             <button id="deleteCat" className="deleteCat"
                  onClick={toggleDeleteConfirmation}>Löschen
             </button>
+
+            <div className="addCat" onClick={toggleAddCategories}>
+                <svg id="plus" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.8966 2V25M25 13.3708H2" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+                </svg>
+            </div>
+
+
 
             {deleteConfirmation && (
                 <div className="deleteConfirmationPopup">
