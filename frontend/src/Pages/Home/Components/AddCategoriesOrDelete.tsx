@@ -49,7 +49,7 @@ export default function AddCategoriesOrDelete(props : AddCategoriesOrDeleteProps
             )}
 
             <div className="addCategoryPopup">
-                <div style={{ float: 'right'}} onClick={props.toggleAddCategories}>
+                <div style={{ float: 'right'}} onClick={props.toggleAddCategories} tabIndex={0}>
                     <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 5L19 19M5 19L19 5" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
@@ -57,7 +57,7 @@ export default function AddCategoriesOrDelete(props : AddCategoriesOrDeleteProps
                 <h4>Kategorien hinzufügen:</h4>
                 <div className="categoryIcons">
                     {!props.selectedCat?.dry || !props.selectedCat?.wet ?
-                        <div onClick={props.toggleEditMode}>
+                        <div onClick={props.toggleEditMode} tabIndex={0}>
                             <Link to={`/cat/food/${props.selectedCat?.id}`}>
                                 <CategoryCard image={FoodIcon}
                                               categoryTitle="Essen"/>
@@ -65,7 +65,7 @@ export default function AddCategoriesOrDelete(props : AddCategoriesOrDeleteProps
                         </div>
                         :<div/>}
                     {!props.selectedCat?.treats && (
-                        <div onClick={props.toggleEditMode}>
+                        <div onClick={props.toggleEditMode} tabIndex={0}>
                             <Link to={`/cat/treats/${props.selectedCat?.id}`}>
                                 <CategoryCard image={FoodIcon} categoryTitle="Leckerlies"/>
                             </Link>

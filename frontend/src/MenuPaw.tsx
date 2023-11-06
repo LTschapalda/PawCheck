@@ -11,13 +11,14 @@ export default function MenuPaw(props: MenuPawProps) {
             props.toggleEditMode();
         }
     };
+
     return(
         <nav>
-            <div className="navbar" onClick={onClick}>
+            <button className="navbar" onClick={onClick}>
                 <Link to="/home">
                     <img id="menuPaw" src={menuPaw} alt="menu Paw"/>
                 </Link>
-            </div>
+            </button>
         </nav>
     )
 }
