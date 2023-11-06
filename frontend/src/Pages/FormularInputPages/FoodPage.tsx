@@ -163,7 +163,13 @@ export default function FoodPage(props: FoodPageProps) {
             console.error('cat is undefined');
             return null;
         }
-        handleSubmit(id,cat, props.getCatsFromUser,()=> {navigate(`/cat/treats/${id}`);});
+        handleSubmit(id,cat, props.getCatsFromUser,()=> {
+            if (!props.editMode) {
+            navigate(`/cat/treats/${id}`);
+            } else {
+            navigate(`/home`);
+            }
+        });
 
     }
 
@@ -274,13 +280,11 @@ export default function FoodPage(props: FoodPageProps) {
                     )}
                 </div>
                 {props.editMode ?
-                    <Link to={'/home'}>
                         <button className="secondaryButton" onClick={() => {
                             handleSubmitLocally();
                             props.toggleEditMode()
                         }}>Speichern
                         </button>
-                    </Link>
                     : <div>
                         {allInputsAreEmpty() ? <>
                                 <button className="secondaryButton" onClick={toggleDoYouReallyWantToContinue}>weiter

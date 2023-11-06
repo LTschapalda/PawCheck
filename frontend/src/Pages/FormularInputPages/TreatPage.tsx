@@ -1,4 +1,4 @@
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {ChangeEvent, useEffect, useState} from "react";
 import {Cat} from "../assets/Cat.ts";
 import FoodIcon from "../../assets/Kategorie_Icons_food.png";
@@ -66,7 +66,7 @@ export default function TreatPage(props : TreatPageProps) {
             console.error('cat is undefined');
             return null;
         }
-        handleSubmit(id,cat, props.getCatsFromUser,()=> {navigate(`/cat/treats/${id}`);});
+        handleSubmit(id,cat, props.getCatsFromUser,()=> {navigate(`/home`);});
     }
 
     return (
@@ -93,11 +93,9 @@ export default function TreatPage(props : TreatPageProps) {
                     </div>
                 )}
             </div>
-            <Link to="/home">
-                <button className="secondaryButton weiter"
-                        onClick={handleSubmitLocally}>weiter
-                </button>
-            </Link>
+            <button className="secondaryButton weiter"
+                    onClick={handleSubmitLocally}>weiter
+            </button>
 
 
         </div>

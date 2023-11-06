@@ -1,6 +1,6 @@
 import './Home.css'
 import {Cat} from "../assets/Cat.ts";
-import CatHeader from './CatHeader.tsx';
+import CatHeader from './Components/CatHeader.tsx';
 import {Link} from "react-router-dom";
 import {useEffect} from "react";
 

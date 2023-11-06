@@ -1,6 +1,6 @@
-import './Home.css'
-import {Cat} from "../assets/Cat.ts";
-import CatFace from "../../assets/ImagePlaceholder.png"
+import '../Home.css'
+import {Cat} from "../../assets/Cat.ts";
+import CatFace from "../../../assets/ImagePlaceholder.png"
 import {Link} from 'react-router-dom';
 
 type CatHeaderProps = {

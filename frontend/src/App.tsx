@@ -1,16 +1,16 @@
 import './App.css'
 import {Route, Routes} from "react-router-dom";
-import LandingPage from "./Components/LandingPage.tsx";
-import NameInput from "./Components/FormularInputComponents/NameInput.tsx";
-import Home from "./Components/Home/Home.tsx";
+import LandingPage from "./Pages/LandingPage.tsx";
+import NameInput from "./Pages/FormularInputPages/NameInput.tsx";
+import Home from "./Pages/Home/Home.tsx";
 import MenuPaw from "./MenuPaw.tsx";
-import CatDetailPage from "./Components/Home/CatDetailPage.tsx";
+import CatDetailPage from "./Pages/Home/CatDetailPage.tsx";
 import {useEffect, useState} from "react";
-import {Cat} from "./Components/assets/Cat.ts";
-import SweetCheckup from "./Components/FormularInputComponents/SweetCheckup.tsx";
-import FoodPage from "./Components/FormularInputComponents/FoodPage.tsx";
+import {Cat} from "./Pages/assets/Cat.ts";
+import SweetCheckup from "./Pages/FormularInputPages/SweetCheckup.tsx";
+import FoodPage from "./Pages/FormularInputPages/FoodPage.tsx";
 import axios from "axios";
-import TreatPage from "./Components/FormularInputComponents/TreatPage.tsx";
+import TreatPage from "./Pages/FormularInputPages/TreatPage.tsx";
 
 
 function App() {
