@@ -7,7 +7,6 @@ import './Input.css'
 import axios from "axios";
 
 type TreatPageProps = {
-    catsOwned: Cat[];
     editMode: boolean;
     toggleEditMode: () => void;
     getCatsFromUser : () => void;
@@ -25,8 +24,7 @@ export default function TreatPage(props : TreatPageProps) {
         axios.get("/api/cat/" + id)
             .then((response: {
                 data: Cat;
-            }) => {setCat(response.data);
-            console.log(response.data)})
+            }) => {setCat(response.data);})
             .catch((error) => {
                 console.error(error);
             });
@@ -51,7 +49,6 @@ export default function TreatPage(props : TreatPageProps) {
                     name: '',
                 };
             } else {
-                console.log(cat)
                 return { ...cat, treats: event.target.value };
             }
         });
@@ -66,7 +63,9 @@ export default function TreatPage(props : TreatPageProps) {
             console.error('cat is undefined');
             return null;
         }
-        handleSubmit(id,cat, props.getCatsFromUser,()=> {navigate(`/home`);});
+        handleSubmit(id,cat,
+            props.getCatsFromUser,
+            ()=> {navigate(`/home`);});
     }
 
     return (

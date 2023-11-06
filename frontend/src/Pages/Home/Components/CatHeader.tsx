@@ -9,7 +9,6 @@ type CatHeaderProps = {
 export default function CatHeader(props: CatHeaderProps) {
 
     return (
-        <>
             <Link to={`/cat/details/${props.cat.id}`}>
                 <div className="catName">
                     <img id="catFace"
@@ -18,6 +17,5 @@ export default function CatHeader(props: CatHeaderProps) {
                     <p>{props.cat.name}</p>
                 </div>
             </Link>
-        </>
     )
 }

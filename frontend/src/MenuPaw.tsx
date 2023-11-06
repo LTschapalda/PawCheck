@@ -2,7 +2,7 @@ import menuPaw from "../src/assets/menuPaw.svg";
 import {Link} from "react-router-dom";
 
 type MenuPawProps = {
-    editMode : boolean,
+    readonly editMode : boolean,
     toggleEditMode: () => void;
 }
 export default function MenuPaw(props: MenuPawProps) {

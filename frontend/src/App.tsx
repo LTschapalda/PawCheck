@@ -33,8 +33,6 @@ function App() {
             .catch(reason => console.error(reason))
     }
 
-
-
     return (
         <>
             <MenuPaw editMode={editMode} toggleEditMode={toggleEditMode}/>

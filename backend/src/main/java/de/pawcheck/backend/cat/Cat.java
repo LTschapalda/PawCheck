@@ -17,4 +17,10 @@ public class Cat {
     private String water;
     private Toilet toilet;
     private Toy toy;
+
+    //KONSTRUKTOR
+    public Cat(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

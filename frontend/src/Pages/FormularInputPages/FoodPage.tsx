@@ -7,7 +7,6 @@ import {handleSubmit} from "../assets/FormFunctions.tsx";
 import axios from "axios";
 
 type FoodPageProps = {
-    catsOwned: Cat[];
     editMode: boolean;
     toggleEditMode: () => void;
     getCatsFromUser : () => void;

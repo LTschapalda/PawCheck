@@ -14,7 +14,6 @@ export default function CatDetailPage( props: CatDetailProps) {
     //VARIABLES
     const { id } = useParams();
     const selectedCat = props.catsOwned.find((cat: Cat) => cat.id == id)
-    console.log(selectedCat)
     const [addCategories, setAddCategories] = useState(false)
     const toggleAddCategories = () => {
         setAddCategories(!addCategories);
