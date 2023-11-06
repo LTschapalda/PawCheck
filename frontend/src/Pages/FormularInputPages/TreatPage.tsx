@@ -5,6 +5,7 @@ import FoodIcon from "../../assets/Kategorie_Icons_food.png";
 import {handleSubmit} from "../assets/FormFunctions.tsx";
 import './Input.css'
 import axios from "axios";
+import SimpleInputField from "./Components/SimpleInputField.tsx";
 
 type TreatPageProps = {
     editMode: boolean;
@@ -33,12 +34,6 @@ export default function TreatPage(props : TreatPageProps) {
     useEffect(() => {
         getCatById()
     }, []);
-
-    //FOLD DOWN SELECTION OPERATOR
-    const [treats, setTreats] = useState(false)
-    const toggleTreats = () => {
-        setTreats(!treats);
-    }
 
     const onTreatsInput = (event: ChangeEvent<HTMLInputElement>) => {
         setCat((cat: Cat | undefined) => {
@@ -79,19 +74,12 @@ export default function TreatPage(props : TreatPageProps) {
                 <h1>Wie siehts mit Leckerchen aus? </h1>
             </div>
 
-            <div className="dropdown catDetails">
-                <button className="mainButton"
-                        onClick={toggleTreats}>Jup
-                </button>
-                {treats && (
-                    <div className="secondaryButton">
-                        <input type="text"
-                               placeholder="Wie viel?"
-                               value={cat?.treats || ''}
-                               onChange={onTreatsInput}/>
-                    </div>
-                )}
-            </div>
+            <SimpleInputField cat={cat}
+                              setCat={setCat}
+                              onInputChange={onTreatsInput}
+                              buttonText="Jup"
+                              placeholder="Wie viele?"/>
+
             <button className="secondaryButton weiter"
                     onClick={handleSubmitLocally}>weiter
             </button>
