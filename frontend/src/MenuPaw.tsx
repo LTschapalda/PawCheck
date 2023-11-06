@@ -1,4 +1,4 @@
-import menuPaw from "../src/assets/menuPaw.svg";
+import menuPaw from "./images/menuPaw.svg";
 import {Link} from "react-router-dom";
 
 type MenuPawProps = {

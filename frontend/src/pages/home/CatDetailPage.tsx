@@ -1,9 +1,9 @@
-import CatFace from "../../assets/ImagePlaceholder.png";
+import CatFace from "../../images/ImagePlaceholder.png";
 import {Link, useParams} from "react-router-dom";
 import {Cat} from "../assets/Cat.ts";
 import {useState} from "react";
-import './Home.css'
-import AddCategoriesOrDelete from "./Components/AddCategoriesOrDelete.tsx";
+import './styling/Home.css'
+import AddCategoriesOrDelete from "./components/AddCategoriesOrDelete.tsx";
 
 type CatDetailProps = {
     catsOwned : Cat[]

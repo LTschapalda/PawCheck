@@ -1,16 +1,16 @@
 import './App.css'
 import {Route, Routes} from "react-router-dom";
-import LandingPage from "./Pages/LandingPage.tsx";
-import NameInput from "./Pages/FormularInputPages/NameInput.tsx";
-import Home from "./Pages/Home/Home.tsx";
+import LandingPage from "./pages/LandingPage.tsx";
+import NameInput from "./pages/formularInputPages/NameInput.tsx";
+import Home from "./pages/home/Home.tsx";
 import MenuPaw from "./MenuPaw.tsx";
-import CatDetailPage from "./Pages/Home/CatDetailPage.tsx";
+import CatDetailPage from "./pages/home/CatDetailPage.tsx";
 import {useEffect, useState} from "react";
-import {Cat} from "./Pages/assets/Cat.ts";
-import SweetCheckup from "./Pages/FormularInputPages/SweetCheckup.tsx";
-import FoodPage from "./Pages/FormularInputPages/FoodPage.tsx";
+import SweetCheckup from "./pages/formularInputPages/SweetCheckup.tsx";
+import FoodPage from "./pages/formularInputPages/FoodPage.tsx";
 import axios from "axios";
-import TreatPage from "./Pages/FormularInputPages/TreatPage.tsx";
+import TreatPage from "./pages/formularInputPages/TreatPage.tsx";
+import {Cat} from "./pages/assets/Cat.ts";
 
 
 function App() {
@@ -40,8 +40,8 @@ function App() {
                 <Route index                     element={<LandingPage/>}/>
                 <Route path={"/cat/name"}        element={<NameInput getCatsFromUser={getCatsFromUser}/>}/>
                 <Route path={"/sweeet/:id"}      element={<SweetCheckup/>}/>
-                <Route path={"/cat/food/:id"}    element={<FoodPage catsOwned={catsOwned} editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser}/>} />
-                <Route path={"/cat/treats/:id"}  element={<TreatPage catsOwned={catsOwned} toggleEditMode={toggleEditMode} editMode={editMode} getCatsFromUser={getCatsFromUser}/>}/>
+                <Route path={"/cat/food/:id"}    element={<FoodPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser}/>} />
+                <Route path={"/cat/treats/:id"}  element={<TreatPage toggleEditMode={toggleEditMode} editMode={editMode} getCatsFromUser={getCatsFromUser}/>}/>
                 <Route path={"/home"}            element={<Home catsOwned={catsOwned} getCatsFromUser={getCatsFromUser}/>}/>
                 <Route path={"/cat/details/:id"} element={<CatDetailPage catsOwned={catsOwned} toggleEditMode={toggleEditMode}/>} />
             </Routes>

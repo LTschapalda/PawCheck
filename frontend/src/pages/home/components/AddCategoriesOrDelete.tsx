@@ -1,9 +1,9 @@
-import CategoryCard from "./CategorieCard.tsx";
-import FoodIcon from "../../../assets/Kategorie_Icons_food copy.png"
-import {Cat} from "../../assets/Cat.ts";
+import FoodIcon from "../../../images/Kategorie_Icons_food copy.png"
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
+import {Cat} from "../../assets/Cat.ts";
+import CategoryCard from "./CategorieCard.tsx";
 
 type AddCategoriesOrDeleteProps = {
     selectedCat? : Cat,

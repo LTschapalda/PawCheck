@@ -1,11 +1,11 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {ChangeEvent, useEffect, useState} from "react";
 import {Cat} from "../assets/Cat.ts";
-import FoodIcon from "../../assets/Kategorie_Icons_food.png";
-import {handleSubmit} from "../assets/FormFunctions.tsx";
-import './Input.css'
+import FoodIcon from "../../images/Kategorie_Icons_food.png";
+import './styling/Input.css'
 import axios from "axios";
-import SimpleInputField from "./Components/SimpleInputField.tsx";
+import {handleSubmit} from "../assets/FormFunctions.tsx";
+import SimpleInputField from "./components/SimpleInputField.tsx";
 
 type TreatPageProps = {
     editMode: boolean;

@@ -1,11 +1,11 @@
-import {Cat} from "../assets/Cat.ts";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {ChangeEvent, useEffect, useState} from "react";
-import FoodIcon from "../../assets/Kategorie_Icons_food.png";
-import './Input.css'
-import {handleSubmit} from "../assets/FormFunctions.tsx";
+import FoodIcon from "../../images/Kategorie_Icons_food.png";
+import './styling/Input.css'
 import axios from "axios";
-import MorningEveningInputField from "./Components/MorningEveningInputField.tsx";
+import {handleSubmit} from "../assets/FormFunctions.tsx";
+import MorningEveningInputField from "./components/MorningEveningInputField.tsx";
+import {Cat} from "../assets/Cat.ts";
 
 type FoodPageProps = {
     editMode: boolean;

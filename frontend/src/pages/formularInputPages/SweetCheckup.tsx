@@ -1,4 +1,4 @@
-import  './SweetCheckup.css'
+import  './styling/SweetCheckup.css'
 import {Link, useParams} from "react-router-dom";
 export default function SweetCheckup() {
     const { id } = useParams();

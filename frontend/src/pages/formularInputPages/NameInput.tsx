@@ -1,7 +1,7 @@
-import  './NameInput.css'
+import  './styling/NameInput.css'
 import {ChangeEvent, useState} from "react";
 import axios from "axios";
-import NameCat from "../../assets/NameCat.svg";
+import NameCat from "../../images/NameCat.svg";
 import { useNavigate } from 'react-router-dom';
 
 type NameInputProps = {
