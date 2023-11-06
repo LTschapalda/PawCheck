@@ -5,6 +5,7 @@ import FoodIcon from "../../assets/Kategorie_Icons_food.png";
 import './Input.css'
 import {handleSubmit} from "../assets/FormFunctions.tsx";
 import axios from "axios";
+import MorningEveningInputField from "./Components/MorningEveningInputField.tsx";
 
 type FoodPageProps = {
     editMode: boolean;
@@ -35,14 +36,6 @@ export default function FoodPage(props: FoodPageProps) {
     }, []);
 
     //FOLD DOWN SELECTION OPERATORS
-    const [dryFood, setDryFood] = useState(false)
-    const toggleDryFood = () => {
-        setDryFood(!dryFood);
-    }
-    const [dryMorning, setDryMorning] = useState(false)
-    const toggleDryMorning = () => {
-        setDryMorning(!dryMorning);
-    }
     const onDryFoodMorningAmount = (event: ChangeEvent<HTMLInputElement>) => {
         setCat((prevCat: Cat | undefined) => {
             if (!prevCat) {
@@ -62,11 +55,6 @@ export default function FoodPage(props: FoodPageProps) {
         });
     };
 
-    const [dryEvening, setDryEvening] = useState(false)
-    const toggleDryEvening = () => {
-        setDryEvening(!dryEvening)
-    }
-
     function onDryFoodEveningAmount(event: ChangeEvent<HTMLInputElement>) {
         setCat((prevCat: Cat | undefined) => {
             if (!prevCat) {
@@ -85,16 +73,6 @@ export default function FoodPage(props: FoodPageProps) {
             };
         });
     }
-
-    const [wetFood, setWetFood] = useState(false)
-    const toggleWetFood = () => {
-        setWetFood(!wetFood);
-    }
-    const [wetMorning, setWetMorning] = useState(false)
-    const toggleWetMorning = () => {
-        setWetMorning(!wetMorning)
-    }
-
     function onWetFoodMorningAmount(event: ChangeEvent<HTMLInputElement>) {
         setCat((prevCat: Cat | undefined) => {
             if (!prevCat) {
@@ -112,11 +90,6 @@ export default function FoodPage(props: FoodPageProps) {
                 },
             };
         });
-    }
-
-    const [wetEvening, setWetEvening] = useState(false)
-    const toggleWetEvening = () => {
-        setWetEvening(!wetEvening);
     }
 
     function onWetFoodEveningAmount(event: ChangeEvent<HTMLInputElement>) {
@@ -184,100 +157,21 @@ export default function FoodPage(props: FoodPageProps) {
             </div>
 
             <div className="catDetails">
-                <div>
-                    <button className="mainButton" onClick={toggleDryFood}>Trockenfutter</button>
-                    {dryFood && (
-                        <div>
-                            {!dryMorning ?
-                                <button className="mainButton mainButtonLighter"
-                                        onClick={toggleDryMorning}>Morgens
-                                </button>
-                                :
-                                <div className="secondaryButton border">
-                                    <label onClick={toggleDryMorning}
-                                           onKeyDown={(e) => {
-                                               if (e.key === 'Enter' || e.key === 'Space') {
-                                                   toggleDryMorning();
-                                               }
-                                           }}
-                                           tabIndex={0}>Morgens</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Wie viel?"
-                                        value={cat?.dry?.morning || ''}
-                                        onChange={onDryFoodMorningAmount}/>
-                                </div>
-                            }
-                            {!dryEvening ?
-                                <button className="mainButton mainButtonLighter"
-                                        onClick={toggleDryEvening}>Abends
-                                </button>
-                                :
-                                <div className="secondaryButton border">
-                                    <label onClick={toggleDryEvening}
-                                           onKeyDown={(e) => {
-                                               if (e.key === 'Enter' || e.key === 'Space') {
-                                                   toggleDryEvening();
-                                               }
-                                           }}
-                                           tabIndex={0}>Abends</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Wie viel?"
-                                        value={cat?.dry?.evening || ''}
-                                        onChange={onDryFoodEveningAmount}/>
-                                </div>
-                            }
-                        </div>
-                    )}
-                </div>
-                <div>
-                    <button className="mainButton" onClick={toggleWetFood}>Nassfutter</button>
-                    {wetFood && (
-                        <div>
-                            {!wetMorning ?
-                                <button className="mainButton mainButtonLighter"
-                                        onClick={toggleWetMorning}>Morgens
-                                </button>
-                                :
-                                <div className="secondaryButton border">
-                                    <label onClick={toggleWetMorning}
-                                           onKeyDown={(e) => {
-                                               if (e.key === 'Enter' || e.key === 'Space') {
-                                                   toggleWetMorning();
-                                               }
-                                           }}
-                                           tabIndex={0}>Morgens</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Wie viel?"
-                                        value={cat?.wet?.morning || ''}
-                                        onChange={onWetFoodMorningAmount}/>
-                                </div>
-                            }
-                            {!wetEvening ?
-                                <button className="mainButton mainButtonLighter"
-                                        onClick={toggleWetEvening}>Abends
-                                </button>
-                                :
-                                <div className="secondaryButton border">
-                                    <label onClick={toggleWetEvening}
-                                           onKeyDown={(e) => {
-                                               if (e.key === 'Enter' || e.key === 'Space') {
-                                                   toggleWetEvening();
-                                               }
-                                           }}
-                                           tabIndex={0}>Abends</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Wie viel?"
-                                        value={cat?.wet?.evening || ''}
-                                        onChange={onWetFoodEveningAmount}/>
-                                </div>
-                            }
-                        </div>
-                    )}
-                </div>
+                <MorningEveningInputField onMorningInputChange={onDryFoodMorningAmount}
+                                          onEveningInputChange={onDryFoodEveningAmount}
+                                          buttonText="Trockenfutter"
+                                          valueMorning={cat?.dry?.morning || ''}
+                                          valueEvening={cat?.dry?.evening || ''}
+                                          placeholder="Wie viel?"
+                />
+                <MorningEveningInputField onMorningInputChange={onWetFoodMorningAmount}
+                                          onEveningInputChange={onWetFoodEveningAmount}
+                                          buttonText="Nassfutter"
+                                          valueMorning={cat?.wet?.morning || ''}
+                                          valueEvening={cat?.wet?.evening || ''}
+                                          placeholder="Wie viel?"
+                />
+
                 {props.editMode ?
                         <button className="secondaryButton" onClick={() => {
                             handleSubmitLocally();
