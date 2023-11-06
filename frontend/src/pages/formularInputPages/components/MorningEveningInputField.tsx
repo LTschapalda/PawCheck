@@ -3,10 +3,10 @@ import {ChangeEvent, useState} from "react";
 type MorningEveningInputFieldProps = {
     onMorningInputChange: (event: ChangeEvent<HTMLInputElement>) => void,
     onEveningInputChange: (event: ChangeEvent<HTMLInputElement>) => void,
-    buttonText: string,
-    valueMorning : string,
-    valueEvening : string,
-    placeholder: string,
+    readonly buttonText: string,
+    readonly valueMorning : string,
+    readonly valueEvening : string,
+    readonly placeholder: string,
 }
 export default function MorningEveningInputField(props: MorningEveningInputFieldProps) {
     //FOLD DOWN SELECTION OPERATOR

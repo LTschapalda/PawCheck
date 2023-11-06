@@ -1,12 +1,10 @@
 import {ChangeEvent, useState} from "react";
-import {Cat} from "../../assets/Cat.ts";
 
 type SimpleInputFieldProps = {
-    cat? : Cat,
-    setCat :  React.Dispatch<React.SetStateAction<Cat | undefined>>,
     onInputChange : (event: ChangeEvent<HTMLInputElement>) => void,
-    buttonText : string,
-    placeholder : string,
+    readonly buttonText : string,
+    readonly placeholder : string,
+    readonly value : string,
 }
 
 export default function SimpleInputField(props : SimpleInputFieldProps) {
@@ -26,7 +24,7 @@ export default function SimpleInputField(props : SimpleInputFieldProps) {
                 <div className="secondaryButton">
                     <input type="text"
                            placeholder={props.placeholder}
-                           value={props.cat?.treats || ''}
+                           value={props.value}
                            onChange={props.onInputChange}/>
                 </div>
             )}

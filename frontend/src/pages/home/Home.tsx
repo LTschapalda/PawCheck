@@ -5,7 +5,7 @@ import {Cat} from "../assets/Cat.ts";
 import CatHeader from "./components/CatHeader.tsx";
 
 type HomeProps = {
-    catsOwned : Cat[];
+    readonly catsOwned : Cat[];
     getCatsFromUser: () => void;
 }
 

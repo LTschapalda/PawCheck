@@ -8,7 +8,7 @@ import MorningEveningInputField from "./components/MorningEveningInputField.tsx"
 import {Cat} from "../assets/Cat.ts";
 
 type FoodPageProps = {
-    editMode: boolean;
+    readonly editMode: boolean;
     toggleEditMode: () => void;
     getCatsFromUser : () => void;
 }
@@ -36,61 +36,41 @@ export default function FoodPage(props: FoodPageProps) {
     }, []);
 
     //FOLD DOWN SELECTION OPERATORS
-    const onDryFoodMorningAmount = (event: ChangeEvent<HTMLInputElement>) => {
+    type MealType = 'dry' | 'wet';
+
+    const updateMealAmount = (mealType: MealType, period: 'morning' | 'evening', event: ChangeEvent<HTMLInputElement>) => {
         setCat((prevCat: Cat | undefined) => {
             if (!prevCat) {
                 return {
-                    dry: {morning: event.target.value},
+                    [mealType]: { [period]: event.target.value },
                     id: '',
                     name: '',
                 };
             }
+
             return {
                 ...prevCat,
-                dry: {
-                    ...prevCat.dry,
-                    morning: event.target.value,
+                [mealType]: {
+                    ...prevCat[mealType],
+                    [period]: event.target.value,
                 },
             };
         });
     };
 
-    function onDryFoodEveningAmount(event: ChangeEvent<HTMLInputElement>) {
-        setCat((prevCat: Cat | undefined) => {
-            if (!prevCat) {
-                return {
-                    dry: {evening: event.target.value},
-                    id: '',
-                    name: '',
-                };
-            }
-            return {
-                ...prevCat,
-                dry: {
-                    ...prevCat.dry,
-                    evening: event.target.value,
-                },
-            };
-        });
-    }
-    function onWetFoodMorningAmount(event: ChangeEvent<HTMLInputElement>) {
-        setCat((prevCat: Cat | undefined) => {
-            if (!prevCat) {
-                return {
-                    wet: {morning: event.target.value},
-                    id: '',
-                    name: '',
-                };
-            }
-            return {
-                ...prevCat,
-                wet: {
-                    ...prevCat.wet,
-                    morning: event.target.value,
-                },
-            };
-        });
-    }
+// Verwendung
+    const onDryFoodMorningAmount = (event: ChangeEvent<HTMLInputElement>) => {
+        updateMealAmount('dry', 'morning', event);
+    };
+
+    const onDryFoodEveningAmount = (event: ChangeEvent<HTMLInputElement>) => {
+        updateMealAmount('dry', 'evening', event);
+    };
+
+    const onWetFoodMorningAmount = (event: ChangeEvent<HTMLInputElement>) => {
+        updateMealAmount('wet', 'morning', event);
+    };
+
 
     function onWetFoodEveningAmount(event: ChangeEvent<HTMLInputElement>) {
         setCat((prevCat: Cat | undefined) => {
@@ -135,10 +115,13 @@ export default function FoodPage(props: FoodPageProps) {
             console.error('cat is undefined');
             return null;
         }
-        handleSubmit(id,cat, props.getCatsFromUser,()=> {
+        handleSubmit(id,cat,
+            props.getCatsFromUser,
+            ()=> {
             if (!props.editMode) {
             navigate(`/cat/treats/${id}`);
             } else {
+            props.toggleEditMode();
             navigate(`/home`);
             }
         });
@@ -160,28 +143,27 @@ export default function FoodPage(props: FoodPageProps) {
                 <MorningEveningInputField onMorningInputChange={onDryFoodMorningAmount}
                                           onEveningInputChange={onDryFoodEveningAmount}
                                           buttonText="Trockenfutter"
-                                          valueMorning={cat?.dry?.morning || ''}
-                                          valueEvening={cat?.dry?.evening || ''}
+                                          valueMorning={cat?.dry?.morning ?? ''}
+                                          valueEvening={cat?.dry?.evening ?? ''}
                                           placeholder="Wie viel?"
                 />
                 <MorningEveningInputField onMorningInputChange={onWetFoodMorningAmount}
                                           onEveningInputChange={onWetFoodEveningAmount}
                                           buttonText="Nassfutter"
-                                          valueMorning={cat?.wet?.morning || ''}
-                                          valueEvening={cat?.wet?.evening || ''}
+                                          valueMorning={cat?.wet?.morning ?? ''}
+                                          valueEvening={cat?.wet?.evening ?? ''}
                                           placeholder="Wie viel?"
                 />
 
                 {props.editMode ?
-                        <button className="secondaryButton" onClick={() => {
-                            handleSubmitLocally();
-                            props.toggleEditMode()
-                        }}>Speichern
-                        </button>
+                        <button className="secondaryButton"
+                                onClick={handleSubmitLocally}
+                        >Speichern</button>
                     : <div>
                         {allInputsAreEmpty() ? <>
-                                <button className="secondaryButton" onClick={toggleDoYouReallyWantToContinue}>weiter
-                                </button>
+                                <button className="secondaryButton"
+                                        onClick={toggleDoYouReallyWantToContinue}
+                                >weiter</button>
                                 {doYouReallyWantToContinue && (
                                     <div className="deleteConfirmationPopup">
                                         <div className="overlay">

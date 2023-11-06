@@ -8,7 +8,7 @@ import {handleSubmit} from "../assets/FormFunctions.tsx";
 import SimpleInputField from "./components/SimpleInputField.tsx";
 
 type TreatPageProps = {
-    editMode: boolean;
+    readonly editMode: boolean;
     toggleEditMode: () => void;
     getCatsFromUser : () => void;
 }
@@ -60,7 +60,14 @@ export default function TreatPage(props : TreatPageProps) {
         }
         handleSubmit(id,cat,
             props.getCatsFromUser,
-            ()=> {navigate(`/home`);});
+            ()=> {
+                if (!props.editMode) {
+                    navigate(`/home`);
+                } else {
+                    props.toggleEditMode();
+                    navigate(`/home`);
+                }
+            });
     }
 
     return (
@@ -74,15 +81,22 @@ export default function TreatPage(props : TreatPageProps) {
                 <h1>Wie siehts mit Leckerchen aus? </h1>
             </div>
 
-            <SimpleInputField cat={cat}
-                              setCat={setCat}
-                              onInputChange={onTreatsInput}
+            <SimpleInputField onInputChange={onTreatsInput}
                               buttonText="Jup"
-                              placeholder="Wie viele?"/>
+                              placeholder="Wie viele?"
+                              value={cat?.treats ?? ''}
+            />
 
-            <button className="secondaryButton weiter"
-                    onClick={handleSubmitLocally}>weiter
-            </button>
+            {props.editMode ?
+                <button className="secondaryButton weiter"
+                        onClick={handleSubmitLocally}>weiter
+                </button>
+                :
+                <button className="secondaryButton weiter"
+                        onClick={handleSubmitLocally}>speichern
+                </button>
+            }
+
 
 
         </div>

@@ -4,7 +4,7 @@ import CatFace from "../../../images/ImagePlaceholder.png"
 import {Link} from 'react-router-dom';
 
 type CatHeaderProps = {
-    cat: Cat
+    readonly cat: Cat
 }
 export default function CatHeader(props: CatHeaderProps) {
 

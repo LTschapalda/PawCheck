@@ -1,6 +1,6 @@
 type CategoryCardProps = {
-    image : string,
-    categoryTitle : string
+    readonly image : string,
+    readonly categoryTitle : string
 }
 export default function CategoryCard(props: CategoryCardProps) {
     return (

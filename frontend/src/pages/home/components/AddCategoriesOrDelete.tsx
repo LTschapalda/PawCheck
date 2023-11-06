@@ -6,7 +6,7 @@ import {Cat} from "../../assets/Cat.ts";
 import CategoryCard from "./CategorieCard.tsx";
 
 type AddCategoriesOrDeleteProps = {
-    selectedCat? : Cat,
+    readonly selectedCat? : Cat,
     toggleAddCategories : () => void;
     toggleEditMode : () => void;
 }
