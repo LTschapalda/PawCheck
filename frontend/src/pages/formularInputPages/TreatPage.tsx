@@ -1,42 +1,31 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {ChangeEvent, useEffect, useState} from "react";
+import {ChangeEvent, useEffect} from "react";
 import {Cat} from "../assets/Cat.ts";
 import FoodIcon from "../../images/Kategorie_Icons_food.png";
 import './styling/Input.css'
-import axios from "axios";
 import {handleSubmit} from "../assets/FormFunctions.tsx";
 import SimpleInputField from "./components/SimpleInputField.tsx";
 
 type TreatPageProps = {
     readonly editMode: boolean;
     toggleEditMode: () => void;
+    readonly cat? : Cat;
+    setCat :  React.Dispatch<React.SetStateAction<Cat | undefined>>;
+    getCatById : (id: string) => undefined;
     getCatsFromUser : () => void;
 }
 export default function TreatPage(props : TreatPageProps) {
     //VARIABLES
     const {id} = useParams();
-    const [cat, setCat] = useState<Cat | undefined>(undefined);
     const navigate = useNavigate();
 
-    const getCatById = () => {
-        if (!id) {
-            return undefined;
-        }
-        axios.get("/api/cat/" + id)
-            .then((response: {
-                data: Cat;
-            }) => {setCat(response.data);})
-            .catch((error) => {
-                console.error(error);
-            });
-    }
-
     useEffect(() => {
-        getCatById()
+        if (id) {
+            props.getCatById(id)
+        }
     }, []);
-
     const onTreatsInput = (event: ChangeEvent<HTMLInputElement>) => {
-        setCat((cat: Cat | undefined) => {
+        props.setCat((cat: Cat | undefined) => {
             if (!cat) {
                 return {
                     treats: event.target.value,
@@ -54,11 +43,11 @@ export default function TreatPage(props : TreatPageProps) {
             console.error('ID is undefined');
             return null;
         }
-        if(!cat) {
+        if(!props.cat) {
             console.error('cat is undefined');
             return null;
         }
-        handleSubmit(id,cat,
+        handleSubmit(id,props.cat,
             props.getCatsFromUser,
             ()=> {
                 if (!props.editMode) {
@@ -84,7 +73,7 @@ export default function TreatPage(props : TreatPageProps) {
             <SimpleInputField onInputChange={onTreatsInput}
                               buttonText="Jup"
                               placeholder="Wie viele?"
-                              value={cat?.treats ?? ''}
+                              value={props.cat?.treats ?? ''}
             />
 
             {props.editMode ?

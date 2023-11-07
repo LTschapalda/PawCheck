@@ -5,40 +5,31 @@ import './styling/Input.css'
 import {handleSubmit} from "../assets/FormFunctions.tsx";
 import MorningEveningInputField from "./components/MorningEveningInputField.tsx";
 import {Cat} from "../assets/Cat.ts";
-import axios from "axios";
 
 type FoodPageProps = {
     readonly editMode: boolean;
     toggleEditMode: () => void;
+    readonly cat? : Cat;
+    setCat :  React.Dispatch<React.SetStateAction<Cat | undefined>>;
+    getCatById : (id: string) => undefined;
     getCatsFromUser : () => void;
 }
 export default function FoodPage(props: FoodPageProps) {
     //VARIABLES
     const {id} = useParams();
-    const [cat, setCat] = useState<Cat | undefined>(undefined);
     const navigate = useNavigate();
 
-    const getCatById = () => {
-        if (!id) {
-            return undefined;
-        }
-        axios.get("/api/cat/" + id)
-            .then((response: {
-                data: Cat;
-            }) => {setCat(response.data);})
-            .catch((error) => {
-                console.error(error);
-            });
-    }
-
     useEffect(() => {
-        getCatById()
+        if (id) {
+        props.getCatById(id)
+        }
     }, []);
+
     //FOLD DOWN SELECTION OPERATORS
     type MealType = 'dry' | 'wet';
 
     const updateMealAmount = (mealType: MealType, period: 'morning' | 'evening', event: ChangeEvent<HTMLInputElement>) => {
-        setCat((prevCat: Cat | undefined) => {
+        props.setCat((prevCat: Cat | undefined) => {
             if (!prevCat) {
                 return {
                     [mealType]: { [period]: event.target.value },
@@ -72,7 +63,7 @@ export default function FoodPage(props: FoodPageProps) {
 
 
     function onWetFoodEveningAmount(event: ChangeEvent<HTMLInputElement>) {
-        setCat((prevCat: Cat | undefined) => {
+        props.setCat((prevCat: Cat | undefined) => {
             if (!prevCat) {
                 return {
                     wet: {evening: event.target.value},
@@ -98,10 +89,10 @@ export default function FoodPage(props: FoodPageProps) {
 
     function allInputsAreEmpty() {
         return (
-            (cat?.dry?.morning == null || cat?.dry?.morning === '') &&
-            (cat?.dry?.evening == null || cat?.dry?.evening === '') &&
-            (cat?.wet?.morning == null || cat?.wet?.morning === '') &&
-            (cat?.wet?.evening == null || cat?.wet?.evening === '')
+            (props.cat?.dry?.morning == null || props.cat?.dry?.morning === '') &&
+            (props.cat?.dry?.evening == null || props.cat?.dry?.evening === '') &&
+            (props.cat?.wet?.morning == null || props.cat?.wet?.morning === '') &&
+            (props.cat?.wet?.evening == null || props.cat?.wet?.evening === '')
         );
     }
 
@@ -110,11 +101,11 @@ export default function FoodPage(props: FoodPageProps) {
             console.error('ID is undefined');
             return null;
         }
-        if(!cat) {
+        if(!props.cat) {
             console.error('cat is undefined');
             return null;
         }
-        handleSubmit(id,cat,
+        handleSubmit(id,props.cat,
             props.getCatsFromUser,
             ()=> {
                 if (!props.editMode) {
@@ -135,22 +126,22 @@ export default function FoodPage(props: FoodPageProps) {
             </div>
 
             <div className="topicText">
-                <h1>Bekommt {cat?.name} Trocken oder Nassfutter? </h1>
+                <h1>Bekommt {props.cat?.name} Trocken oder Nassfutter? </h1>
             </div>
 
             <div className="catDetails">
                 <MorningEveningInputField onMorningInputChange={onDryFoodMorningAmount}
                                           onEveningInputChange={onDryFoodEveningAmount}
                                           buttonText="Trockenfutter"
-                                          valueMorning={cat?.dry?.morning ?? ''}
-                                          valueEvening={cat?.dry?.evening ?? ''}
+                                          valueMorning={props.cat?.dry?.morning ?? ''}
+                                          valueEvening={props.cat?.dry?.evening ?? ''}
                                           placeholder="Wie viel?"
                 />
                 <MorningEveningInputField onMorningInputChange={onWetFoodMorningAmount}
                                           onEveningInputChange={onWetFoodEveningAmount}
                                           buttonText="Nassfutter"
-                                          valueMorning={cat?.wet?.morning ?? ''}
-                                          valueEvening={cat?.wet?.evening ?? ''}
+                                          valueMorning={props.cat?.wet?.morning ?? ''}
+                                          valueEvening={props.cat?.wet?.evening ?? ''}
                                           placeholder="Wie viel?"
                 />
 

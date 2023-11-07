@@ -20,6 +20,7 @@ function App() {
         setEditMode(!editMode);
     }
     const [catsOwned, setCatsOwned] = useState<Cat[]>([])
+    const [cat, setCat] = useState<Cat | undefined>();
     const id : string = "123"
 
     useEffect(getCatsFromUser, []);
@@ -33,6 +34,19 @@ function App() {
             .catch(reason => console.error(reason))
     }
 
+    const getCatById = (id: string) => {
+        if (!id) {
+            return undefined;
+        }
+        axios.get("/api/cat/" + id)
+            .then((response: {
+                data: Cat;
+            }) => {setCat(response.data);})
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
     return (
         <>
             <MenuPaw editMode={editMode} toggleEditMode={toggleEditMode}/>
@@ -40,8 +54,8 @@ function App() {
                 <Route index                     element={<LandingPage/>}/>
                 <Route path={"/cat/name"}        element={<NameInput getCatsFromUser={getCatsFromUser}/>}/>
                 <Route path={"/sweeet/:id"}      element={<SweetCheckup/>}/>
-                <Route path={"/cat/food/:id"}    element={<FoodPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser}/>} />
-                <Route path={"/cat/treats/:id"}  element={<TreatPage toggleEditMode={toggleEditMode} editMode={editMode} getCatsFromUser={getCatsFromUser}/>}/>
+                <Route path={"/cat/food/:id"}    element={<FoodPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById}/>} />
+                <Route path={"/cat/treats/:id"}  element={<TreatPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById}/> }/>
                 <Route path={"/home"}            element={<Home catsOwned={catsOwned} getCatsFromUser={getCatsFromUser}/>}/>
                 <Route path={"/cat/details/:id"} element={<CatDetailPage catsOwned={catsOwned} toggleEditMode={toggleEditMode}/>} />
             </Routes>
