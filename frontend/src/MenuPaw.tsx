@@ -1,14 +1,24 @@
-import menuPaw from "../src/assets/menuPaw.svg";
+import menuPaw from "./images/menuPaw.svg";
 import {Link} from "react-router-dom";
 
-export default function MenuPaw() {
+type MenuPawProps = {
+    readonly editMode : boolean,
+    toggleEditMode: () => void;
+}
+export default function MenuPaw(props: MenuPawProps) {
+    const onClick = () => {
+        if (props.editMode) {
+            props.toggleEditMode();
+        }
+    };
+
     return(
         <nav>
-            <div className="navbar">
+            <button className="navbar" onClick={onClick}>
                 <Link to="/home">
                     <img id="menuPaw" src={menuPaw} alt="menu Paw"/>
                 </Link>
-            </div>
+            </button>
         </nav>
     )
 }

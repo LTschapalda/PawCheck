@@ -193,9 +193,11 @@ p,a,li{
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 80px;
     margin-left: 8%;
     z-index: 990;
+    border: 0;
+    background-color: transparent;
 }
 
 #menuPaw {
@@ -208,14 +210,14 @@ p,a,li{
 /* fonts */
 @font-face {
     font-family: 'Montserrat';
-    src: url("./assets/Montserrat-VariableFont_wght.ttf") format("truetype");
+    src: url("images/Montserrat-VariableFont_wght.ttf") format("truetype");
 }
 @font-face {
     font-family: 'Hind';
-    src: url("./assets/Hind-Regular.ttf") format("truetype");
+    src: url("images/Hind-Regular.ttf") format("truetype");
 }
 @font-face {
     font-family: 'HindBold';
-    src: url("./assets/Hind-Bold.ttf") format("truetype");
+    src: url("images/Hind-Bold.ttf") format("truetype");
 }
 

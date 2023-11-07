@@ -37,10 +37,12 @@
     background-color: #9FCC1D;
     border-radius: 50%;
     position: fixed;
-    bottom: 15px;
+    bottom: 10px;
     left: 50%;
     transform: translate(-50%, -50%);
+    border: 0;
 }
+
 
 .deleteCat {
     display: flex;
@@ -52,6 +54,14 @@
     height: 70px;
     width: 100vw;
     background-color: white;
+    border-top: 2px solid #9FCC1D;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+}
+
+.löschen {
+    background: linear-gradient(351deg, #EFEFEF -22.4%, rgba(255, 255, 255, 0.00) 287.69%);
 }
 
 .deleteCat:hover {
@@ -112,6 +122,9 @@ body.active-deleteConfirmation {
     background: rgba(49,49,49,0.8);
     z-index: 999;
 }
+.deleteConfirmationPopup {
+    z-index: 1000;
+}
 
 .deleteConfirmationPopup-content {
     z-index: 1000;
@@ -132,4 +145,59 @@ body.active-deleteConfirmation {
     top: 10px;
     right: 10px;
     padding: 5px 7px;
+}
+
+.addCategoryPopup {
+    z-index: 100;
+    position: absolute;
+    bottom: 138px; /* Hier den Durchmesser von .addCat plus gewünschter Abstand eintragen */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    line-height: 1.4;
+    background-color: white;
+    padding: 14px 28px;
+    border-radius: 17px;
+    box-shadow: 0 1px 13px 0 rgba(0, 0, 0, 0.25);
+}
+
+.addCategoryPopup h4 {
+    padding-bottom: 14px;
+}
+
+.categoryIcons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.categoryCard {
+    width: 89px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.categoryFrame {
+    width: 88.587px;
+    height: 88.587px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #FFF -15.91%, rgba(205, 205, 205, 0.55) 132.27%);
+}
+
+.categoryFrame img {
+    width: 100%;
+}
+
+.categoryTitle {
+    width: 100%;
+    text-align: center;
+    font-size: 1em;
+    color: black;
+    padding-top: 5px;
 }

@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import PawCheck from "../assets/PawCheck.svg"
+import PawCheck from "../images/PawCheck.svg"
 
 
 export default function LandingPage() {

@@ -1,11 +1,11 @@
-import './Home.css'
-import {Cat} from "../assets/Cat.ts";
-import CatHeader from './CatHeader.tsx';
+import './styling/Home.css'
 import {Link} from "react-router-dom";
 import {useEffect} from "react";
+import {Cat} from "../assets/Cat.ts";
+import CatHeader from "./components/CatHeader.tsx";
 
 type HomeProps = {
-    catsOwned : Cat[];
+    readonly catsOwned : Cat[];
     getCatsFromUser: () => void;
 }
 

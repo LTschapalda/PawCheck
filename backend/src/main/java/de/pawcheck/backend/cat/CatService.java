@@ -38,7 +38,7 @@ public class CatService {
 
     public Cat addCat(String name) {
         String catId = idService.generateRandomId();
-        Cat newCat = new Cat(catId, name);
+        Cat newCat = new Cat(catId, name,null,null,null,null,null,null,null);
 
         Optional<User> optionalUser = userRepo.findById("123");
 
@@ -62,7 +62,7 @@ public class CatService {
                     .orElseThrow(() -> new CatNotFoundException("Cat not found with ID: " + id));
         } catch (CatNotFoundException e) {
             System.err.println("Fehler beim Abrufen der Katze: " + e.getMessage());
-            return new Cat("000", "Cat not found");
+            return new Cat("000", "Cat not found",null,null,null,null,null,null,null);
         }
     }
 
@@ -82,6 +82,11 @@ public class CatService {
             existingCat.setName(cat.getName());
             existingCat.setWet(cat.getWet());
             existingCat.setDry(cat.getDry());
+            existingCat.setTreats(cat.getTreats());
+            existingCat.setCatlery(cat.getCatlery());
+            existingCat.setWater(cat.getWater());
+            existingCat.setToilet(cat.getToilet());
+            existingCat.setToy(cat.getToy());
 
             return catRepo.save(existingCat);
         } else {
