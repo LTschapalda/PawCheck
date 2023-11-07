@@ -15,16 +15,3 @@ export const handleSubmit = (id: string, cat: Cat, getCatsFromUser : () => void,
             console.error(error);
         });
 }
-
-export const getCatById = async (id: string | undefined): Promise<Cat | undefined> => {
-    if (!id) {
-        return undefined;
-    }
-        axios.get("/api/cat/" + id)
-            .then((response: {
-                data: Cat;
-            }) => {return response.data;})
-            .catch((error) => {
-                console.error(error);
-            });
-}

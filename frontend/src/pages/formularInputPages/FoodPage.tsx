@@ -2,10 +2,10 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import {ChangeEvent, useEffect, useState} from "react";
 import FoodIcon from "../../images/Kategorie_Icons_food.png";
 import './styling/Input.css'
-import axios from "axios";
 import {handleSubmit} from "../assets/FormFunctions.tsx";
 import MorningEveningInputField from "./components/MorningEveningInputField.tsx";
 import {Cat} from "../assets/Cat.ts";
+import axios from "axios";
 
 type FoodPageProps = {
     readonly editMode: boolean;
@@ -34,7 +34,6 @@ export default function FoodPage(props: FoodPageProps) {
     useEffect(() => {
         getCatById()
     }, []);
-
     //FOLD DOWN SELECTION OPERATORS
     type MealType = 'dry' | 'wet';
 
@@ -106,7 +105,7 @@ export default function FoodPage(props: FoodPageProps) {
         );
     }
 
-   function handleSubmitLocally() {
+    function handleSubmitLocally() {
         if (!id) {
             console.error('ID is undefined');
             return null;
@@ -118,13 +117,13 @@ export default function FoodPage(props: FoodPageProps) {
         handleSubmit(id,cat,
             props.getCatsFromUser,
             ()=> {
-            if (!props.editMode) {
-            navigate(`/cat/treats/${id}`);
-            } else {
-            props.toggleEditMode();
-            navigate(`/home`);
-            }
-        });
+                if (!props.editMode) {
+                    navigate(`/cat/treats/${id}`);
+                } else {
+                    props.toggleEditMode();
+                    navigate(`/home`);
+                }
+            });
 
     }
 
@@ -156,9 +155,9 @@ export default function FoodPage(props: FoodPageProps) {
                 />
 
                 {props.editMode ?
-                        <button className="secondaryButton"
-                                onClick={handleSubmitLocally}
-                        >Speichern</button>
+                    <button className="secondaryButton"
+                            onClick={handleSubmitLocally}
+                    >Speichern</button>
                     : <div>
                         {allInputsAreEmpty() ? <>
                                 <button className="secondaryButton"
