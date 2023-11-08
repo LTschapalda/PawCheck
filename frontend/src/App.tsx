@@ -11,6 +11,7 @@ import FoodPage from "./pages/formularInputPages/FoodPage.tsx";
 import axios from "axios";
 import TreatPage from "./pages/formularInputPages/TreatPage.tsx";
 import {Cat} from "./pages/assets/Cat.ts";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 function App() {
@@ -49,16 +50,18 @@ function App() {
 
     return (
         <>
-            <MenuPaw editMode={editMode} toggleEditMode={toggleEditMode}/>
-            <Routes>
-                <Route index                     element={<LandingPage/>}/>
-                <Route path={"/cat/name"}        element={<NameInput getCatsFromUser={getCatsFromUser}/>}/>
-                <Route path={"/sweeet/:id"}      element={<SweetCheckup/>}/>
-                <Route path={"/cat/food/:id"}    element={<FoodPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById}/>} />
-                <Route path={"/cat/treats/:id"}  element={<TreatPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById}/> }/>
-                <Route path={"/home"}            element={<Home catsOwned={catsOwned} getCatsFromUser={getCatsFromUser}/>}/>
-                <Route path={"/cat/details/:id"} element={<CatDetailPage catsOwned={catsOwned} toggleEditMode={toggleEditMode}/>} />
-            </Routes>
+            <GoogleOAuthProvider clientId="95911181275-54fl7u3pcg5l39cpn7pf6qp6e2c98rcp.apps.googleusercontent.com">
+                <MenuPaw editMode={editMode} toggleEditMode={toggleEditMode}/>
+                <Routes>
+                    <Route index                     element={<LandingPage/>}/>
+                    <Route path={"/cat/name"}        element={<NameInput getCatsFromUser={getCatsFromUser}/>}/>
+                    <Route path={"/sweeet/:id"}      element={<SweetCheckup/>}/>
+                    <Route path={"/cat/food/:id"}    element={<FoodPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById}/>} />
+                    <Route path={"/cat/treats/:id"}  element={<TreatPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById}/> }/>
+                    <Route path={"/home"}            element={<Home catsOwned={catsOwned} getCatsFromUser={getCatsFromUser}/>}/>
+                    <Route path={"/cat/details/:id"} element={<CatDetailPage catsOwned={catsOwned} toggleEditMode={toggleEditMode}/>} />
+                </Routes>
+            </GoogleOAuthProvider>;
         </>
     )
 }
