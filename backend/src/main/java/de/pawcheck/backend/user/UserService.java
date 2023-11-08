@@ -2,7 +2,6 @@ package de.pawcheck.backend.user;
 
 import de.pawcheck.backend.cat.Cat;
 import de.pawcheck.backend.cat.CatService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import java.util.List;
