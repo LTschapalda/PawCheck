@@ -223,7 +223,7 @@ body.active-deleteConfirmation {
     margin: 23px 0 2px 0;
 }
 
-.footer button {
+.footer > button {
     border: 0;
     background-color: transparent;
     margin-left: 40px;
@@ -234,6 +234,12 @@ body.active-deleteConfirmation {
     color: white;
     width: 80%;
     text-align: center;
+    transition: font-size 0.3s ease;
+}
+
+.footer > button:hover {
+    font-size: 16px;
+    color: red;
 }
 
 .footer p {
@@ -243,7 +249,7 @@ body.active-deleteConfirmation {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    margin-top: 16px;
+    margin-top: 15px;
     padding-left: 59px;
 }
 

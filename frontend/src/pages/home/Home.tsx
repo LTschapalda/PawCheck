@@ -1,22 +1,32 @@
 import './styling/Home.css'
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import {Cat} from "../assets/Cat.ts";
 import CatHeader from "./components/CatHeader.tsx";
 import {User} from "../assets/User.ts";
 import PawCheck from "../../images/PawCheck.svg";
+import axios from "axios";
 
 type HomeProps = {
     readonly catsOwned : Cat[];
     getCatsFromUser: () => void;
     user? : User;
+    login : () => void;
 }
 
 export default function Home(props : HomeProps) {
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         props.getCatsFromUser();
     }, [props.user]);
+
+    console.log(props.user)
+    function logout() {
+        axios.post("/api/logout")
+        navigate(`/`);
+    }
 
     return(
         <>
@@ -37,7 +47,11 @@ export default function Home(props : HomeProps) {
                         <p> © 2023 all Rights reserved</p>
                         <img src={PawCheck} alt="PawCheck"/>
                     </div>
-                    <button>Logout</button>
+                    {props.user ?
+                        <button onClick={logout}>Logout</button>
+                        :
+                        <button onClick={props.login}>Login</button>
+                    }
                 </div>
             </div>
             <div className="addCat">

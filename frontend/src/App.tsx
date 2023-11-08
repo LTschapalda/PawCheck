@@ -1,5 +1,5 @@
 import './App.css'
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import LandingPage from "./pages/LandingPage.tsx";
 import NameInput from "./pages/formularInputPages/NameInput.tsx";
 import Home from "./pages/home/Home.tsx";
@@ -28,6 +28,12 @@ function App() {
 
     useEffect(() => {getCatsFromUser()
         getUser()}, []);
+
+
+    function login() {
+        const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080' : window.location.origin;
+        window.open(host + '/oauth2/authorization/google', '_self');
+    }
 
     function getCatsFromUser() {
         if (user) {
@@ -68,12 +74,12 @@ function App() {
             <GoogleOAuthProvider clientId="95911181275-54fl7u3pcg5l39cpn7pf6qp6e2c98rcp.apps.googleusercontent.com">
                 <MenuPaw editMode={editMode} toggleEditMode={toggleEditMode}/>
                 <Routes>
-                    <Route index                     element={<LandingPage/>}/>
+                    <Route index                     element={<LandingPage login={login}/>}/>
                     <Route path={"/cat/name"}        element={<NameInput getCatsFromUser={getCatsFromUser} user={user}/>}/>
                     <Route path={"/sweeet/:id"}      element={<SweetCheckup/>}/>
                     <Route path={"/cat/food/:id"}    element={<FoodPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById}/>} />
                     <Route path={"/cat/treats/:id"}  element={<TreatPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById}/> }/>
-                    <Route path={"/home"}            element={<Home catsOwned={catsOwned} getCatsFromUser={getCatsFromUser} user={user}/>}/>
+                    <Route path={"/home"}            element={<Home catsOwned={catsOwned} getCatsFromUser={getCatsFromUser} user={user} login={login}/>}/>
                     <Route path={"/cat/details/:id"} element={<CatDetailPage catsOwned={catsOwned} toggleEditMode={toggleEditMode}/>} />
                 </Routes>
             </GoogleOAuthProvider>;

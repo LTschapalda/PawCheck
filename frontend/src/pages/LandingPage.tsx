@@ -1,11 +1,9 @@
 import PawCheck from "../images/PawCheck.svg"
 
-export default function LandingPage() {
-
-    function login() {
-        const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080' : window.location.origin;
-        window.open(host + '/oauth2/authorization/google', '_self');
-    }
+type LandingPageProps = {
+    login : () => void;
+}
+export default function LandingPage(props : LandingPageProps) {
 
     return (
         <>
@@ -14,7 +12,7 @@ export default function LandingPage() {
                 <p>Let's check, ob deine Katze es auch ist!</p>
             </div>
             <div className="letsgo">
-                    <button className="mainButton" onClick={() => login()}>
+                    <button className="mainButton" onClick={props.login}>
                         check in with Google
                     </button>
             </div>
