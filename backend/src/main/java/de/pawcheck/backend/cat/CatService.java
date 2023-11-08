@@ -36,11 +36,11 @@ public class CatService {
 
     //METHODEN
 
-    public Cat addCat(String name) {
+    public Cat addCat(RequestName requestName) {
         String catId = idService.generateRandomId();
-        Cat newCat = new Cat(catId, name);
+        Cat newCat = new Cat(catId, requestName.catName);
 
-        Optional<User> optionalUser = userRepo.findById("123");
+        Optional<User> optionalUser = userRepo.findById(requestName.userId);
 
         if (optionalUser.isPresent()) {
             User user =optionalUser.get();

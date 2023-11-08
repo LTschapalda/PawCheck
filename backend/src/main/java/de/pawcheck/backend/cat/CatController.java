@@ -17,7 +17,7 @@ public class CatController {
     //SERVER REQUESTS
     @PostMapping("/cat")
     public Cat createCatWithName(@RequestBody RequestName requestName) {
-        return catService.addCat(requestName.name);
+        return catService.addCat(requestName);
     }
 
     @GetMapping("/cat/{id}")

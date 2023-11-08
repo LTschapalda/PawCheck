@@ -3,23 +3,26 @@ import {Link} from "react-router-dom";
 import {useEffect} from "react";
 import {Cat} from "../assets/Cat.ts";
 import CatHeader from "./components/CatHeader.tsx";
+import {User} from "../assets/User.ts";
+import PawCheck from "../../images/PawCheck.svg";
 
 type HomeProps = {
     readonly catsOwned : Cat[];
     getCatsFromUser: () => void;
+    user? : User;
 }
 
 export default function Home(props : HomeProps) {
 
     useEffect(() => {
         props.getCatsFromUser();
-    }, []);
+    }, [props.user]);
 
     return(
         <>
             <div className="container">
                 <div className="xx">
-                    <h1>Hallo Nutzer</h1>
+                    <h1>Hallo {props.user?.name ? props.user?.name : "Nutzer"}</h1>
                         <p>Hier findest du eine Übersicht über deine Katzen</p>
                 </div>
                 <div className="listOfCats">
@@ -28,6 +31,14 @@ export default function Home(props : HomeProps) {
                     )}
                 </div>
                 <div className="bottomSpace"/>
+                <div className="footer">
+                    <div>
+                        <h4>PawCheck</h4>
+                        <p> © 2023 all Rights reserved</p>
+                        <img src={PawCheck} alt="PawCheck"/>
+                    </div>
+                    <button>Logout</button>
+                </div>
             </div>
             <div className="addCat">
                 <Link to="/cat/name">
