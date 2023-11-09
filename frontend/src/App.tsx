@@ -11,7 +11,6 @@ import FoodPage from "./pages/formularInputPages/FoodPage.tsx";
 import axios from "axios";
 import TreatPage from "./pages/formularInputPages/TreatPage.tsx";
 import {Cat} from "./pages/assets/Cat.ts";
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import {User} from "./pages/assets/User.ts";
 
 
@@ -33,7 +32,10 @@ function App() {
         getUser()}, []);
 
     useEffect(() => {
-        navigate(`/home`);
+        // Überprüfen, ob der Benutzer eingeloggt ist
+        if (user) {
+            navigate(`/home`);
+        }
     }, [user]);
 
 
@@ -57,8 +59,7 @@ function App() {
     function getUser () {
         axios.get("/api/user")
             .then(response => {
-                setUser(response.data)
-                console.log(response.data)})
+                setUser(response.data)})
             .catch(error => {
                 console.error('Fehler beim Abrufen des Benutzerprofils:', error);
             })
@@ -77,12 +78,10 @@ function App() {
             });
     }
 
-    const clientId: string = process.env.GOOGLE_CLIENT_ID || '';
 
 
     return (
         <>
-            <GoogleOAuthProvider clientId={clientId}>
                 <MenuPaw editMode={editMode} toggleEditMode={toggleEditMode}/>
                 <Routes>
                     <Route index                     element={<LandingPage login={login}/>}/>
@@ -93,7 +92,6 @@ function App() {
                     <Route path={"/home"}            element={<Home catsOwned={catsOwned} getCatsFromUser={getCatsFromUser} user={user} login={login}/>}/>
                     <Route path={"/cat/details/:id"} element={<CatDetailPage catsOwned={catsOwned} toggleEditMode={toggleEditMode}/>} />
                 </Routes>
-            </GoogleOAuthProvider>;
         </>
     )
 }
