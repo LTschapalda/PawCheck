@@ -24,18 +24,5 @@ public class UserController {
         return null;
     }
 
-   /* @GetMapping
-    public String getUser() {
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        if (auth instanceof OAuth2AuthenticationToken token) {
-            Map<String, Object> attributes = token.getPrincipal().getAttributes();
-            System.out.println(attributes);
-        }
-
-        return auth.getName();
-    }*/
-
 }
 

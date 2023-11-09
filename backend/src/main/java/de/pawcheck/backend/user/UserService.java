@@ -40,17 +40,6 @@ public class UserService {
         
     }
 
-    public User showUser(OAuth2AuthenticationToken token) {
-        Map<String, Object> attributes = token.getPrincipal().getAttributes();
-
-        String id = attributes.getOrDefault("sub", "").toString();
-        String userName = attributes.getOrDefault("given_name", "").toString();
-        String email = attributes.getOrDefault("email", "").toString();
-        User newUser = new User(id,userName,email,List.of());
-        System.out.println(newUser);
-        return newUser;
-    }
-
     public User handleLogin(OAuth2AuthenticationToken token) {
 
         Map<String, Object> attributes = token.getPrincipal().getAttributes();
