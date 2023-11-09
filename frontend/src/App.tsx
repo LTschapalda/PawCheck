@@ -25,16 +25,16 @@ function App() {
     const [catsOwned, setCatsOwned] = useState<Cat[]>([])
     const [cat, setCat] = useState<Cat | undefined>();
 
-
     const navigate = useNavigate();
 
     useEffect(() => {getCatsFromUser()
         getUser()}, []);
 
     useEffect(() => {
-        // Überprüfen, ob der Benutzer eingeloggt ist
         if (user) {
             navigate(`/home`);
+        } else {
+            getCatsFromUser();
         }
     }, [user]);
 

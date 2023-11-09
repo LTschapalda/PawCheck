@@ -41,11 +41,8 @@ public class UserService {
     }
 
     public User handleLogin(OAuth2AuthenticationToken token) {
-
         Map<String, Object> attributes = token.getPrincipal().getAttributes();
-
         String id = attributes.getOrDefault("sub", "").toString();
-
         if (userRepo.findById(id).isPresent()) {
             return userRepo.findById(id).orElseThrow();
         } else  {

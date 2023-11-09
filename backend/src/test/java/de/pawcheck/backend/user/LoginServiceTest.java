@@ -1,9 +1,7 @@
 package de.pawcheck.backend.user;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import de.pawcheck.backend.cat.CatService;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
@@ -15,23 +13,22 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class LoginServiceTest {
 
-    @Mock
-    private OAuth2AuthenticationToken token;
+class LoginServiceTest {
 
-    @Mock
-    private OAuth2User principal;
 
-    @Mock
-    private UserRepo userRepo;
+    private final OAuth2AuthenticationToken token = Mockito.mock(OAuth2AuthenticationToken.class);
 
-    @InjectMocks
-    private UserService userService;
+    private final OAuth2User principal = Mockito.mock(OAuth2User.class);
+
+    private final UserRepo userRepo = Mockito.mock(UserRepo.class);
+
+    private final CatService catService = Mockito.mock(CatService.class);
+
+    private final UserService userService = new UserService(userRepo,catService);
 
     @Test
-    public void testHandleLogin_UserExists() {
+    void testHandleLogin_UserExists() {
         //GIVEN
         Map<String, Object> attributes = new HashMap<>();
         attributes.put("sub", "existingUserId");
@@ -53,7 +50,7 @@ public class LoginServiceTest {
     }
 
     @Test
-    public void testHandleLogin_UserDoesNotExist() {
+    void testHandleLogin_UserDoesNotExist() {
         //GIVEN
         Map<String, Object> attributes = new HashMap<>();
         attributes.put("sub", "newUserId");
