@@ -1,5 +1,5 @@
 import './App.css'
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import LandingPage from "./pages/LandingPage.tsx";
 import NameInput from "./pages/formularInputPages/NameInput.tsx";
 import Home from "./pages/home/Home.tsx";
@@ -26,13 +26,21 @@ function App() {
     const [catsOwned, setCatsOwned] = useState<Cat[]>([])
     const [cat, setCat] = useState<Cat | undefined>();
 
+
+    const navigate = useNavigate();
+
     useEffect(() => {getCatsFromUser()
         getUser()}, []);
+
+    useEffect(() => {
+        navigate(`/home`);
+    }, [user]);
 
 
     function login() {
         const host = window.location.host === 'localhost:5173' ? 'http://localhost:8080' : window.location.origin;
-        window.open(host + '/oauth2/authorization/google', '_self');
+        window.open(host + '/oauth2/authorization/google',
+            '_self');
     }
 
     function getCatsFromUser() {
