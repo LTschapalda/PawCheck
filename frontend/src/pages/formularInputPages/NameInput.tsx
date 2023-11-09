@@ -3,9 +3,11 @@ import {ChangeEvent, useState} from "react";
 import axios from "axios";
 import NameCat from "../../images/NameCat.svg";
 import { useNavigate } from 'react-router-dom';
+import {User} from "../assets/User.ts";
 
 type NameInputProps = {
-    getCatsFromUser: () => void;
+    readonly getCatsFromUser: () => void;
+    readonly user? : User;
 }
 export default function NameInput(props : NameInputProps) {
     const [name, setName] = useState<string>('')
@@ -17,8 +19,8 @@ export default function NameInput(props : NameInputProps) {
     }
 
     const handleSubmit = () => {
-        if (name !== '') {
-            axios.post('/api/cat', { name: name })
+        if (name !== '' && props.user?.id) {
+            axios.post('/api/cat', {catName: name, userId: props.user.id })
                 .then(response => {
                     props.getCatsFromUser();
                     const newCat = response.data;

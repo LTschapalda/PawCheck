@@ -7,8 +7,8 @@ import CategoryCard from "./CategorieCard.tsx";
 
 type AddCategoriesOrDeleteProps = {
     readonly selectedCat? : Cat,
-    toggleAddCategories : () => void;
-    toggleEditMode : () => void;
+    readonly toggleAddCategories : () => void;
+    readonly toggleEditMode : () => void;
 }
 export default function AddCategoriesOrDelete(props : AddCategoriesOrDeleteProps) {
     const navigate = useNavigate()

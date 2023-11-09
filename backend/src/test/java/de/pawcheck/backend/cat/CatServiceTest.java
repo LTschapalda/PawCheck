@@ -45,15 +45,16 @@ class CatServiceTest {
     void returnNewCat_whenAddCat() {
         //GIVEN
         Cat newCat = new Cat("1234", "Mo");
-        User user = new User("123", List.of());
-        User updatedUser = new User("123", List.of("1234"));
+        User user = new User("123", "Peter", "peter@pan.de", List.of());
+        RequestName requestName = new RequestName(newCat.getName(), user.id());
+        User updatedUser = new User("123", "Peter", "peter@pan.de", List.of("1234"));
         when(idService.generateRandomId()).thenReturn("1234");
         when(userRepo.findById("123")).thenReturn(Optional.of(user));
         when(userRepo.save(user)).thenReturn(updatedUser);
         when(catRepo.save(newCat)).thenReturn(newCat);
 
         //WHEN
-        Cat expected = catService.addCat("Mo");
+        Cat expected = catService.addCat((requestName));
         //VERIFY
         verify(idService).generateRandomId();
         verify(userRepo).findById("123");
@@ -67,15 +68,16 @@ class CatServiceTest {
     void returnNull_whenAddCat_AndUserNotFound() {
         //GIVEN
         Cat newCat = new Cat("1234", "Mo");
-        User user = new User("123", List.of());
-        User updatedUser = new User("123", List.of("1234"));
+        User user = new User("123", "Peter", "peter@pan.de",List.of());
+        User updatedUser = new User("123", "Peter", "peter@pan.de",List.of("1234"));
+        RequestName requestName = new RequestName(newCat.getName(), user.id());
         when(idService.generateRandomId()).thenReturn("1234");
         when(userRepo.findById("123")).thenReturn(Optional.empty());
         when(userRepo.save(user)).thenReturn(updatedUser);
         when(catRepo.save(newCat)).thenReturn(newCat);
 
         //WHEN
-        catService.addCat("Mo");
+        catService.addCat(requestName);
         //VERIFY
         verify(catRepo, times(1)).save(newCat);
         //THEN

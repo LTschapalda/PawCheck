@@ -1,7 +1,7 @@
 import {ChangeEvent, useState} from "react";
 
 type SimpleInputFieldProps = {
-    onInputChange : (event: ChangeEvent<HTMLInputElement>) => void,
+    readonly onInputChange : (event: ChangeEvent<HTMLInputElement>) => void,
     readonly buttonText : string,
     readonly placeholder : string,
     readonly value : string,

@@ -8,11 +8,11 @@ import SimpleInputField from "./components/SimpleInputField.tsx";
 
 type TreatPageProps = {
     readonly editMode: boolean;
-    toggleEditMode: () => void;
+    readonly toggleEditMode: () => void;
     readonly cat? : Cat;
-    setCat :  React.Dispatch<React.SetStateAction<Cat | undefined>>;
-    getCatById : (id: string) => undefined;
-    getCatsFromUser : () => void;
+    readonly setCat :  React.Dispatch<React.SetStateAction<Cat | undefined>>;
+    readonly getCatById : (id: string) => undefined;
+    readonly getCatsFromUser : () => void;
 }
 export default function TreatPage(props : TreatPageProps) {
     //VARIABLES

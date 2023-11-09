@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 type MenuPawProps = {
     readonly editMode : boolean,
-    toggleEditMode: () => void;
+    readonly toggleEditMode: () => void;
 }
 export default function MenuPaw(props: MenuPawProps) {
     const onClick = () => {

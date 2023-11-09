@@ -6,7 +6,6 @@ export const handleSubmit = (id: string, cat: Cat, getCatsFromUser : () => void,
         .then((response: {
             data: Cat;
         }) => {
-            console.log(cat)
             console.log('Erfolgreich upgedatet:' + JSON.stringify(response.data));
             getCatsFromUser();
             whatToDoAfter();
