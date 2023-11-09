@@ -48,6 +48,7 @@ class CatIntegrationTest {
 
     @Test
     @DirtiesContext
+    @WithMockUser
     void createCatWithName() throws Exception{
         //GIVEN
         userRepo.save(new User("123", "Peter", "peter@pan.de", List.of("1234")));
