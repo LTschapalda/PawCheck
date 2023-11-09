@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import {User} from "../assets/User.ts";
 
 type NameInputProps = {
-    getCatsFromUser: () => void;
-    user? : User;
+    readonly getCatsFromUser: () => void;
+    readonly user? : User;
 }
 export default function NameInput(props : NameInputProps) {
     const [name, setName] = useState<string>('')

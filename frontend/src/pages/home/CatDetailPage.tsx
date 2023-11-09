@@ -7,7 +7,7 @@ import AddCategoriesOrDelete from "./components/AddCategoriesOrDelete.tsx";
 
 type CatDetailProps = {
     readonly catsOwned : Cat[]
-    toggleEditMode : () => void;
+    readonly toggleEditMode : () => void;
 }
 export default function CatDetailPage( props: CatDetailProps) {
 

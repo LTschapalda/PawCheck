@@ -1,7 +1,7 @@
 import PawCheck from "../images/PawCheck.svg"
 
 type LandingPageProps = {
-    login : () => void;
+    readonly login : () => void;
 }
 export default function LandingPage(props : LandingPageProps) {
 

@@ -40,12 +40,12 @@
 }
 
 .secondaryButton.border {
-    border: 1px solid rgba(135, 173, 25, 0.7);
+    border: 1.5px solid rgba(135, 173, 25, 0.7);
     border-radius: 17px ;
 }
 
 .dropdown {
-    margin-top: 18%;
+    margin-top: 12%;
 }
 
 .dropdown input {

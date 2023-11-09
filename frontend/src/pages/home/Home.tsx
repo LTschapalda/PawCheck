@@ -9,9 +9,9 @@ import axios from "axios";
 
 type HomeProps = {
     readonly catsOwned : Cat[];
-    getCatsFromUser: () => void;
-    user? : User;
-    login : () => void;
+    readonly getCatsFromUser: () => void;
+    readonly user? : User;
+    readonly login : () => void;
 }
 
 export default function Home(props : HomeProps) {

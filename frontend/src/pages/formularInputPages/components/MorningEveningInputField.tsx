@@ -1,8 +1,8 @@
 import {ChangeEvent, useState} from "react";
 
 type MorningEveningInputFieldProps = {
-    onMorningInputChange: (event: ChangeEvent<HTMLInputElement>) => void,
-    onEveningInputChange: (event: ChangeEvent<HTMLInputElement>) => void,
+    readonly onMorningInputChange: (event: ChangeEvent<HTMLInputElement>) => void,
+    readonly onEveningInputChange: (event: ChangeEvent<HTMLInputElement>) => void,
     readonly buttonText: string,
     readonly valueMorning : string,
     readonly valueEvening : string,
