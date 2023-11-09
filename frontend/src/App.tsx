@@ -77,9 +77,12 @@ function App() {
             });
     }
 
+    const clientId: string = process.env.GOOGLE_CLIENT_ID || '';
+
+
     return (
         <>
-            <GoogleOAuthProvider clientId="95911181275-54fl7u3pcg5l39cpn7pf6qp6e2c98rcp.apps.googleusercontent.com">
+            <GoogleOAuthProvider clientId={clientId}>
                 <MenuPaw editMode={editMode} toggleEditMode={toggleEditMode}/>
                 <Routes>
                     <Route index                     element={<LandingPage login={login}/>}/>
