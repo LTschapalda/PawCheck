@@ -22,6 +22,7 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.GET, url+"cats/*").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, url+"cat/*").authenticated()
                         .anyRequest().permitAll())
 
                 .sessionManagement(sessions ->

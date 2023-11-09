@@ -23,8 +23,8 @@ class UserServiceTest {
     @Test
     void getAListOFCatsWhen_getCatsAssociatedToUser() {
         //GIVEN
-        Cat newCat = new Cat("1234", "Mo",null,null,null,null,null,null,null);
-        User user = new User("123", List.of("1234"));
+        Cat newCat = new Cat("1234", "Mo");
+        User user = new User("123", "Peter", "peter@pan.de", List.of("1234"));
 
         // Mocks und Annahmen
         when(userRepo.findById(user.id())).thenReturn(Optional.of(user));
@@ -41,8 +41,8 @@ class UserServiceTest {
     @Test
     void getEmptyListWhen_getCatsAssociatedToUser_UserIsNotPresent() {
         //GIVEN
-        Cat newCat = new Cat("1234", "Mo",null,null,null,null,null,null,null);
-        User user = new User("123", List.of("1234"));
+        Cat newCat = new Cat("1234", "Mo");
+        User user = new User("123", "Peter", "peter@pan.de", List.of("1234"));
 
         // Mocks und Annahmen
         when(userRepo.findById(user.id())).thenReturn(Optional.empty());

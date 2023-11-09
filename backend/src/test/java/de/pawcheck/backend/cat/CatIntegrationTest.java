@@ -7,8 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.MediaType;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -35,6 +38,9 @@ class CatIntegrationTest {
     @Autowired
     MongoTemplate mongoTemplate;
 
+    @MockBean
+    ClientRegistrationRepository clientRegistrationRepository;
+
     @BeforeEach
     void setUp() {
         mongoTemplate.getDb().drop();
@@ -44,11 +50,13 @@ class CatIntegrationTest {
     @DirtiesContext
     void createCatWithName() throws Exception{
         //GIVEN
+        userRepo.save(new User("123", "Peter", "peter@pan.de", List.of("1234")));
         //WHEN
         mockMvc.perform(MockMvcRequestBuilders.post("/api/cat")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
-        {"name" : "Mo"}
+        {"catName" : "Mo",
+        "userId" : "123"}
         """))
         //THEN
                 .andExpect(status().isOk())
@@ -98,10 +106,11 @@ class CatIntegrationTest {
 
     @Test
     @DirtiesContext
+    @WithMockUser
     void getCatsAssociatedToUser_andExpectListOfCats() throws Exception {
         //GIVEN
         catRepo.save(new Cat("1234", "Mo"));
-        userRepo.save(new User("123", List.of("1234")));
+        userRepo.save(new User("123", "Peter", "peter@pan.de", List.of("1234")));
 
         //WHEN
         mockMvc.perform(MockMvcRequestBuilders.get("/api/cats/123"))
@@ -114,10 +123,11 @@ class CatIntegrationTest {
 
     @Test
     @DirtiesContext
+    @WithMockUser
     void deleteCatEverywhereById () throws Exception {
         //GIVEN
         catRepo.save(new Cat("1234", "Mo"));
-        userRepo.save(new User("123", List.of("1234")));
+        userRepo.save(new User("123", "Peter", "peter@pan.de", List.of("1234")));
         //WHEN
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/cat/123"))
                 //THEN
