@@ -70,7 +70,7 @@ export default function WaterPage(props: TreatPageProps) {
                         onClick={() => {
                             props.updateCat(id, props.cat, props.getCatsFromUser)
                                 .then(() => {
-                                    navigate(`/home`)
+                                    navigate(`/cat/litterbox/${props.cat?.id}`)
                                 })
                         }}
                 >weiter</button>

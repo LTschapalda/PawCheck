@@ -13,6 +13,7 @@
 
 .topicText {
     margin-left: 8%;
+    margin-bottom: 12%;
 }
 
 .catDetails {
@@ -20,7 +21,6 @@
     flex-direction: column;
     justify-content: flex-start;
     transition: height 0.3s ease;
-    margin-top: 8%;
 }
 
 .secondaryButton label {
@@ -42,10 +42,6 @@
 .secondaryButton.border {
     border: 1.5px solid rgba(135, 173, 25, 0.7);
     border-radius: 17px ;
-}
-
-.dropdown {
-    margin-top: 12%;
 }
 
 .dropdown input {

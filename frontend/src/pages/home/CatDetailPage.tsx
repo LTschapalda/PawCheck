@@ -72,6 +72,26 @@ export default function CatDetailPage( props: CatDetailProps) {
                                      link="water"
                                      catValue={selectedCat?.water}
                                      selectedCat={selectedCat}/>
+                {selectedCat?.toilet &&
+                    <Link to={`/cat/litterbox/${selectedCat.id}`}>
+                        <div className="catName" onClick={() => props.toggleEditMode() }
+                             onKeyDown={onKeyDown}
+                             tabIndex={0}>
+                                <div>
+                                    <h4>Katzenklo</h4>
+                                    {selectedCat.toilet.where && (
+                                        <p>Wo : {selectedCat.toilet.where}</p>
+                                    )}
+                                    {selectedCat.toilet.howOften && (
+                                        <p>Wie oft? : {selectedCat.toilet.howOften}</p>
+                                    )}
+                                    {selectedCat.toilet.whereTheShit && (
+                                        <p>Wohin?: {selectedCat.toilet.whereTheShit}</p>
+                                    )}
+                                </div>
+                        </div>
+                    </Link>
+                }
 
                 <div className="bottomSpace"/>
             </div>
