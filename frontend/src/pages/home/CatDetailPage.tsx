@@ -4,6 +4,7 @@ import {Cat} from "../assets/Cat.ts";
 import {useState} from "react";
 import './styling/Home.css'
 import AddCategoriesOrDelete from "./components/AddCategoriesOrDelete.tsx";
+import CategoryDetailsCard from "./components/CategoryDetailsCard.tsx";
 
 type CatDetailProps = {
     readonly catsOwned : Cat[]
@@ -58,31 +59,20 @@ export default function CatDetailPage( props: CatDetailProps) {
                                     )}
                                 </div>
                             )}
-                            {selectedCat?.wet && (
-                                <div>
-                                    <h4>Nassfutter</h4>
-                                    {selectedCat.wet.morning && (
-                                        <p>Morgens : {selectedCat.wet.morning}</p>
-                                    )}
-                                    {selectedCat.wet.evening && (
-                                        <p>Abends : {selectedCat.wet.evening}</p>
-                                    )}
-                                </div>
-                            )}
                         </div>
                     </Link>
                 ):(<div/>)}
-                {selectedCat?.treats && (
-                    <Link to={`/cat/treats/${selectedCat.id}`}>
-                        <div className="catName" onClick={() => props.toggleEditMode() }
-                             onKeyDown={onKeyDown} tabIndex={0}>
-                            <div>
-                                <h4>Leckerlies</h4>
-                                <p>{selectedCat?.treats}</p>
-                            </div>
-                        </div>
-                    </Link>
-                )}
+                <CategoryDetailsCard toggleEditMode={props.toggleEditMode}
+                                     categoryTitle="Leckerlies"
+                                     link="treats"
+                                     catValue={selectedCat?.treats}
+                                     selectedCat={selectedCat}/>
+                <CategoryDetailsCard toggleEditMode={props.toggleEditMode}
+                                     categoryTitle="Wasser"
+                                     link="water"
+                                     catValue={selectedCat?.water}
+                                     selectedCat={selectedCat}/>
+
                 <div className="bottomSpace"/>
             </div>
             <button className="addCat" onClick={toggleAddCategories}>

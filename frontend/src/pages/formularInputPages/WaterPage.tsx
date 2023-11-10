@@ -61,7 +61,7 @@ export default function WaterPage(props: TreatPageProps) {
                         onClick={() => {
                             props.updateCat(id, props.cat, props.getCatsFromUser)
                                 .then(() => {
-                                    navigate(`/home`)
+                                    navigate(`/cat/details/${props.cat?.id}`)
                                 })
                         }}
                 >speichern</button>

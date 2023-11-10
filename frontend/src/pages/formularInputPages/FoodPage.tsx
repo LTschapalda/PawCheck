@@ -129,7 +129,7 @@ export default function FoodPage(props: FoodPageProps) {
                                 props.updateCat(id,props.cat,props.getCatsFromUser)
                                     .then(() => {
                                         props.toggleEditMode()
-                                        navigate(`/home`)})
+                                        navigate(`/cat/details/${props.cat?.id}`)})
                             }}
                     >Speichern</button>
                     : <div>
