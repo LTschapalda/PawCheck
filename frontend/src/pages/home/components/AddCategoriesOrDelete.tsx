@@ -1,4 +1,5 @@
 import FoodIcon from "../../../images/Kategorie_Icons_food copy.png"
+import WaterIcon from "../../../images/Kategorie_Icons_water copy.png"
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
@@ -71,7 +72,7 @@ export default function AddCategoriesOrDelete(props : AddCategoriesOrDeleteProps
                 </div>
                 <h4>Kategorien hinzufügen:</h4>
                 <div className="categoryIcons">
-                    {!props.selectedCat?.dry || !props.selectedCat?.wet ?
+                    {!props.selectedCat?.dry && !props.selectedCat?.wet ?
                         <div onClick={props.toggleEditMode}
                              onKeyDown={onKeyDownEditMode}
                              tabIndex={0}>
@@ -86,14 +87,27 @@ export default function AddCategoriesOrDelete(props : AddCategoriesOrDeleteProps
                              onKeyDown={onKeyDownEditMode}
                              tabIndex={0}>
                             <Link to={`/cat/treats/${props.selectedCat?.id}`}>
-                                <CategoryCard image={FoodIcon} categoryTitle="Leckerlies"/>
+                                <CategoryCard image={FoodIcon}
+                                              categoryTitle="Leckerlies"/>
                             </Link>
                         </div>
                     )}
+                    {!props.selectedCat?.water && (
+                        <div onClick={props.toggleEditMode}
+                             onKeyDown={onKeyDownEditMode}
+                             tabIndex={0}>
+                            <Link to={`/cat/water/${props.selectedCat?.id}`}>
+                                <CategoryCard image={WaterIcon}
+                                              categoryTitle="Wasser"/>
+                            </Link>
+                        </div>
+                    )}
+
                 </div>
-                <button id="deleteCat" className="secondaryButton löschen"
-                        onClick={toggleDeleteConfirmation}>Katze löschen
-                </button>
+                <button id="deleteCat"
+                        className="secondaryButton löschen"
+                        onClick={toggleDeleteConfirmation}
+                >Katze löschen</button>
             </div>
         </>
     )
