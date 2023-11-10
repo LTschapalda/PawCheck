@@ -1,8 +1,7 @@
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {ChangeEvent, useEffect, useState} from "react";
 import FoodIcon from "../../images/Kategorie_Icons_food.png";
 import './styling/Input.css'
-import {handleSubmit} from "../assets/FormFunctions.tsx";
 import MorningEveningInputField from "./components/MorningEveningInputField.tsx";
 import {Cat} from "../assets/Cat.ts";
 
@@ -13,6 +12,7 @@ type FoodPageProps = {
     readonly setCat :  React.Dispatch<React.SetStateAction<Cat | undefined>>;
     readonly getCatById : (id: string) => undefined;
     readonly getCatsFromUser : () => void;
+    readonly updateCat : (id: string | undefined, cat: Cat | undefined, getCatsFromUser: () => void) => Promise<void>;
 }
 export default function FoodPage(props: FoodPageProps) {
     //VARIABLES
@@ -96,28 +96,6 @@ export default function FoodPage(props: FoodPageProps) {
         );
     }
 
-    function handleSubmitLocally() {
-        if (!id) {
-            console.error('ID is undefined');
-            return null;
-        }
-        if(!props.cat) {
-            console.error('cat is undefined');
-            return null;
-        }
-        handleSubmit(id,props.cat,
-            props.getCatsFromUser,
-            ()=> {
-                if (!props.editMode) {
-                    navigate(`/cat/treats/${id}`);
-                } else {
-                    props.toggleEditMode();
-                    navigate(`/home`);
-                }
-            });
-
-    }
-
     return (
         <div className="container">
 
@@ -147,7 +125,12 @@ export default function FoodPage(props: FoodPageProps) {
 
                 {props.editMode ?
                     <button className="secondaryButton"
-                            onClick={handleSubmitLocally}
+                            onClick={() => {
+                                props.updateCat(id,props.cat,props.getCatsFromUser)
+                                    .then(() => {
+                                        props.toggleEditMode()
+                                        navigate(`/home`)})
+                            }}
                     >Speichern</button>
                     : <div>
                         {allInputsAreEmpty() ? <>
@@ -162,18 +145,22 @@ export default function FoodPage(props: FoodPageProps) {
                                                 <button className="mainButton"
                                                         onClick={toggleDoYouReallyWantToContinue}>Ups, doch!
                                                 </button>
-                                                <Link to={"/cat/treats/:id"}>
                                                     <button className="secondaryButton"
-                                                            onClick={handleSubmitLocally}>Ne, sie ist auf Diet
+                                                            onClick={() => {
+                                                                props.updateCat(id,props.cat,props.getCatsFromUser)
+                                                                    .then(() => {navigate(`/cat/treats/${id}`)})
+                                                            }}>Ne, sie ist auf Diet
                                                     </button>
-                                                </Link>
                                             </div>
                                         </div>
                                     </div>
                                 )}</>
                             :
                             <button className="secondaryButton"
-                                    onClick={handleSubmitLocally}>weiter
+                                    onClick={() => {
+                                        props.updateCat(id,props.cat,props.getCatsFromUser)
+                                            .then(() => {navigate(`/cat/treats/${id}`)})
+                                    }}>weiter
                             </button>
                         }
                     </div>

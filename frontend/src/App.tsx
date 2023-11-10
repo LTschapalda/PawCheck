@@ -78,6 +78,22 @@ function App() {
             });
     }
 
+    const updateCat = async (id: string | undefined, cat: Cat | undefined, getCatsFromUser: () => void):Promise<void> => {
+        if (!id) {
+            console.error('ID is undefined');
+        }
+        if(!cat) {
+            console.error('cat is undefined');
+        }
+        try {
+            const response = await axios.put("/api/cat/" + id, cat);
+            console.log('Erfolgreich upgedatet:' + JSON.stringify(response.data));
+            getCatsFromUser();
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
 
 
     return (
@@ -85,12 +101,12 @@ function App() {
                 <MenuPaw editMode={editMode} toggleEditMode={toggleEditMode}/>
                 <Routes>
                     <Route index                     element={<LandingPage login={login}/>}/>
-                    <Route path={"/cat/name"}        element={<NameInput getCatsFromUser={getCatsFromUser} user={user}/>}/>
-                    <Route path={"/sweeet/:id"}      element={<SweetCheckup/>}/>
-                    <Route path={"/cat/food/:id"}    element={<FoodPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById}/>} />
-                    <Route path={"/cat/treats/:id"}  element={<TreatPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById}/> }/>
                     <Route path={"/home"}            element={<Home catsOwned={catsOwned} getCatsFromUser={getCatsFromUser} user={user} login={login}/>}/>
                     <Route path={"/cat/details/:id"} element={<CatDetailPage catsOwned={catsOwned} toggleEditMode={toggleEditMode}/>} />
+                    <Route path={"/cat/name"}        element={<NameInput getCatsFromUser={getCatsFromUser} user={user}/>}/>
+                    <Route path={"/sweeet/:id"}      element={<SweetCheckup/>}/>
+                    <Route path={"/cat/food/:id"}    element={<FoodPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById} updateCat={updateCat}/>} />
+                    <Route path={"/cat/treats/:id"}  element={<TreatPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById} updateCat={updateCat}/>}/>
                 </Routes>
         </>
     )

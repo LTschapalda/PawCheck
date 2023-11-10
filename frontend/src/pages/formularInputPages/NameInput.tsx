@@ -18,7 +18,7 @@ export default function NameInput(props : NameInputProps) {
         setName(name);
     }
 
-    const handleSubmit = () => {
+    const handleSubmitCreatNewCat = () => {
         if (name !== '' && props.user?.id) {
             axios.post('/api/cat', {catName: name, userId: props.user.id })
                 .then(response => {
@@ -56,7 +56,7 @@ export default function NameInput(props : NameInputProps) {
                 </div>
             <div className="weiter">
                 <button className="secondaryButton"
-                        onClick={handleSubmit}>weiter</button>
+                        onClick={handleSubmitCreatNewCat}>weiter</button>
             </div>
         </>
     );

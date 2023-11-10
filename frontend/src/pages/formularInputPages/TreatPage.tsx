@@ -3,7 +3,6 @@ import {ChangeEvent, useEffect} from "react";
 import {Cat} from "../assets/Cat.ts";
 import FoodIcon from "../../images/Kategorie_Icons_food.png";
 import './styling/Input.css'
-import {handleSubmit} from "../assets/FormFunctions.tsx";
 import SimpleInputField from "./components/SimpleInputField.tsx";
 
 type TreatPageProps = {
@@ -13,6 +12,7 @@ type TreatPageProps = {
     readonly setCat :  React.Dispatch<React.SetStateAction<Cat | undefined>>;
     readonly getCatById : (id: string) => undefined;
     readonly getCatsFromUser : () => void;
+    readonly updateCat : (id: string | undefined, cat: Cat | undefined, getCatsFromUser: () => void) => Promise<void>;
 }
 export default function TreatPage(props : TreatPageProps) {
     //VARIABLES
@@ -38,27 +38,6 @@ export default function TreatPage(props : TreatPageProps) {
         });
     };
 
-    function handleSubmitLocally() {
-        if (!id) {
-            console.error('ID is undefined');
-            return null;
-        }
-        if(!props.cat) {
-            console.error('cat is undefined');
-            return null;
-        }
-        handleSubmit(id,props.cat,
-            props.getCatsFromUser,
-            ()=> {
-                if (!props.editMode) {
-                    navigate(`/home`);
-                } else {
-                    props.toggleEditMode();
-                    navigate(`/home`);
-                }
-            });
-    }
-
     return (
         <div className="container">
 
@@ -78,12 +57,18 @@ export default function TreatPage(props : TreatPageProps) {
 
             {props.editMode ?
                 <button className="secondaryButton weiter"
-                        onClick={handleSubmitLocally}>weiter
-                </button>
+                        onClick={() => {
+                            props.updateCat(id,props.cat,props.getCatsFromUser)
+                                .then(() => {navigate(`/home`)})
+                        }}
+                >speichern</button>
                 :
                 <button className="secondaryButton weiter"
-                        onClick={handleSubmitLocally}>speichern
-                </button>
+                        onClick={() => {
+                            props.updateCat(id,props.cat,props.getCatsFromUser)
+                                .then(() => {navigate(`/home`)})
+                        }}
+                >weiter</button>
             }
 
 
