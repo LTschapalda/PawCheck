@@ -5,6 +5,7 @@ export type Cat = {
     wet? : Food,
     treats? : string,
     catlery? : string,
+    water? : string,
     toilet? : Toilet,
     toy? : Toy,
 

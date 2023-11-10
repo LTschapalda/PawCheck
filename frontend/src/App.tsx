@@ -12,6 +12,7 @@ import axios from "axios";
 import TreatPage from "./pages/formularInputPages/TreatPage.tsx";
 import {Cat} from "./pages/assets/Cat.ts";
 import {User} from "./pages/assets/User.ts";
+import WaterPage from "./pages/formularInputPages/WaterPage.tsx";
 
 
 function App() {
@@ -89,6 +90,7 @@ function App() {
             const response = await axios.put("/api/cat/" + id, cat);
             console.log('Erfolgreich upgedatet:' + JSON.stringify(response.data));
             getCatsFromUser();
+            setCat(response.data)
         } catch (error) {
             console.error(error);
         }
@@ -107,6 +109,7 @@ function App() {
                     <Route path={"/sweeet/:id"}      element={<SweetCheckup/>}/>
                     <Route path={"/cat/food/:id"}    element={<FoodPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById} updateCat={updateCat}/>} />
                     <Route path={"/cat/treats/:id"}  element={<TreatPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById} updateCat={updateCat}/>}/>
+                    <Route path={"/cat/water/:id"}  element={<WaterPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById} updateCat={updateCat}/>}/>
                 </Routes>
         </>
     )

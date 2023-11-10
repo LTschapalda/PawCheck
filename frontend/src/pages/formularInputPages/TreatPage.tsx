@@ -66,7 +66,7 @@ export default function TreatPage(props : TreatPageProps) {
                 <button className="secondaryButton weiter"
                         onClick={() => {
                             props.updateCat(id,props.cat,props.getCatsFromUser)
-                                .then(() => {navigate(`/home`)})
+                                .then(() => {navigate(`/cat/water/${id}`)})
                         }}
                 >weiter</button>
             }

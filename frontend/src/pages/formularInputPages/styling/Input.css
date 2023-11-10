@@ -55,3 +55,8 @@
     border-radius: 17px ;
 }
 
+.catDetails textarea {
+    border: 2px solid rgba(135, 173, 25, 0.7);
+    border-radius: 17px;
+    padding: 5px;
+}
