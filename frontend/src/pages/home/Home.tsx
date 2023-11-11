@@ -30,16 +30,17 @@ export default function Home(props : HomeProps) {
     return(
         <>
             <div className="container">
-                <div className="xx">
-                    <h1>Hallo {props.user?.name ? props.user?.name : "Nutzer"}</h1>
-                        <p>Hier findest du eine Übersicht über deine Katzen</p>
-                </div>
-                <div className="listOfCats">
+                <div className="scrollbar">
+                    <div className="topic">
+                        <h1>Hallo {props.user?.name ? props.user?.name : "Nutzer"}</h1>
+                            <p>Hier findest du eine Übersicht über deine Katzen</p>
+                    </div>
                     {props.catsOwned.map(
                         (cat:Cat) => <CatHeader key={cat.id} cat={cat}/>
                     )}
+                    <div className="bottomSpace"/>
                 </div>
-                <div className="bottomSpace"/>
+
                 <div className="footer">
                     <div>
                         <h4>PawCheck</h4>
@@ -52,13 +53,14 @@ export default function Home(props : HomeProps) {
                         <button onClick={props.login}>Login</button>
                     }
                 </div>
-            </div>
-            <div className="addCat">
-                <Link to="/cat/name">
-                <svg id="plus" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M13.8966 2V25M25 13.3708H2" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-                </svg>
-                </Link>
+
+                <div className="addCat">
+                    <Link to="/cat/name">
+                    <svg id="plus" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.8966 2V25M25 13.3708H2" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+                    </svg>
+                    </Link>
+                </div>
             </div>
 
         </>

@@ -15,7 +15,7 @@ import WaterPage from "./pages/formularInputPages/WaterPage.tsx";
 import ToiletPage from "./pages/formularInputPages/ToiletPage.tsx";
 import './styling/Preset.css'
 import './styling/Landingpage.css'
-
+import './styling/Home.css'
 
 function App() {
 

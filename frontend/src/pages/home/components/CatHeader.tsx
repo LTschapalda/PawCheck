@@ -9,11 +9,11 @@ export default function CatHeader(props: CatHeaderProps) {
 
     return (
             <Link to={`/cat/details/${props.cat.id}`}>
-                <div className="catName">
+                <div className="catHeader">
                     <img id="catFace"
                          src={CatFace}
                          alt="catface"/>
-                    <p>{props.cat.name}</p>
+                    <h6>{props.cat.name}</h6>
                 </div>
             </Link>
     )
