@@ -7,11 +7,11 @@ import {Cat} from "../assets/Cat.ts";
 type FoodPageProps = {
     readonly editMode: boolean;
     readonly toggleEditMode: () => void;
-    readonly cat? : Cat;
-    readonly setCat :  React.Dispatch<React.SetStateAction<Cat | undefined>>;
-    readonly getCatById : (id: string) => undefined;
-    readonly getCatsFromUser : () => void;
-    readonly updateCat : (id: string | undefined, cat: Cat | undefined, getCatsFromUser: () => void) => Promise<void>;
+    readonly cat?: Cat;
+    readonly setCat: React.Dispatch<React.SetStateAction<Cat | undefined>>;
+    readonly getCatById: (id: string) => undefined;
+    readonly getCatsFromUser: () => void;
+    readonly updateCat: (id: string | undefined, cat: Cat | undefined, getCatsFromUser: () => void) => Promise<void>;
 }
 export default function FoodPage(props: FoodPageProps) {
     //VARIABLES
@@ -20,7 +20,7 @@ export default function FoodPage(props: FoodPageProps) {
 
     useEffect(() => {
         if (id) {
-        props.getCatById(id)
+            props.getCatById(id)
         }
     }, []);
 
@@ -31,7 +31,7 @@ export default function FoodPage(props: FoodPageProps) {
         props.setCat((prevCat: Cat | undefined) => {
             if (!prevCat) {
                 return {
-                    [mealType]: { [period]: event.target.value },
+                    [mealType]: {[period]: event.target.value},
                     id: '',
                     name: '',
                 };
@@ -97,74 +97,78 @@ export default function FoodPage(props: FoodPageProps) {
 
     return (
         <div className="container">
-
-            <div className="topicImage">
-                <img src={FoodIcon} alt="food icon"/>
+            <div className="scrollbar">
+                <div className="inputTopic">
+                    <img src={FoodIcon} alt="food icon"/>
+                    <h2>Bekommt {props.cat?.name} Trocken oder Nassfutter? </h2>
+                </div>
+                <div className="catDetails">
+                    <MorningEveningInputField onMorningInputChange={onDryFoodMorningAmount}
+                                              onEveningInputChange={onDryFoodEveningAmount}
+                                              buttonText="Trockenfutter"
+                                              valueMorning={props.cat?.dry?.morning ?? ''}
+                                              valueEvening={props.cat?.dry?.evening ?? ''}
+                                              placeholder="Wie viel?"
+                    />
+                    <MorningEveningInputField onMorningInputChange={onWetFoodMorningAmount}
+                                              onEveningInputChange={onWetFoodEveningAmount}
+                                              buttonText="Nassfutter"
+                                              valueMorning={props.cat?.wet?.morning ?? ''}
+                                              valueEvening={props.cat?.wet?.evening ?? ''}
+                                              placeholder="Wie viel?"
+                    />
+                </div>
             </div>
-
-            <div className="topicText">
-                <h1>Bekommt {props.cat?.name} Trocken oder Nassfutter? </h1>
-            </div>
-
-            <div className="catDetails">
-                <MorningEveningInputField onMorningInputChange={onDryFoodMorningAmount}
-                                          onEveningInputChange={onDryFoodEveningAmount}
-                                          buttonText="Trockenfutter"
-                                          valueMorning={props.cat?.dry?.morning ?? ''}
-                                          valueEvening={props.cat?.dry?.evening ?? ''}
-                                          placeholder="Wie viel?"
-                />
-                <MorningEveningInputField onMorningInputChange={onWetFoodMorningAmount}
-                                          onEveningInputChange={onWetFoodEveningAmount}
-                                          buttonText="Nassfutter"
-                                          valueMorning={props.cat?.wet?.morning ?? ''}
-                                          valueEvening={props.cat?.wet?.evening ?? ''}
-                                          placeholder="Wie viel?"
-                />
-
-                {props.editMode ?
-                    <button className="secondaryButton"
-                            onClick={() => {
-                                props.updateCat(id,props.cat,props.getCatsFromUser)
-                                    .then(() => {
-                                        props.toggleEditMode()
-                                        navigate(`/cat/details/${props.cat?.id}`)})
-                            }}
-                    >Speichern</button>
-                    : <div>
-                        {allInputsAreEmpty() ? <>
-                                <button className="secondaryButton"
-                                        onClick={toggleDoYouReallyWantToContinue}
-                                >weiter</button>
-                                {doYouReallyWantToContinue && (
-                                    <div className="deleteConfirmationPopup">
-                                        <div className="overlay">
-                                            <div className="deleteConfirmationPopup-content">
-                                                <h3>Deine Katze isst nichts?</h3>
-                                                <button className="mainButton"
-                                                        onClick={toggleDoYouReallyWantToContinue}>Ups, doch!
-                                                </button>
+                <div className="weiter">
+                    {props.editMode ?
+                        <button className="secondaryButton"
+                                onClick={() => {
+                                    props.updateCat(id, props.cat, props.getCatsFromUser)
+                                        .then(() => {
+                                            props.toggleEditMode()
+                                            navigate(`/cat/details/${props.cat?.id}`)
+                                        })
+                                }}
+                        >Speichern</button>
+                        : <div>
+                            {allInputsAreEmpty() ? <>
+                                    <button className="secondaryButton"
+                                            onClick={toggleDoYouReallyWantToContinue}
+                                    >weiter
+                                    </button>
+                                    {doYouReallyWantToContinue && (
+                                        <div className="deleteConfirmationPopup">
+                                            <div className="overlay">
+                                                <div className="deleteConfirmationPopup-content">
+                                                    <h3>Deine Katze isst nichts?</h3>
+                                                    <button className="mainButton"
+                                                            onClick={toggleDoYouReallyWantToContinue}>Ups, doch!
+                                                    </button>
                                                     <button className="secondaryButton"
                                                             onClick={() => {
-                                                                props.updateCat(id,props.cat,props.getCatsFromUser)
-                                                                    .then(() => {navigate(`/cat/treats/${id}`)})
+                                                                props.updateCat(id, props.cat, props.getCatsFromUser)
+                                                                    .then(() => {
+                                                                        navigate(`/cat/treats/${id}`)
+                                                                    })
                                                             }}>Ne, sie ist auf Diet
                                                     </button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                )}</>
-                            :
-                            <button className="secondaryButton"
-                                    onClick={() => {
-                                        props.updateCat(id,props.cat,props.getCatsFromUser)
-                                            .then(() => {navigate(`/cat/treats/${id}`)})
-                                    }}>weiter
-                            </button>
-                        }
-                    </div>
-                }
-            </div>
+                                    )}</>
+                                :
+                                <button className="secondaryButton"
+                                        onClick={() => {
+                                            props.updateCat(id, props.cat, props.getCatsFromUser)
+                                                .then(() => {
+                                                    navigate(`/cat/treats/${id}`)
+                                                })
+                                        }}>weiter
+                                </button>
+                            }
+                        </div>
+                    }
+                </div>
         </div>
     )
 }

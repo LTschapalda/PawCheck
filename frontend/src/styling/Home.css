@@ -1,16 +1,3 @@
-.scrollbar {
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: transparent transparent;
-}
-
-.container::-webkit-scrollbar {
-    width: 0; /* Breite der Scroll-Leiste */
-}
-
-.container::-webkit-scrollbar-thumb {
-    background-color: transparent; /* Hintergrundfarbe des Scroll-Leisten-Griffs */
-}
 
 .footer {
     display: grid;

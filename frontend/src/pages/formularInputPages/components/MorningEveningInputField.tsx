@@ -34,7 +34,7 @@ export default function MorningEveningInputField(props: MorningEveningInputField
                                 onClick={toggleMorningIsSelected}>Morgens
                         </button>
                         :
-                        <div className="secondaryButton border">
+                        <div className="secondaryButton splitInput">
                             <label onClick={toggleMorningIsSelected}
                                    onKeyDown={(e) => {
                                        if (e.key === 'Enter' || e.key === 'Space') {
@@ -54,7 +54,7 @@ export default function MorningEveningInputField(props: MorningEveningInputField
                                 onClick={toggleEveningIsSelected}>Abends
                         </button>
                         :
-                        <div className="secondaryButton border">
+                        <div className="secondaryButton splitInput">
                             <label onClick={toggleEveningIsSelected}
                                    onKeyDown={(e) => {
                                        if (e.key === 'Enter' || e.key === 'Space') {

@@ -5,8 +5,57 @@
     width: 95%;
 }
 
+.inputTopic {
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+}
+
+.inputTopic img {
+    width: 187px;
+    height: 187px;
+    margin: auto;
+}
+
 .weiter {
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+}
+
+.splitInput {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    margin-bottom: 7px;
+    height: 65px;
+    border: 1.5px solid var(--lighterGreen);
+    border-radius: 17px;
+    overflow: hidden;
+    background-color: white;
+
+    @media screen and (max-height: 600px) {
+        height: 45px;
+    }
+}
+
+.splitInput label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1em;
+    height: 100%;
+    width: 100%;
+    color: #fff;
+    background-color: var(--lighterGreen);
+}
+
+.splitInput input {
+    width: 100%;
+    height: 100%;
+    padding-left: 10px;
+    border: 0;
 }
 
 .speech {

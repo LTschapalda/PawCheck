@@ -2,6 +2,7 @@
 :root{
     --mainGreen: #87AD19;
     --darkerGreen: #698713;
+    --lighterGreen: #acc153;
     --catBrown: #9D6C3D;
     --catBeige: #E3D0B2;
     --catPink: #D8A89D;
@@ -55,6 +56,22 @@ body {
     }
 }
 
+.scrollbar {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    flex: 1; /* Fülle den verfügbaren vertikalen Platz */
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: 0; /* Breite der Scroll-Leiste */
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Hintergrundfarbe des Scroll-Leisten-Griffs */
+}
+
+
 h1, h2, h3, h4, h5, h6 {
     margin: 0.5em 0;
     font-family: Montserrat, sans-serif;
@@ -68,6 +85,9 @@ h1 {
 
 h2 {
     font-size: 2.3em;
+    @media screen and (max-height: 600px) {
+        font-size: 2em;
+    }
 }
 
 h3 {
@@ -112,9 +132,17 @@ ul {
 
 /* Eingabefelder */
 input, textarea {
-    margin: 0;
-    padding: 0;
-    border: 1px solid #ccc;
+    width: 100%;
+    font-family: Hind, sans-serif;
+    font-size: 1em;
+    margin: auto;
+    padding: 10px;
+    border: 1.5px solid var(--lighterGreen);
+    border-radius: 17px;
+    background-color: white;
+    outline: none;
+    resize: none;
+    overflow-y: hidden;
 }
 
 /* Buttons */
@@ -133,6 +161,11 @@ button {
     cursor: pointer;
     margin-bottom: 7px;
     transition: transform 0.3s ease;
+
+    @media screen and (max-height: 600px) {
+        padding: 0.5em 0.7em;
+        font-size: 1.1em;
+    }
 }
 
 button:active {

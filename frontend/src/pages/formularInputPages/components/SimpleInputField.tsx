@@ -14,7 +14,6 @@ export default function SimpleInputField(props : SimpleInputFieldProps) {
         setIsSelected(!isSelected);
     }
 
-
     return (
         <div className="dropdown catDetails">
             <button className="mainButton"

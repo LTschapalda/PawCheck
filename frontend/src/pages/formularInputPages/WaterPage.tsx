@@ -2,6 +2,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {ChangeEvent, useEffect} from "react";
 import {Cat} from "../assets/Cat.ts";
 import WaterIcon from "../../images/Kategorie_Icons_water.png"
+import AutoResizingTextarea from "./components/AutoResizingTextarea.tsx";
 
 type TreatPageProps = {
     readonly editMode: boolean;
@@ -31,28 +32,25 @@ export default function WaterPage(props: TreatPageProps) {
                     name: '',
                 };
             } else {
-                return { ...cat, water: event.target.value };
+                return {...cat, water: event.target.value};
             }
         });
     };
 
     return (
         <div className="container">
+            <div className="scrollbar">
+                <div className="inputTopic">
+                    <img src={WaterIcon} alt="food icon"/>
+                    <h1>Wo ist {props.cat?.name}s Wasser? </h1>
+                </div>
 
-            <div className="topicImage">
-                <img src={WaterIcon} alt="food icon"/>
-            </div>
-
-            <div className="topicText">
-                <h1>Wo ist {props.cat?.name}s Wasser? </h1>
-            </div>
-
-            <div className="catDetails">
-                <textarea placeholder="Raum für Notizen"
-                          value={props.cat?.water ?? ''}
-                          onChange={onWaterInput}
-                          rows= {4}
+                <div className="catDetails">
+                <AutoResizingTextarea value={props.cat?.water ?? ''}
+                                      placeholder="Raum für Notizen"
+                                      onChange={onWaterInput}
                 />
+                </div>
             </div>
 
             {props.editMode ?

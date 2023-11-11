@@ -7,13 +7,13 @@ import SimpleInputField from "./components/SimpleInputField.tsx";
 type TreatPageProps = {
     readonly editMode: boolean;
     readonly toggleEditMode: () => void;
-    readonly cat? : Cat;
-    readonly setCat :  React.Dispatch<React.SetStateAction<Cat | undefined>>;
-    readonly getCatById : (id: string) => undefined;
-    readonly getCatsFromUser : () => void;
-    readonly updateCat : (id: string | undefined, cat: Cat | undefined, getCatsFromUser: () => void) => Promise<void>;
+    readonly cat?: Cat;
+    readonly setCat: React.Dispatch<React.SetStateAction<Cat | undefined>>;
+    readonly getCatById: (id: string) => undefined;
+    readonly getCatsFromUser: () => void;
+    readonly updateCat: (id: string | undefined, cat: Cat | undefined, getCatsFromUser: () => void) => Promise<void>;
 }
-export default function TreatPage(props : TreatPageProps) {
+export default function TreatPage(props: TreatPageProps) {
     //VARIABLES
     const {id} = useParams();
     const navigate = useNavigate();
@@ -32,46 +32,47 @@ export default function TreatPage(props : TreatPageProps) {
                     name: '',
                 };
             } else {
-                return { ...cat, treats: event.target.value };
+                return {...cat, treats: event.target.value};
             }
         });
     };
 
     return (
         <div className="container">
+            <div className="scrollbar">
+                <div className="inputTopic">
+                    <img src={FoodIcon} alt="food icon"/>
+                    <h2>Wie siehts mit Leckerchen aus? </h2>
+                </div>
 
-            <div className="topicImage">
-                <img src={FoodIcon} alt="food icon"/>
+                <SimpleInputField onInputChange={onTreatsInput}
+                                  buttonText="Jup"
+                                  placeholder="Wie viele?"
+                                  value={props.cat?.treats ?? ''}
+                />
             </div>
 
-            <div className="topicText">
-                <h1>Wie siehts mit Leckerchen aus? </h1>
+            <div className="weiter">
+                {props.editMode ?
+                    <button className="secondaryButton weiter"
+                            onClick={() => {
+                                props.updateCat(id, props.cat, props.getCatsFromUser)
+                                    .then(() => {
+                                        navigate(`/cat/details/${props.cat?.id}`)
+                                    })
+                            }}
+                    >speichern</button>
+                    :
+                    <button className="secondaryButton weiter"
+                            onClick={() => {
+                                props.updateCat(id, props.cat, props.getCatsFromUser)
+                                    .then(() => {
+                                        navigate(`/cat/water/${id}`)
+                                    })
+                            }}
+                    >weiter</button>
+                }
             </div>
-
-            <SimpleInputField onInputChange={onTreatsInput}
-                              buttonText="Jup"
-                              placeholder="Wie viele?"
-                              value={props.cat?.treats ?? ''}
-            />
-
-            {props.editMode ?
-                <button className="secondaryButton weiter"
-                        onClick={() => {
-                            props.updateCat(id,props.cat,props.getCatsFromUser)
-                                .then(() => {navigate(`/cat/details/${props.cat?.id}`)})
-                        }}
-                >speichern</button>
-                :
-                <button className="secondaryButton weiter"
-                        onClick={() => {
-                            props.updateCat(id,props.cat,props.getCatsFromUser)
-                                .then(() => {navigate(`/cat/water/${id}`)})
-                        }}
-                >weiter</button>
-            }
-
-
-
         </div>
     )
 }
