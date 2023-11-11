@@ -1,0 +1,33 @@
+.topic {
+    margin-top: 25vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+}
+
+.speech {
+    font-size: 1.4em;
+    padding: 8px;
+    width: calc(100% - 16px); /* 100% width minus padding on both sides */
+    height: calc(100% - 16px); /* 100% height minus padding on both sides */
+    border: none;
+    outline: none;
+}
+
+.nameinput {
+    z-index: 2;
+    width: 100%;
+    margin: 10% auto auto;
+}
+
+.peakingCat {
+    z-index: 1;
+    position: fixed;
+    top: 61%;
+    left: -49px;
+}
+
+.peakingCat img {
+    width: 180px;
+}
+

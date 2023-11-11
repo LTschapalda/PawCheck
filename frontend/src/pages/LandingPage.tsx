@@ -7,7 +7,7 @@ export default function LandingPage(props: LandingPageProps) {
 
     return (
             <div className="container">
-                <div className="topic">
+                <div className="title">
                     <h1>Bereit für deinen Trip?</h1>
                     <p>Let's check, ob deine Katze es auch ist!</p>
                 </div>
