@@ -47,7 +47,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 0 35px;
+    padding: 0 28px;
     /* Bei Bildschirmen breiter als 400px */
     @media screen and (min-width: 451px) {
         width: 450px;
