@@ -13,6 +13,8 @@ import {Cat} from "./pages/assets/Cat.ts";
 import {User} from "./pages/assets/User.ts";
 import WaterPage from "./pages/formularInputPages/WaterPage.tsx";
 import ToiletPage from "./pages/formularInputPages/ToiletPage.tsx";
+import './styling/Preset.css'
+import './styling/Landingpage.css'
 
 
 function App() {

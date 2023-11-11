@@ -6,7 +6,7 @@ type LandingPageProps = {
 export default function LandingPage(props : LandingPageProps) {
 
     return (
-        <>
+        <div className="container">
             <div className="topic">
                 <h1>Bereit für deinen Trip?</h1>
                 <p>Let's check, ob deine Katze es auch ist!</p>
@@ -17,6 +17,6 @@ export default function LandingPage(props : LandingPageProps) {
                     </button>
             </div>
             <img id="pawcheck" src={PawCheck} alt="PawCheck"/>
-        </>
+        </div>
     )
 }

@@ -14,11 +14,9 @@ export default function MenuPaw(props: MenuPawProps) {
 
     return(
         <nav>
-            <button className="navbar" onClick={onClick}>
-                <Link to="/home">
-                    <img id="menuPaw" src={menuPaw} alt="menu Paw"/>
-                </Link>
-            </button>
+            <Link to="/home">
+                <img onClick={onClick} src={menuPaw} alt="menu Paw"/>
+            </Link>
         </nav>
     )
 }
