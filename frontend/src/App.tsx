@@ -1,4 +1,3 @@
-import './App.css'
 import {Route, Routes, useNavigate} from "react-router-dom";
 import LandingPage from "./pages/LandingPage.tsx";
 import NameInput from "./pages/formularInputPages/NameInput.tsx";

@@ -2,7 +2,6 @@ import CatFace from "../../images/ImagePlaceholder.png";
 import {Link, useParams} from "react-router-dom";
 import {Cat} from "../assets/Cat.ts";
 import {useState} from "react";
-import './styling/Home.css'
 import AddCategoriesOrDelete from "./components/AddCategoriesOrDelete.tsx";
 import CategoryDetailsCard from "./components/CategoryDetailsCard.tsx";
 

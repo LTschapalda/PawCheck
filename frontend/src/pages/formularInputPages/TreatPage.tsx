@@ -2,7 +2,6 @@ import {useNavigate, useParams} from "react-router-dom";
 import {ChangeEvent, useEffect} from "react";
 import {Cat} from "../assets/Cat.ts";
 import FoodIcon from "../../images/Kategorie_Icons_food.png";
-import './styling/Input.css'
 import SimpleInputField from "./components/SimpleInputField.tsx";
 
 type TreatPageProps = {

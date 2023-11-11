@@ -1,7 +1,6 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {ChangeEvent, useEffect} from "react";
 import {Cat} from "../assets/Cat.ts";
-import './styling/Input.css'
 import WaterIcon from "../../images/Kategorie_Icons_water.png"
 
 type TreatPageProps = {

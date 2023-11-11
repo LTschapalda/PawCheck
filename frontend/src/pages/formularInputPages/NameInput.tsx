@@ -1,4 +1,3 @@
-import  './styling/NameInput.css'
 import {ChangeEvent, useState} from "react";
 import axios from "axios";
 import NameCat from "../../images/NameCat.svg";

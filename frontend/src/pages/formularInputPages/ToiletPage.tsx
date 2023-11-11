@@ -2,7 +2,6 @@ import {useNavigate, useParams} from "react-router-dom";
 import {ChangeEvent, useEffect} from "react";
 import {Cat} from "../assets/Cat.ts";
 import LitterboxIcon from "../../images/Kategorie_Icons_litterbox.png"
-import './styling/Input.css'
 import SimpleInputField from "./components/SimpleInputField.tsx";
 
 type ToiletPageProps = {

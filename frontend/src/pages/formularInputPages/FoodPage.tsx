@@ -1,7 +1,6 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {ChangeEvent, useEffect, useState} from "react";
 import FoodIcon from "../../images/Kategorie_Icons_food.png";
-import './styling/Input.css'
 import MorningEveningInputField from "./components/MorningEveningInputField.tsx";
 import {Cat} from "../assets/Cat.ts";
 

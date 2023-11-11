@@ -1,4 +1,3 @@
-import '../styling/Home.css'
 import {Cat} from "../../assets/Cat.ts";
 import CatFace from "../../../images/ImagePlaceholder.png"
 import {Link} from 'react-router-dom';

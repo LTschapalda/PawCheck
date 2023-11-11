@@ -1,4 +1,3 @@
-import './styling/Home.css'
 import {Link, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import {Cat} from "../assets/Cat.ts";
