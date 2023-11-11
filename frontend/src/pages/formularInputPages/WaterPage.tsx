@@ -44,33 +44,33 @@ export default function WaterPage(props: TreatPageProps) {
                     <img src={WaterIcon} alt="food icon"/>
                     <h1>Wo ist {props.cat?.name}s Wasser? </h1>
                 </div>
-
-                <div className="catDetails">
-                <AutoResizingTextarea value={props.cat?.water ?? ''}
-                                      placeholder="Raum für Notizen"
-                                      onChange={onWaterInput}
-                />
+                <div className="smallerInput">
+                    <AutoResizingTextarea value={props.cat?.water ?? ''}
+                                          placeholder="Raum für Notizen"
+                                          onChange={onWaterInput}
+                    />
                 </div>
             </div>
 
-            {props.editMode ?
-                <button className="secondaryButton weiter"
-                        onClick={() => {
-                            props.updateCat(id, props.cat, props.getCatsFromUser)
-                                .then(() => {
-                                    navigate(`/cat/details/${props.cat?.id}`)
-                                })
-                        }}
-                >speichern</button>
-                :
-                <button className="secondaryButton weiter"
-                        onClick={() => {
-                            props.updateCat(id, props.cat, props.getCatsFromUser)
-                                .then(() => {
-                                    navigate(`/cat/litterbox/${props.cat?.id}`)
-                                })
-                        }}
-                >weiter</button>
+            {
+                props.editMode ?
+                    <button className="secondaryButton weiter"
+                            onClick={() => {
+                                props.updateCat(id, props.cat, props.getCatsFromUser)
+                                    .then(() => {
+                                        navigate(`/cat/details/${props.cat?.id}`)
+                                    })
+                            }}
+                    >speichern</button>
+                    :
+                    <button className="secondaryButton weiter"
+                            onClick={() => {
+                                props.updateCat(id, props.cat, props.getCatsFromUser)
+                                    .then(() => {
+                                        navigate(`/cat/litterbox/${props.cat?.id}`)
+                                    })
+                            }}
+                    >weiter</button>
             }
 
 

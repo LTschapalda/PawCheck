@@ -7,13 +7,13 @@ import SimpleInputField from "./components/SimpleInputField.tsx";
 type ToiletPageProps = {
     readonly editMode: boolean;
     readonly toggleEditMode: () => void;
-    readonly cat? : Cat;
-    readonly setCat :  React.Dispatch<React.SetStateAction<Cat | undefined>>;
-    readonly getCatById : (id: string) => undefined;
-    readonly getCatsFromUser : () => void;
-    readonly updateCat : (id: string | undefined, cat: Cat | undefined, getCatsFromUser: () => void) => Promise<void>;
+    readonly cat?: Cat;
+    readonly setCat: React.Dispatch<React.SetStateAction<Cat | undefined>>;
+    readonly getCatById: (id: string) => undefined;
+    readonly getCatsFromUser: () => void;
+    readonly updateCat: (id: string | undefined, cat: Cat | undefined, getCatsFromUser: () => void) => Promise<void>;
 }
-export default function ToiletPage(props : ToiletPageProps) {
+export default function ToiletPage(props: ToiletPageProps) {
     //VARIABLES
     const {id} = useParams();
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ export default function ToiletPage(props : ToiletPageProps) {
             props.getCatById(id)
         }
     }, []);
-    const onWhereInput = (event: ChangeEvent<HTMLInputElement>) => {
+    const onWhereInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
         props.setCat((cat: Cat | undefined) => {
             if (!cat) {
                 return {
@@ -32,12 +32,12 @@ export default function ToiletPage(props : ToiletPageProps) {
                     name: '',
                 };
             } else {
-                return { ...cat, toilet: {...cat.toilet, where: event.target.value}};
+                return {...cat, toilet: {...cat.toilet, where: event.target.value}};
             }
         });
     };
 
-    const onHowOftenInput = (event: ChangeEvent<HTMLInputElement>) => {
+    const onHowOftenInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
         props.setCat((cat: Cat | undefined) => {
             if (!cat) {
                 return {
@@ -46,12 +46,12 @@ export default function ToiletPage(props : ToiletPageProps) {
                     name: '',
                 };
             } else {
-                return { ...cat, toilet: {...cat.toilet, howOften: event.target.value}};
+                return {...cat, toilet: {...cat.toilet, howOften: event.target.value}};
             }
         });
     };
 
-    const onWhereTheShitInput = (event: ChangeEvent<HTMLInputElement>) => {
+    const onWhereTheShitInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
         props.setCat((cat: Cat | undefined) => {
             if (!cat) {
                 return {
@@ -60,56 +60,57 @@ export default function ToiletPage(props : ToiletPageProps) {
                     name: '',
                 };
             } else {
-                return { ...cat, toilet: {...cat.toilet, whereTheShit: event.target.value}};
+                return {...cat, toilet: {...cat.toilet, whereTheShit: event.target.value}};
             }
         });
     };
 
     return (
         <div className="container">
+            <div className="scrollbar">
+                <div className="inputTopic">
+                    <img src={LitterboxIcon} alt="litterbox icon"/>
+                    <h1>Wie siehts mit dem Klo aus? </h1>
+                </div>
 
-            <div className="topicImage">
-                <img src={LitterboxIcon} alt="litterbox icon"/>
+                <SimpleInputField onInputChange={onWhereInput}
+                                  buttonText="Wo?"
+                                  placeholder="Beschreibe wo das Katzenklo steht"
+                                  value={props.cat?.toilet?.where ?? ''}
+                />
+                <SimpleInputField onInputChange={onHowOftenInput}
+                                  buttonText="Wie oft?"
+                                  placeholder="Soll die Toilette bei jedem Besuch gereinigt werden?"
+                                  value={props.cat?.toilet?.howOften ?? ''}
+                />
+                <SimpleInputField onInputChange={onWhereTheShitInput}
+                                  buttonText="Wohin mit dem Sch**ß?"
+                                  placeholder="Gibt es eine extra Mülltonne? oder direkt in die Toilette?"
+                                  value={props.cat?.toilet?.whereTheShit ?? ''}
+                />
             </div>
 
-            <div className="topicText">
-                <h1>Wie siehts mit dem Klo aus? </h1>
+            <div className="weiter">
+                {props.editMode ?
+                    <button className="secondaryButton weiter"
+                            onClick={() => {
+                                props.updateCat(id, props.cat, props.getCatsFromUser)
+                                    .then(() => {
+                                        navigate(`/cat/details/${props.cat?.id}`)
+                                    })
+                            }}
+                    >speichern</button>
+                    :
+                    <button className="secondaryButton weiter"
+                            onClick={() => {
+                                props.updateCat(id, props.cat, props.getCatsFromUser)
+                                    .then(() => {
+                                        navigate(`/home`)
+                                    })
+                            }}
+                    >weiter</button>
+                }
             </div>
-
-            <SimpleInputField onInputChange={onWhereInput}
-                              buttonText="Wo?"
-                              placeholder="Beschreibe wo das Katzenklo steht"
-                              value={props.cat?.toilet?.where ?? ''}
-            />
-            <SimpleInputField onInputChange={onHowOftenInput}
-                              buttonText="Wie oft?"
-                              placeholder="Soll die Toilette bei jedem Besuch gereinigt werden?"
-                              value={props.cat?.toilet?.howOften ?? ''}
-            />
-            <SimpleInputField onInputChange={onWhereTheShitInput}
-                              buttonText="Wohin mit dem Sch**ß?"
-                              placeholder="Gibt es eine extra Mülltonne? oder direkt in die Toilette?"
-                              value={props.cat?.toilet?.whereTheShit ?? ''}
-            />
-
-            {props.editMode ?
-                <button className="secondaryButton weiter"
-                        onClick={() => {
-                            props.updateCat(id,props.cat,props.getCatsFromUser)
-                                .then(() => {navigate(`/cat/details/${props.cat?.id}`)})
-                        }}
-                >speichern</button>
-                :
-                <button className="secondaryButton weiter"
-                        onClick={() => {
-                            props.updateCat(id,props.cat,props.getCatsFromUser)
-                                .then(() => {navigate(`/home`)})
-                        }}
-                >weiter</button>
-            }
-
-
-
         </div>
     )
 }

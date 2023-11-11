@@ -27,8 +27,7 @@ export default function AutoResizingTextarea(
                 adjustHeight();
             }}
             placeholder={props.placeholder}
-            onInput={adjustHeight} // Hier wird die Höhe bei jedem Input angepasst
-            style={{ overflowY: "hidden" }} // Damit keine sichtbare Scrollleiste vorhanden ist
+            onInput={adjustHeight}
         />
     );
 }

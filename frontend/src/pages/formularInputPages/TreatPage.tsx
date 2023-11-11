@@ -23,7 +23,7 @@ export default function TreatPage(props: TreatPageProps) {
             props.getCatById(id)
         }
     }, []);
-    const onTreatsInput = (event: ChangeEvent<HTMLInputElement>) => {
+    const onTreatsInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
         props.setCat((cat: Cat | undefined) => {
             if (!cat) {
                 return {

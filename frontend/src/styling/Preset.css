@@ -135,7 +135,7 @@ input, textarea {
     width: 100%;
     font-family: Hind, sans-serif;
     font-size: 1em;
-    margin: auto;
+    margin: auto auto 7px;
     padding: 10px;
     border: 1.5px solid var(--lighterGreen);
     border-radius: 17px;
