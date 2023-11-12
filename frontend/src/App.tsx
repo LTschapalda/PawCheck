@@ -17,6 +17,7 @@ import './styling/Preset.css'
 import './styling/Landingpage.css'
 import './styling/Home.css'
 import './styling/Input.css'
+import './styling/CatDetails.css'
 
 function App() {
 

@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {Cat} from "../../assets/Cat.ts";
 
 type CategoryDetailCardProps = {
@@ -9,23 +9,18 @@ type CategoryDetailCardProps = {
     readonly selectedCat : Cat | undefined;
 }
 export default function CategoryDetailsCard(props: CategoryDetailCardProps) {
-    function onKeyDown (e:React.KeyboardEvent<HTMLDivElement>){
-        if (e.key === 'Enter' || e.key === 'Space') {
-            props.toggleEditMode();
-        }
-    }
+    const navigate = useNavigate();
+
     return (
         <div>
             {props.catValue && (
-                <Link to={`/cat/${props.link}/${props.selectedCat?.id}`}>
-                    <div className="catName" onClick={() => props.toggleEditMode() }
-                         onKeyDown={onKeyDown} tabIndex={0}>
-                        <div>
-                            <h4>{props.categoryTitle}</h4>
+                    <a onClick={() => {props.toggleEditMode()
+                        navigate(`/cat/${props.link}/${props.selectedCat?.id}`)} }>
+                        <div className="catDetailsCard">
+                            <h5>{props.categoryTitle}</h5>
                             <p>{props.catValue}</p>
                         </div>
-                    </div>
-                </Link>
+                    </a>
             )}
         </div>
     )

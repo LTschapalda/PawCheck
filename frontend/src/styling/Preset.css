@@ -47,6 +47,7 @@ body {
     margin: auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-between;
     padding: 0 28px;
     /* Bei Bildschirmen breiter als 400px */
@@ -57,10 +58,12 @@ body {
 }
 
 .scrollbar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
-    flex: 1; /* Fülle den verfügbaren vertikalen Platz */
 }
 
 .scrollbar::-webkit-scrollbar {

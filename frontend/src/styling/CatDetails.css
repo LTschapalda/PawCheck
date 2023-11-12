@@ -1,0 +1,146 @@
+.lower {
+    margin-top: 20vh;
+}
+
+.catDetailsCard {
+    width: 86%;
+    margin: auto auto 0.8rem;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.20);
+    padding: 0.5em 1em;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+.catDetailsCard p {
+    width: 100%;
+}
+
+
+body.active-deleteConfirmation {
+    overflow-y: hidden;
+}
+
+.deleteConfirmationPopup, .overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.overlay {
+    background: rgba(49,49,49,0.8);
+    z-index: 999;
+}
+.deleteConfirmationPopup {
+    z-index: 1000;
+}
+
+.deleteConfirmationPopup-content {
+    z-index: 1000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #f1f1f1;
+    padding: 14px 28px;
+    border-radius: 3px;
+    max-width: 600px;
+    min-width: 300px;
+}
+
+.delete {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 7px;
+}
+
+.addCategoryPopup {
+    z-index: 100;
+    position: absolute;
+    bottom: 138px; /* Hier den Durchmesser von .addCat plus gewünschter Abstand eintragen */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    line-height: 1.4;
+    background-color: white;
+    padding: 14px 28px;
+    border-radius: 17px;
+    box-shadow: 0 1px 13px 0 rgba(0, 0, 0, 0.25);
+}
+
+.addCategoryPopup h4 {
+    padding-bottom: 14px;
+}
+
+.categoryIcons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.categoryCard {
+    width: 89px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.categoryFrame {
+    width: 88.587px;
+    height: 88.587px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #FFF -15.91%, rgba(205, 205, 205, 0.55) 132.27%);
+}
+
+.categoryFrame img {
+    width: 100%;
+}
+
+.categoryTitle {
+    width: 100%;
+    text-align: center;
+    font-size: 1em;
+    color: black;
+    padding-top: 5px;
+}
+
+
+.deleteCat {
+    display: flex;
+    bottom: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    height: 70px;
+    width: 100vw;
+    background-color: white;
+    border-top: 2px solid #9FCC1D;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+}
+
+.löschen {
+    background: linear-gradient(351deg, #EFEFEF -22.4%, rgba(255, 255, 255, 0.00) 287.69%);
+}
+
+.deleteCat:hover {
+    background-color: red;
+    color: white;
+}
+
+
+
