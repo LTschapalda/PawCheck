@@ -3,6 +3,7 @@ import {ChangeEvent, useEffect} from "react";
 import {Cat} from "../assets/Cat.ts";
 import LitterboxIcon from "../../images/Kategorie_Icons_litterbox.png"
 import SimpleInputField from "./components/SimpleInputField.tsx";
+import PawCheck from "../../images/PawCheck.svg";
 
 type ToiletPageProps = {
     readonly editMode: boolean;
@@ -88,29 +89,32 @@ export default function ToiletPage(props: ToiletPageProps) {
                                   placeholder="Gibt es eine extra Mülltonne? oder direkt in die Toilette?"
                                   value={props.cat?.toilet?.whereTheShit ?? ''}
                 />
+                <div className="bottomSpace"/>
             </div>
 
-            <div className="weiter">
-                {props.editMode ?
-                    <button className="secondaryButton weiter"
-                            onClick={() => {
-                                props.updateCat(id, props.cat, props.getCatsFromUser)
-                                    .then(() => {
-                                        navigate(`/cat/details/${props.cat?.id}`)
-                                    })
-                            }}
-                    >speichern</button>
-                    :
-                    <button className="secondaryButton weiter"
-                            onClick={() => {
-                                props.updateCat(id, props.cat, props.getCatsFromUser)
-                                    .then(() => {
-                                        navigate(`/home`)
-                                    })
-                            }}
-                    >weiter</button>
-                }
-            </div>
+            {props.editMode ?
+                <button className="mainButton save"
+                        onClick={() => {
+                            props.updateCat(id, props.cat, props.getCatsFromUser)
+                                .then(() => {
+                                    navigate(`/cat/details/${props.cat?.id}`)
+                                })
+                        }}>
+                    <img className="thumbsUp" src={PawCheck} alt="PawCheck"/>
+                    <span className="text">speichern</span>
+                </button>
+                :
+                <button className="mainButton save"
+                        onClick={() => {
+                            props.updateCat(id, props.cat, props.getCatsFromUser)
+                                .then(() => {
+                                    navigate(`/home`)
+                                })
+                        }}>
+                    <img className="thumbsUp" src={PawCheck} alt="PawCheck"/>
+                    <span className="text">weiter</span>
+                </button>
+            }
         </div>
     )
 }

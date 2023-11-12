@@ -118,10 +118,9 @@ export default function FoodPage(props: FoodPageProps) {
                                               valueEvening={props.cat?.wet?.evening ?? ''}
                                               placeholder="Wie viel?"
                     />
+                    <div className="bottomSpace"/>
                 </div>
             </div>
-
-            <div>
                 {props.editMode ?
                     <button className="mainButton save"
                             onClick={() => {
@@ -134,7 +133,7 @@ export default function FoodPage(props: FoodPageProps) {
                         <img className="thumbsUp" src={PawCheck} alt="PawCheck"/>
                         <span className="text">speichern</span>
                     </button>
-                    : <div>
+                    : <>
                         {allInputsAreEmpty() ? <>
                                 <button className="mainButton save"
                                         onClick={toggleDoYouReallyWantToContinue}>
@@ -173,9 +172,8 @@ export default function FoodPage(props: FoodPageProps) {
                                 <span className="text">weiter</span>
                             </button>
                         }
-                    </div>
+                    </>
                 }
-            </div>
         </div>
     )
 }

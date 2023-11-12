@@ -3,6 +3,7 @@ import {ChangeEvent, useEffect} from "react";
 import {Cat} from "../assets/Cat.ts";
 import WaterIcon from "../../images/Kategorie_Icons_water.png"
 import AutoResizingTextarea from "./components/AutoResizingTextarea.tsx";
+import PawCheck from "../../images/PawCheck.svg";
 
 type TreatPageProps = {
     readonly editMode: boolean;
@@ -52,28 +53,29 @@ export default function WaterPage(props: TreatPageProps) {
                 </div>
             </div>
 
-            {
-                props.editMode ?
-                    <button className="secondaryButton weiter"
-                            onClick={() => {
-                                props.updateCat(id, props.cat, props.getCatsFromUser)
-                                    .then(() => {
-                                        navigate(`/cat/details/${props.cat?.id}`)
-                                    })
-                            }}
-                    >speichern</button>
-                    :
-                    <button className="secondaryButton weiter"
-                            onClick={() => {
-                                props.updateCat(id, props.cat, props.getCatsFromUser)
-                                    .then(() => {
-                                        navigate(`/cat/litterbox/${props.cat?.id}`)
-                                    })
-                            }}
-                    >weiter</button>
+            {props.editMode ?
+                <button className="mainButton save"
+                        onClick={() => {
+                            props.updateCat(id, props.cat, props.getCatsFromUser)
+                                .then(() => {
+                                    navigate(`/cat/details/${props.cat?.id}`)
+                                })
+                        }}>
+                    <img className="thumbsUp" src={PawCheck} alt="PawCheck"/>
+                    <span className="text">speichern</span>
+                </button>
+                :
+                <button className="mainButton save"
+                        onClick={() => {
+                            props.updateCat(id, props.cat, props.getCatsFromUser)
+                                .then(() => {
+                                    navigate(`/cat/litterbox/${props.cat?.id}`)
+                                })
+                        }}>
+                    <img className="thumbsUp" src={PawCheck} alt="PawCheck"/>
+                    <span className="text">weiter</span>
+                </button>
             }
-
-
         </div>
     )
 }
