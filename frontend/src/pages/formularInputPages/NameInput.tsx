@@ -3,6 +3,7 @@ import axios from "axios";
 import NameCat from "../../images/NameCat.svg";
 import {useNavigate} from 'react-router-dom';
 import {User} from "../assets/User.ts";
+import PawCheck from "../../images/PawCheck.svg";
 
 type NameInputProps = {
     readonly getCatsFromUser: () => void;
@@ -55,11 +56,11 @@ export default function NameInput(props: NameInputProps) {
                     </svg>
                 </div>
 
-                <div className="weiter">
-                    <button className="secondaryButton"
-                            onClick={handleSubmitCreatNewCat}>weiter
-                    </button>
-                </div>
+                <button className="mainButton save"
+                        onClick={handleSubmitCreatNewCat}>
+                    <img className="thumbsUp" src={PawCheck} alt="PawCheck"/>
+                    <span className="text">weiter</span>
+                </button>
             </div>
             <div className="peakingCat">
                 <img src={NameCat} alt="peaking cat"/>

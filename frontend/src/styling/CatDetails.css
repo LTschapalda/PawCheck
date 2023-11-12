@@ -64,7 +64,7 @@ body.active-deleteConfirmation {
 .addCategoryPopup {
     z-index: 100;
     position: absolute;
-    bottom: 138px; /* Hier den Durchmesser von .addCat plus gewünschter Abstand eintragen */
+    bottom: 138px;
     left: 50%;
     transform: translateX(-50%);
     width: 300px;

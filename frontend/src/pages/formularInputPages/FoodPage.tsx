@@ -3,6 +3,7 @@ import {ChangeEvent, useEffect, useState} from "react";
 import FoodIcon from "../../images/Kategorie_Icons_food.png";
 import MorningEveningInputField from "./components/MorningEveningInputField.tsx";
 import {Cat} from "../assets/Cat.ts";
+import PawCheck from "../../images/PawCheck.svg";
 
 type FoodPageProps = {
     readonly editMode: boolean;
@@ -119,56 +120,62 @@ export default function FoodPage(props: FoodPageProps) {
                     />
                 </div>
             </div>
-                <div className="weiter">
-                    {props.editMode ?
-                        <button className="secondaryButton"
-                                onClick={() => {
-                                    props.updateCat(id, props.cat, props.getCatsFromUser)
-                                        .then(() => {
-                                            props.toggleEditMode()
-                                            navigate(`/cat/details/${props.cat?.id}`)
-                                        })
-                                }}
-                        >Speichern</button>
-                        : <div>
-                            {allInputsAreEmpty() ? <>
-                                    <button className="secondaryButton"
-                                            onClick={toggleDoYouReallyWantToContinue}
-                                    >weiter
-                                    </button>
-                                    {doYouReallyWantToContinue && (
-                                        <div className="deleteConfirmationPopup">
-                                            <div className="overlay">
-                                                <div className="deleteConfirmationPopup-content">
-                                                    <h3>Deine Katze isst nichts?</h3>
-                                                    <button className="mainButton"
-                                                            onClick={toggleDoYouReallyWantToContinue}>Ups, doch!
-                                                    </button>
-                                                    <button className="secondaryButton"
-                                                            onClick={() => {
-                                                                props.updateCat(id, props.cat, props.getCatsFromUser)
-                                                                    .then(() => {
-                                                                        navigate(`/cat/treats/${id}`)
-                                                                    })
-                                                            }}>Ne, sie ist auf Diet
-                                                    </button>
-                                                </div>
+
+            <div>
+                {props.editMode ?
+                    <button className="mainButton save"
+                            onClick={() => {
+                                props.updateCat(id, props.cat, props.getCatsFromUser)
+                                    .then(() => {
+                                        props.toggleEditMode()
+                                        navigate(`/cat/details/${props.cat?.id}`)
+                                    })
+                            }}>
+                        <img className="thumbsUp" src={PawCheck} alt="PawCheck"/>
+                        <span className="text">speichern</span>
+                    </button>
+                    : <div>
+                        {allInputsAreEmpty() ? <>
+                                <button className="mainButton save"
+                                        onClick={toggleDoYouReallyWantToContinue}>
+                                    <img className="thumbsUp" src={PawCheck} alt="PawCheck"/>
+                                    <span className="text">weiter</span>
+                                </button>
+                                {doYouReallyWantToContinue && (
+                                    <div className="deleteConfirmationPopup">
+                                        <div className="overlay">
+                                            <div className="deleteConfirmationPopup-content">
+                                                <h3>Deine Katze isst nichts?</h3>
+                                                <button className="mainButton"
+                                                        onClick={toggleDoYouReallyWantToContinue}>Ups, doch!
+                                                </button>
+                                                <button className="secondaryButton"
+                                                        onClick={() => {
+                                                            props.updateCat(id, props.cat, props.getCatsFromUser)
+                                                                .then(() => {
+                                                                    navigate(`/cat/treats/${id}`)
+                                                                })
+                                                        }}>Ne, sie ist auf Diet
+                                                </button>
                                             </div>
                                         </div>
-                                    )}</>
-                                :
-                                <button className="secondaryButton"
-                                        onClick={() => {
-                                            props.updateCat(id, props.cat, props.getCatsFromUser)
-                                                .then(() => {
-                                                    navigate(`/cat/treats/${id}`)
-                                                })
-                                        }}>weiter
-                                </button>
-                            }
-                        </div>
-                    }
-                </div>
+                                    </div>
+                                )}</>
+                            :
+                            <button className="mainButton save"
+                                    onClick={() => {
+                                        props.updateCat(id, props.cat, props.getCatsFromUser)
+                                            .then(() => {
+                                                navigate(`/cat/treats/${id}`)
+                                            })
+                                    }}>
+                                <img className="thumbsUp" src={PawCheck} alt="PawCheck"/>
+                                <span className="text">weiter</span>
+                            </button>
+                        }
+                    </div>
+                }
+            </div>
         </div>
     )
 }

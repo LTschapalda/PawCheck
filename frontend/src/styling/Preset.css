@@ -26,6 +26,10 @@ table, caption, tbody, tfoot, thead, tr, th, td {
     vertical-align: baseline;
 }
 
+#root {
+    display: flex;
+}
+
 /* Allgemeine Basisstile für Text */
 body {
     background: linear-gradient(180deg, #FFF 0%, #F5F5F5 27.08%);
@@ -125,7 +129,7 @@ a {
 }
 
 a:hover {
-    text-decoration: underline;
+    color: var(--lighterGreen);
 }
 
 /* Ungeordnete Liste */

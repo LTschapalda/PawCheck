@@ -21,7 +21,6 @@ export default function Home(props : HomeProps) {
         props.getCatsFromUser();
     }, [props.user]);
 
-    console.log(props.user)
     function logout() {
         axios.post("/api/logout")
         navigate(`/`);
@@ -42,7 +41,7 @@ export default function Home(props : HomeProps) {
                 </div>
 
                 <div className="footer">
-                    <div>
+                    <div className="fixedHeight">
                         <h4>PawCheck</h4>
                         <p> © 2023 all Rights reserved</p>
                         <img src={PawCheck} alt="PawCheck"/>

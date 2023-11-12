@@ -22,7 +22,37 @@
 }
 
 .weiter {
+    width: 100%;
     margin-bottom: 25px;
+}
+
+.save {
+    margin-bottom: 0;
+    width: 110%;
+    height: 74px;
+    border-radius: 30px 30px 0 0px;
+    background-color: var(--darkerGreen);
+}
+
+.save .thumbsUp {
+    opacity: 0;
+    position: absolute;
+    margin-left: 5px;
+    width: 46px;
+    height: 62px;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.save:hover .thumbsUp {
+    opacity: 1;
+}
+
+.save .text {
+    opacity: 1;
+}
+
+.save:hover .text {
+    opacity: 0;
 }
 
 .smallerInput {
@@ -31,7 +61,7 @@
 
 .splitInput {
     display: grid;
-    grid-template-columns: 35% 65%;
+    grid-template-columns: 35% 59%;
     margin-bottom: 7px;
     height: 65px;
     border: 1.5px solid var(--lighterGreen);
@@ -57,7 +87,7 @@
 
 .splitInput input {
     width: 100%;
-    height: 100%;
+    margin: auto;
     padding-left: 10px;
     border: 0;
 }
