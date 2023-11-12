@@ -139,11 +139,11 @@ ul {
 
 /* Eingabefelder */
 input, textarea {
-    width: 100%;
+    width: 91%;
     font-family: Hind, sans-serif;
     font-size: 1em;
     margin: auto auto 7px;
-    padding: 10px;
+    padding: 4%;
     border: 1.5px solid var(--lighterGreen);
     border-radius: 17px;
     background-color: white;

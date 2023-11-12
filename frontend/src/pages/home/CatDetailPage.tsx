@@ -93,8 +93,9 @@ export default function CatDetailPage(props: CatDetailProps) {
                                 </div>
                             </Link>
                         }
+                        <div className="bottomSpace"/>
+                        <div className="bottomSpace"/>
                     </div>
-                    <div className="bottomSpace"/>
                 </div>
             </div>
             <button className="addCat" onClick={toggleAddCategories}>

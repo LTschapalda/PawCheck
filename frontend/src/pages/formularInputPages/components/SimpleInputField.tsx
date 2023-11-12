@@ -16,16 +16,15 @@ export default function SimpleInputField(props: SimpleInputFieldProps) {
     }
 
     return (
-        <div>
+        <div style={{width: '100%'}}>
             <button className="mainButton"
                     onClick={toggleIsSelected}>{props.buttonText}
             </button>
             {isSelected && (
-                <div className="smallerInput">
-                    <AutoResizingTextarea value={props.value}
-                                          placeholder={props.placeholder}
-                                          onChange={props.onInputChange}/>
-                </div>
+                <AutoResizingTextarea value={props.value}
+                                      placeholder={props.placeholder}
+                                      onChange={props.onInputChange}/>
+
 
             )}
         </div>

@@ -30,7 +30,7 @@
     margin-bottom: 0;
     width: 110%;
     height: 74px;
-    border-radius: 30px 30px 0 0px;
+    border-radius: 30px 30px 0 0;
     background-color: var(--darkerGreen);
 }
 
@@ -53,10 +53,6 @@
 
 .save:hover .text {
     opacity: 0;
-}
-
-.smallerInput {
-    width: 92%;
 }
 
 .splitInput {
