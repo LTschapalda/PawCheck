@@ -1,9 +1,9 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {ChangeEvent, useEffect} from "react";
 import {Cat, Toilet} from "../assets/Cat.ts";
 import LitterboxIcon from "../../images/Kategorie_Icons_litterbox.png"
 import SimpleInputField from "./components/SimpleInputField.tsx";
-import PawCheck from "../../images/PawCheck.svg";
+import ContinueOrSaveButton from "./components/ContinueOrSaveButton.tsx";
 
 type ToiletPageProps = {
     readonly editMode: boolean;
@@ -17,7 +17,6 @@ type ToiletPageProps = {
 export default function ToiletPage(props: ToiletPageProps) {
     //VARIABLES
     const {id} = useParams();
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (id) {
@@ -82,29 +81,12 @@ export default function ToiletPage(props: ToiletPageProps) {
                 <div className="bottomSpace"/>
             </div>
 
-            {props.editMode ?
-                <button className="mainButton save"
-                        onClick={() => {
-                            props.updateCat(id, props.cat, props.getCatsFromUser)
-                                .then(() => {
-                                    navigate(`/cat/details/${props.cat?.id}`)
-                                })
-                        }}>
-                    <img className="thumbsUp" src={PawCheck} alt="PawCheck"/>
-                    <span className="text">speichern</span>
-                </button>
-                :
-                <button className="mainButton save"
-                        onClick={() => {
-                            props.updateCat(id, props.cat, props.getCatsFromUser)
-                                .then(() => {
-                                    navigate(`/home`)
-                                })
-                        }}>
-                    <img className="thumbsUp" src={PawCheck} alt="PawCheck"/>
-                    <span className="text">weiter</span>
-                </button>
-            }
+            <ContinueOrSaveButton editMode={props.editMode}
+                                  updateCat={props.updateCat}
+                                  id={id}
+                                  cat={props.cat}
+                                  getCatsFromUser={props.getCatsFromUser}
+                                  route={'/home'}/>
         </div>
     )
 }

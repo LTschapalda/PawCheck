@@ -1,10 +1,10 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {ChangeEvent, useEffect} from "react";
 import {Cat} from "../assets/Cat.ts";
 import FoodIcon from "../../images/Kategorie_Icons_food.png";
 import SimpleInputField from "./components/SimpleInputField.tsx";
-import PawCheck from "../../images/PawCheck.svg";
 import {updateSimpleCatValue} from "../assets/formInputFunktions.ts";
+import ContinueOrSaveButton from "./components/ContinueOrSaveButton.tsx";
 
 type TreatPageProps = {
     readonly editMode: boolean;
@@ -18,7 +18,6 @@ type TreatPageProps = {
 export default function TreatPage(props: TreatPageProps) {
     //VARIABLES
     const {id} = useParams();
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (id) {
@@ -46,30 +45,12 @@ export default function TreatPage(props: TreatPageProps) {
                 />
             </div>
 
-
-            {props.editMode ?
-                <button className="mainButton save"
-                        onClick={() => {
-                            props.updateCat(id, props.cat, props.getCatsFromUser)
-                                .then(() => {
-                                    navigate(`/cat/details/${props.cat?.id}`)
-                                })
-                        }}>
-                    <img className="thumbsUp" src={PawCheck} alt="PawCheck"/>
-                    <span className="text">speichern</span>
-                </button>
-                :
-                <button className="mainButton save"
-                        onClick={() => {
-                            props.updateCat(id, props.cat, props.getCatsFromUser)
-                                .then(() => {
-                                    navigate(`/cat/water/${id}`)
-                                })
-                        }}>
-                    <img className="thumbsUp" src={PawCheck} alt="PawCheck"/>
-                    <span className="text">weiter</span>
-                </button>
-            }
+            <ContinueOrSaveButton editMode={props.editMode}
+                                  updateCat={props.updateCat}
+                                  id={id}
+                                  cat={props.cat}
+                                  getCatsFromUser={props.getCatsFromUser}
+                                  route={`/cat/water/${id}`}/>
         </div>
     )
 }
