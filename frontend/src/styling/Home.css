@@ -64,7 +64,7 @@
 
 .addCat {
     z-index: 20;
-    display: block;
+    display: flex;
     justify-content: center;
     align-items: center;
     width: 68px;

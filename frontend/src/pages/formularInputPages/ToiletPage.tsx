@@ -1,6 +1,6 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {ChangeEvent, useEffect} from "react";
-import {Cat} from "../assets/Cat.ts";
+import {Cat, Toilet} from "../assets/Cat.ts";
 import LitterboxIcon from "../../images/Kategorie_Icons_litterbox.png"
 import SimpleInputField from "./components/SimpleInputField.tsx";
 import PawCheck from "../../images/PawCheck.svg";
@@ -24,47 +24,37 @@ export default function ToiletPage(props: ToiletPageProps) {
             props.getCatById(id)
         }
     }, []);
-    const onWhereInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
+
+    const onToiletInput = (field: keyof Toilet, value: string) => {
         props.setCat((cat: Cat | undefined) => {
             if (!cat) {
-                return {
-                    toilet: {where: event.target.value},
+                const newCat: Cat = {
                     id: '',
                     name: '',
+                    toilet: { [field]: value as any }, // hier verwenden wir "as any"
                 };
+                return newCat;
             } else {
-                return {...cat, toilet: {...cat.toilet, where: event.target.value}};
+                const updatedToilet: Toilet = { ...cat.toilet, [field]: value };
+                return { ...cat, toilet: updatedToilet };
             }
         });
+    };
+
+
+// Beispielaufruf
+    const onWhereInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        onToiletInput("where", event.target.value);
     };
 
     const onHowOftenInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.setCat((cat: Cat | undefined) => {
-            if (!cat) {
-                return {
-                    toilet: {howOften: event.target.value},
-                    id: '',
-                    name: '',
-                };
-            } else {
-                return {...cat, toilet: {...cat.toilet, howOften: event.target.value}};
-            }
-        });
+        onToiletInput('howOften', event.target.value);
     };
 
     const onWhereTheShitInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.setCat((cat: Cat | undefined) => {
-            if (!cat) {
-                return {
-                    toilet: {whereTheShit: event.target.value},
-                    id: '',
-                    name: '',
-                };
-            } else {
-                return {...cat, toilet: {...cat.toilet, whereTheShit: event.target.value}};
-            }
-        });
+        onToiletInput('whereTheShit', event.target.value);
     };
+
 
     return (
         <div className="container">

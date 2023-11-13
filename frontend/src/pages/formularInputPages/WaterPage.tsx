@@ -4,6 +4,7 @@ import {Cat} from "../assets/Cat.ts";
 import WaterIcon from "../../images/Kategorie_Icons_water.png"
 import AutoResizingTextarea from "./components/AutoResizingTextarea.tsx";
 import PawCheck from "../../images/PawCheck.svg";
+import {updateSimpleCatValue} from "../assets/formInputFunktions.ts";
 
 type TreatPageProps = {
     readonly editMode: boolean;
@@ -25,17 +26,8 @@ export default function WaterPage(props: TreatPageProps) {
         }
     }, []);
     const onWaterInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.setCat((cat: Cat | undefined) => {
-            if (!cat) {
-                return {
-                    water: event.target.value,
-                    id: '',
-                    name: '',
-                };
-            } else {
-                return {...cat, water: event.target.value};
-            }
-        });
+        const updatedCat = updateSimpleCatValue(props.cat, 'water', event.target.value);
+        props.setCat(updatedCat);
     };
 
     return (

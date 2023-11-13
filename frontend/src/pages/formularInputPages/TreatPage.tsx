@@ -4,6 +4,7 @@ import {Cat} from "../assets/Cat.ts";
 import FoodIcon from "../../images/Kategorie_Icons_food.png";
 import SimpleInputField from "./components/SimpleInputField.tsx";
 import PawCheck from "../../images/PawCheck.svg";
+import {updateSimpleCatValue} from "../assets/formInputFunktions.ts";
 
 type TreatPageProps = {
     readonly editMode: boolean;
@@ -24,18 +25,10 @@ export default function TreatPage(props: TreatPageProps) {
             props.getCatById(id)
         }
     }, []);
+
     const onTreatsInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.setCat((cat: Cat | undefined) => {
-            if (!cat) {
-                return {
-                    treats: event.target.value,
-                    id: '',
-                    name: '',
-                };
-            } else {
-                return {...cat, treats: event.target.value};
-            }
-        });
+        const updatedCat = updateSimpleCatValue(props.cat, 'treats', event.target.value);
+        props.setCat(updatedCat);
     };
 
     return (
