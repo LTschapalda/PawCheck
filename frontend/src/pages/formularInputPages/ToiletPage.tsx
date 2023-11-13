@@ -31,7 +31,7 @@ export default function ToiletPage(props: ToiletPageProps) {
                 const newCat: Cat = {
                     id: '',
                     name: '',
-                    toilet: { [field]: value as any }, // hier verwenden wir "as any"
+                    toilet: { [field]: value as never }, // hier verwenden wir "as any"
                 };
                 return newCat;
             } else {
