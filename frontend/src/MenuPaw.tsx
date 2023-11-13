@@ -6,6 +6,13 @@ type MenuPawProps = {
     readonly toggleEditMode: () => void;
 }
 export default function MenuPaw(props: MenuPawProps) {
+
+    function onKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+        if (e.key === 'Enter' || e.key === 'Space') {
+            props.toggleEditMode();
+        }
+    }
+
     const onClick = () => {
         if (props.editMode) {
             props.toggleEditMode();
@@ -15,7 +22,10 @@ export default function MenuPaw(props: MenuPawProps) {
     return(
         <nav>
             <Link to="/home">
-                <img onClick={onClick} src={menuPaw} alt="menu Paw"/>
+                <img onClick={onClick}
+                     onKeyDown={onKeyDown}
+                     src={menuPaw}
+                     alt="menu Paw"/>
             </Link>
         </nav>
     )

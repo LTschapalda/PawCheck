@@ -1,9 +1,9 @@
 import { ChangeEvent, useRef } from "react";
 
 type AutoResizingTextareaProps = {
-    value: string | "";
-    placeholder: string;
-    onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+    readonly value: string | "";
+    readonly placeholder: string;
+    readonly onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 export default function AutoResizingTextarea(

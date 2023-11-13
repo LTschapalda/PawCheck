@@ -92,7 +92,6 @@ function App() {
         }
         try {
             const response = await axios.put("/api/cat/" + id, cat);
-            //console.log('Erfolgreich upgedatet:' + JSON.stringify(response.data));
             getCatsFromUser();
             setCat(response.data)
         } catch (error) {

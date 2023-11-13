@@ -26,6 +26,12 @@ export default function CatDetailPage(props: CatDetailProps) {
             props.toggleEditMode();
         }
     }
+    function onKeyDownAnchor(e: React.KeyboardEvent<HTMLAnchorElement>) {
+        if (e.key === 'Enter' || e.key === 'Space') {
+            props.toggleEditMode();
+            navigate(`/cat/food/${id}`)
+        }
+    }
 
     //RETURN
     return (
@@ -48,8 +54,9 @@ export default function CatDetailPage(props: CatDetailProps) {
 
                     <div style={{width: '100%'}}>
                         {selectedCat?.dry || selectedCat?.wet ? (
-                                <a  onClick={() => {props.toggleEditMode()
-                                    navigate(`/cat/food/${selectedCat.id}`)}}>
+                                <a onKeyDown={onKeyDownAnchor}
+                                   onClick={() => {props.toggleEditMode()
+                                    navigate(`/cat/food/${id}`)}}>
                                     {selectedCat?.dry && (
                                         <div className="catDetailsCard">
                                             <h5>Trockenfutter</h5>
