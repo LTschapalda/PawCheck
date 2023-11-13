@@ -45,7 +45,7 @@ body {
 .container {
     z-index: 2;
     max-width: 400px;
-    height: 100vh;
+    height: 100%;
     width: 100%; /* Fülle die Breite des Viewports */
     box-sizing: border-box; /* Beachte auch das Padding und die Grenzen in der Breite */
     margin: auto;
@@ -68,6 +68,7 @@ body {
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
+    margin-bottom: -5px;
 }
 
 .scrollbar::-webkit-scrollbar {
@@ -139,7 +140,7 @@ ul {
 
 /* Eingabefelder */
 input, textarea {
-    width: 91%;
+    width: calc(100% - 8% - 3px);
     font-family: Hind, sans-serif;
     font-size: 1em;
     margin: auto auto 7px;

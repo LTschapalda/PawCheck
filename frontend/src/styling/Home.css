@@ -63,7 +63,8 @@
 
 
 .addCat {
-    display: flex;
+    z-index: 20;
+    display: block;
     justify-content: center;
     align-items: center;
     width: 68px;
@@ -75,6 +76,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border: 0;
+}
+
+
+.addCat:active {
+    transform: none;
 }
 
 .catHeader {
