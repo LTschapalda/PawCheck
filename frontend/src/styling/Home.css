@@ -64,6 +64,7 @@
 
 .addCat {
     z-index: 20;
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -71,17 +72,11 @@
     height: 68px;
     background-color: #9FCC1D;
     border-radius: 50%;
-    position: fixed;
-    bottom: 10px;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    bottom: 36px;
     border: 0;
 }
 
 
-.addCat:active {
-    transform: none;
-}
 
 .catHeader {
     display: grid;

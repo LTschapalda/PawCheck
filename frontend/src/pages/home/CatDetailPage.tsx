@@ -104,13 +104,13 @@ export default function CatDetailPage(props: CatDetailProps) {
                         <div className="bottomSpace"/>
                     </div>
                 </div>
+                <button className="addCat" onClick={toggleAddCategories}>
+                    <svg id="plus" width="27" height="27" viewBox="0 0 27 27" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.8966 2V25M25 13.3708H2" stroke="white" strokeWidth="3" strokeLinecap="round"/>
+                    </svg>
+                </button>
             </div>
-            <button className="addCat" onClick={toggleAddCategories}>
-                <svg id="plus" width="27" height="27" viewBox="0 0 27 27" fill="none"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <path d="M13.8966 2V25M25 13.3708H2" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-                </svg>
-            </button>
 
             {addCategories && (
                 <AddCategoriesOrDelete selectedCat={selectedCat}
