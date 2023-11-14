@@ -1,0 +1,20 @@
+.title {
+    margin-top: 20vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+}
+.login {
+    width: 100%;
+    margin-top: 5%;
+}
+
+#pawcheck {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    margin-bottom: -2%;
+    max-height: 300px;
+    padding-top: 5%;
+    height: 100%;
+}

@@ -1,0 +1,241 @@
+/* variables */
+:root{
+    --mainGreen: #87AD19;
+    --darkerGreen: #698713;
+    --lighterGreen: #acc153;
+    --catBrown: #9D6C3D;
+    --catBeige: #E3D0B2;
+    --catPink: #D8A89D;
+}
+
+/* Reset für einige Basisstile */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+#root {
+    display: flex;
+}
+
+/* Allgemeine Basisstile für Text */
+body {
+    background: linear-gradient(180deg, #FFF 0%, #F5F5F5 27.08%);
+    line-height: 1;
+    font-family: Hind, sans-serif;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    overflow-y: hidden;
+}
+
+.container {
+    z-index: 2;
+    max-width: 400px;
+    height: 100%;
+    width: 100%; /* Fülle die Breite des Viewports */
+    box-sizing: border-box; /* Beachte auch das Padding und die Grenzen in der Breite */
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    /* Bei Bildschirmen breiter als 400px */
+    @media screen and (min-width: 451px) {
+        width: 450px;
+        padding: 0 30px;
+    }
+}
+
+.scrollbar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    margin-bottom: -5px;
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: 0; /* Breite der Scroll-Leiste */
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Hintergrundfarbe des Scroll-Leisten-Griffs */
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0.5em 0;
+    font-family: Montserrat, sans-serif;
+    color: var(--darkerGreen);
+}
+
+/* Überschriften */
+h1 {
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 2.3em;
+    @media screen and (max-height: 600px) {
+        font-size: 2em;
+    }
+}
+
+h3 {
+    font-size: 2em;
+}
+
+h4 {
+    font-size: 1.7em;
+}
+
+h5 {
+    font-size: 1.5em;
+}
+
+h6 {
+    font-size: 1.3em;
+}
+
+
+/* Absätze */
+p {
+    margin: 0 0 1em 0;
+    color: var(--mainGreen);
+    font-size: 1.2em;
+}
+
+/* Links */
+a {
+    color: var(--darkerGreen);
+    text-decoration: none;
+    background-color: transparent;
+}
+
+a:hover {
+    color: var(--lighterGreen);
+}
+
+/* Ungeordnete Liste */
+ul {
+    list-style: none;
+}
+
+/* Eingabefelder */
+input, textarea {
+    width: calc(100% - 8% - 3px);
+    font-family: Hind, sans-serif;
+    font-size: 1em;
+    margin: auto auto 7px;
+    padding: 4%;
+    border: 1.5px solid var(--lighterGreen);
+    border-radius: 17px;
+    background-color: white;
+    outline: none;
+    resize: none;
+    overflow-y: hidden;
+}
+
+/* Buttons */
+button {
+    display: inline-block;
+    width: 100%;
+    align-items: center;
+    padding: 0.8em 1em;
+    border: 0;
+    border-radius: 17px;
+    font-family: Hind, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    font-size: 1.3em;
+    cursor: pointer;
+    margin-bottom: 7px;
+    transition: transform 0.3s ease;
+
+    @media screen and (max-height: 600px) {
+        padding: 0.5em 0.7em;
+        font-size: 1.1em;
+    }
+}
+
+button:active {
+    transform: scale(0.9);
+}
+
+.mainButton {
+    background-color: var(--mainGreen);
+    color: white;
+}
+
+.mainButtonLighter{
+    background-color: rgba(135, 173, 25, 0.7);
+}
+
+.secondaryButton {
+    background-color: transparent;
+    color: var(--mainGreen);
+}
+
+/* Label */
+label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+/* Formulare */
+form {
+    margin: 0;
+}
+
+/* Navigation */
+nav {
+    display: block;
+    position: fixed;
+    margin-top: -25px;
+    top: 0;
+    left: 0;
+    width: 67px;
+    margin-left: 8%;
+    z-index: 990;
+    border: 0;
+    background-color: transparent;
+}
+
+/* Bilder */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* fonts */
+@font-face {
+    font-family: 'Montserrat';
+    src: url("../images/Montserrat-VariableFont_wght.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'Hind';
+    src: url("../images/Hind-Regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: 'HindBold';
+    src: url("../images/Hind-Bold.ttf") format("truetype");
+}
