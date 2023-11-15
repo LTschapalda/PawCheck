@@ -27,6 +27,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 }
 
 #root {
+    width: 100%;
     display: flex;
 }
 
@@ -117,7 +118,7 @@ h6 {
 
 /* Absätze */
 p {
-    margin: 0 0 1em 0;
+    margin: 0 0 0.6em 0;
     color: var(--mainGreen);
     font-size: 1.2em;
 }

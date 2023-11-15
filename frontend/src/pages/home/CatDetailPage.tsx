@@ -4,6 +4,7 @@ import {Cat} from "../assets/Cat.ts";
 import {useState} from "react";
 import AddCategoriesOrDelete from "./components/AddCategoriesOrDelete.tsx";
 import CategoryDetailsCard from "./components/CategoryDetailsCard.tsx";
+import Copy from "../../images/copy.svg"
 
 type CatDetailProps = {
     readonly catsOwned: Cat[]
@@ -19,6 +20,12 @@ export default function CatDetailPage(props: CatDetailProps) {
         setAddCategories(!addCategories);
     }
 
+    const [share, setShare] = useState(false)
+
+    const toggleOnShare = () => {
+        setShare(!share)
+    }
+
     const navigate = useNavigate();
 
     function onKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
@@ -26,12 +33,26 @@ export default function CatDetailPage(props: CatDetailProps) {
             props.toggleEditMode();
         }
     }
+
     function onKeyDownAnchor(e: React.KeyboardEvent<HTMLAnchorElement>) {
         if (e.key === 'Enter' || e.key === 'Space') {
             props.toggleEditMode();
             navigate(`/cat/food/${id}`)
         }
     }
+
+    const copyToClipboard = () => {
+        const input = document.querySelector('input');
+        const btn = document.querySelector('button');
+        if (input && btn) {
+            btn.addEventListener('click', () => {
+                navigator.clipboard.writeText(input.value);
+            })
+        }
+    };
+
+    //TODO: copyIcon einfügen, checken, ob man die katze auch als nicht eingeloogter User aufrugfen kann & im nicht eingeloggten zustand die Katze zur Liste hinzufügen.
+
 
     //RETURN
     return (
@@ -45,30 +66,79 @@ export default function CatDetailPage(props: CatDetailProps) {
                              alt="catface"/>
                         {selectedCat ? (
                             <div className="catDetails">
-                                <h3>{selectedCat.name}</h3>
+                                <div className="edit">
+                                    <h3>{selectedCat.name}</h3>
+                                    <svg onClick={toggleOnShare}
+                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+                                         strokeLinejoin="round">
+                                        <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+                                        <polyline points="16 6 12 2 8 6"/>
+                                        <line x1="12" y1="2" x2="12" y2="15"/>
+                                    </svg>
+                                </div>
+
+                                {share &&
+                                    <div className="share">
+                                        <input
+                                            style={{'width': '90%'}}
+                                            id="sharedLinkInput"
+                                            type="text"
+                                            value={"www.paw-check.de/cat/details/" + id}
+                                            readOnly
+                                        />
+                                        <button onClick={copyToClipboard}>
+                                            <img src={Copy} alt="copy"/>
+                                        </button>
+                                    </div>}
                             </div>
                         ) : (
-                            <div className="catDetails">Katze nicht gefunden</div>
+                            <div className="catDetails">
+                                <h2>Katze nicht gefunden</h2>
+                            </div>
                         )}
                     </div>
 
                     <div style={{width: '100%'}}>
                         {selectedCat?.dry || selectedCat?.wet ? (
-                                <a onKeyDown={onKeyDownAnchor}
-                                   onClick={() => {props.toggleEditMode()
-                                    navigate(`/cat/food/${id}`)}}>
+                            <a onKeyDown={onKeyDownAnchor}
+                               onClick={() => {
+                                   props.toggleEditMode()
+                                   navigate(`/cat/food/${id}`)
+                               }}>
+                                <div className="catDetailsCard">
+                                    <div className="edit">
+                                        <h5>Futter</h5>
+                                        <svg width="22" height="22" viewBox="0 0 24 24"
+                                             xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+                                             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+                                        </svg>
+                                    </div>
                                     {selectedCat?.dry && (
-                                        <div className="catDetailsCard">
-                                            <h5>Trockenfutter</h5>
+                                        <>
+                                            <h6>Trockenfutter</h6>
                                             {selectedCat.dry.morning && (
                                                 <p>Morgens : {selectedCat.dry.morning}</p>
                                             )}
                                             {selectedCat.dry.evening && (
                                                 <p>Abends : {selectedCat.dry.evening}</p>
                                             )}
-                                        </div>
+                                        </>
                                     )}
-                                </a>
+                                    {selectedCat?.wet && (
+                                        <>
+                                            <h6>Nassfutter</h6>
+                                            {selectedCat.wet.morning && (
+                                                <p>Morgens : {selectedCat.wet.morning}</p>
+                                            )}
+                                            {selectedCat.wet.evening && (
+                                                <p>Abends : {selectedCat.wet.evening}</p>
+                                            )}
+                                        </>
+                                    )}
+                                </div>
+                            </a>
                         ) : (<div/>)}
                         <CategoryDetailsCard toggleEditMode={props.toggleEditMode}
                                              categoryTitle="Leckerlies"
@@ -86,7 +156,14 @@ export default function CatDetailPage(props: CatDetailProps) {
                                      onKeyDown={onKeyDown}
                                      tabIndex={0}>
                                     <div>
-                                        <h5>Katzenklo</h5>
+                                        <div className="edit">
+                                            <h5>Katzenklo</h5>
+                                            <svg width="22" height="22" viewBox="0 0 24 24"
+                                                 xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+                                                 strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+                                            </svg>
+                                        </div>
                                         {selectedCat.toilet.where && (
                                             <p>Wo : {selectedCat.toilet.where}</p>
                                         )}

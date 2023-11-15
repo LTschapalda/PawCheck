@@ -2,6 +2,46 @@
     margin-top: 20vh;
 }
 
+.edit {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.share {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1.5px solid var(--lighterGreen);
+    border-radius: 14px;
+    margin: auto auto 20px;
+    background-color: white;
+}
+
+.share input {
+    width: 90%;
+    border: 0;
+    margin: 0;
+    padding: 0.5em;
+}
+
+.share button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    padding: 0.3em;
+    width: 10%;
+    border-radius: 8px;
+    background-color: var(--mainGreen);
+}
+
+.share img {
+    width: 24px;
+    height: 20px;
+}
+
 .catDetailsCard {
     width: 86%;
     margin: auto auto 0.8rem;
