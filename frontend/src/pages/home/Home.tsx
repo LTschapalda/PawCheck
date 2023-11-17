@@ -5,6 +5,7 @@ import CatHeader from "./components/CatHeader.tsx";
 import {User} from "../assets/User.ts";
 import PawCheck from "../../images/PawCheck.svg";
 import axios from "axios";
+import CatFace from "../../images/ImagePlaceholder.png";
 
 type HomeProps = {
     readonly catsOwned: Cat[];
@@ -33,9 +34,26 @@ export default function Home(props: HomeProps) {
                     <h1>Hallo {props.user?.name ? props.user?.name : "Nutzer"}</h1>
                     <p>Hier findest du eine Übersicht über deine Katzen</p>
                 </div>
-                {props.catsOwned.map(
-                    (cat: Cat) => <CatHeader key={cat.id} cat={cat}/>
+                {props.catsOwned.length ? (
+                    <>
+                        {props.catsOwned.map((cat: Cat) => (
+                            <CatHeader key={cat.id} cat={cat}/>
+                        ))}
+                    </>
+                ) : (
+                    <Link to="/cat/name">
+                        <div className="catHeaderEmpty">
+                            <h6>Du hast noch keine Katze in deiner Kartei.</h6>
+                            <p>Lege direkt eine an</p>
+                            <svg width="29" height="20" viewBox="0 0 41 23" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 2.5L20.5 21L39 2.5" stroke="#87AD19" strokeWidth="4" strokeLinecap="round"
+                                      strokeLinejoin="round"/>
+                            </svg>
+                        </div>
+                    </Link>
                 )}
+
                 <div className="bottomSpace"/>
             </div>
 
