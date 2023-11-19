@@ -5,7 +5,6 @@ import CatHeader from "./components/CatHeader.tsx";
 import {User} from "../assets/User.ts";
 import PawCheck from "../../images/PawCheck.svg";
 import axios from "axios";
-import CatFace from "../../images/ImagePlaceholder.png";
 
 type HomeProps = {
     readonly catsOwned: Cat[];

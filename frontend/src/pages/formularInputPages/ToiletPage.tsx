@@ -86,7 +86,7 @@ export default function ToiletPage(props: ToiletPageProps) {
                                   id={id}
                                   cat={props.cat}
                                   getCatsFromUser={props.getCatsFromUser}
-                                  route={'/home'}/>
+                                  route={`/toys/${id}`}/>
         </div>
     )
 }

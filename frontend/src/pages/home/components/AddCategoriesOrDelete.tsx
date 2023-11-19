@@ -1,6 +1,7 @@
 import FoodIcon from "../../../images/Kategorie_Icons_food copy.png"
 import WaterIcon from "../../../images/Kategorie_Icons_water copy.png"
 import ToiletIcon from "../../../images/Kategorie_Icons_litterbox copy.png"
+import ToyIcon from "../../../images/Kategorie_Icons_toys copy.png"
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
@@ -110,6 +111,16 @@ export default function AddCategoriesOrDelete(props : AddCategoriesOrDeleteProps
                             <Link to={`/cat/litterbox/${props.selectedCat?.id}`}>
                                 <CategoryCard image={ToiletIcon}
                                               categoryTitle="Katzenklo"/>
+                            </Link>
+                        </div>
+                    )}
+                    {!props.selectedCat?.toy && (
+                        <div onClick={props.toggleEditMode}
+                             onKeyDown={onKeyDownEditMode}
+                             tabIndex={0}>
+                            <Link to={`/cat/toys/${props.selectedCat?.id}`}>
+                                <CategoryCard image={ToyIcon}
+                                              categoryTitle="Spielzeug"/>
                             </Link>
                         </div>
                     )}

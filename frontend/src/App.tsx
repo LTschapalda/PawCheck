@@ -18,6 +18,7 @@ import './styling/Landingpage.css'
 import './styling/Home.css'
 import './styling/Input.css'
 import './styling/CatDetails.css'
+import ToyPage from "./pages/formularInputPages/Toys.tsx";
 
 function App() {
 
@@ -106,14 +107,15 @@ function App() {
                 <MenuPaw editMode={editMode} toggleEditMode={toggleEditMode}/>
                 <Routes>
                     <Route index                     element={<LandingPage login={login}/>}/>
-                    <Route path={"/home"}            element={<Home catsOwned={catsOwned} getCatsFromUser={getCatsFromUser} user={user} login={login}/>}/>
+                    <Route path={"/home"}        element={<Home catsOwned={catsOwned} getCatsFromUser={getCatsFromUser} user={user} login={login}/>}/>
                     <Route path={"/cat/details/:id"} element={<CatDetailPage catsOwned={catsOwned} toggleEditMode={toggleEditMode}/>} />
                     <Route path={"/cat/name"}        element={<NameInput getCatsFromUser={getCatsFromUser} user={user}/>}/>
                     <Route path={"/sweeet/:id"}      element={<SweetCheckup/>}/>
                     <Route path={"/cat/food/:id"}    element={<FoodPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById} updateCat={updateCat}/>} />
                     <Route path={"/cat/treats/:id"}  element={<TreatPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById} updateCat={updateCat}/>}/>
-                    <Route path={"/cat/water/:id"}  element={<WaterPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById} updateCat={updateCat}/>}/>
+                    <Route path={"/cat/water/:id"}   element={<WaterPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById} updateCat={updateCat}/>}/>
                     <Route path={"/cat/litterbox/:id"}  element={<ToiletPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById} updateCat={updateCat}/>}/>
+                    <Route path={"/cat/toys/:id"}    element={<ToyPage editMode={editMode} toggleEditMode={toggleEditMode} getCatsFromUser={getCatsFromUser} cat={cat} setCat={setCat} getCatById={getCatById} updateCat={updateCat}/>}/>
                 </Routes>
         </>
     )
